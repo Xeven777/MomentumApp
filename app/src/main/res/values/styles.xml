@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- One tappable weekday circle in the habit add/edit dialog. -->
+    <style name="DayToggle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+        <item name="android:background">@drawable/day_toggle_bg</item>
+        <item name="android:fontFamily">@font/google_sans_bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/day_toggle_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

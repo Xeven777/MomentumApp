@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Momentum</string>
+    <string name="widget_description">"Momentum: streak and today's progress"</string>
+    <string name="widget_streak_description">Current streak ring</string>
+    <string name="widget_heatmap_description">Last 12 weeks of completed habits</string>
+    <string name="widget_tick_description">Tick the next habit</string>
+    <string name="close_description">Close</string>
+    <string name="show_month_calendar_description">Show the month calendar</string>
+</resources>
