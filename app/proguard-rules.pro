@@ -42,7 +42,7 @@
 -keep class com.anish.momentum.utils.BootReceiver { *; }
 -keep class com.anish.momentum.utils.ReminderReceiver { *; }
 -keep class com.anish.momentum.widgets.StreakWidget { *; }
--keep class com.anish.momentum.widgets.WidgetActionReceiver { *; }
+-keep class com.anish.momentum.widgets.StreakMiniWidget { *; }
 
 # --- Lottie -----------------------------------------------------------
 # Its models come from the JSON animations, and the @SerializedName rule above

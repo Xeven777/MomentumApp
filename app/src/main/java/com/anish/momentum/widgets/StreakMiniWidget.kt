@@ -19,14 +19,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Home screen widget. Renders a small layout (streak ring + today's progress)
- * and, when there is room, a GitHub-style contribution grid.
- *
- * There is no `updatePeriodMillis`: the widget is refreshed from the app
- * whenever habits change, which is both cheaper and more accurate than waking
- * the CPU every hour to re-read data that has not moved.
+ * Compact 2x2 home screen widget: just the streak ring. Tap anywhere to open
+ * the app. Refreshed from the app whenever habits change, same as [StreakWidget].
  */
-class StreakWidget : AppWidgetProvider() {
+class StreakMiniWidget : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, manager: AppWidgetManager, ids: IntArray) {
         render(context, manager, ids)
@@ -41,13 +37,6 @@ class StreakWidget : AppWidgetProvider() {
         render(context, manager, intArrayOf(appWidgetId))
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
-        super.onReceive(context, intent)
-        if (intent.action == ACTION_REFRESH) {
-            render(context, AppWidgetManager.getInstance(context), widgetIds(context))
-        }
-    }
-
     private fun render(context: Context, manager: AppWidgetManager, ids: IntArray) {
         if (ids.isEmpty()) return
         val pending = goAsync()
@@ -56,12 +45,12 @@ class StreakWidget : AppWidgetProvider() {
             try {
                 val state = loadState(appContext)
                 for (id in ids) {
-                    val views = RemoteViews(appContext.packageName, R.layout.widget_momentum)
+                    val views = RemoteViews(appContext.packageName, R.layout.widget_momentum_mini)
                     bind(appContext, views, state, id)
                     manager.updateAppWidget(id, views)
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Could not refresh widget", e)
+                Log.e(TAG, "Could not refresh mini widget", e)
             } finally {
                 pending.finish()
             }
@@ -83,9 +72,9 @@ class StreakWidget : AppWidgetProvider() {
     ) {
         val density = context.resources.displayMetrics.density
 
-        val ringSize = 96.dpToPx(density).toInt()
+        val ringSize = 84.dpToPx(density).toInt()
         views.setImageViewBitmap(
-            R.id.widget_ring,
+            R.id.widget_mini_ring,
             WidgetArtwork.ring(
                 progress = state.todayProgress,
                 streak = state.streak,
@@ -95,40 +84,13 @@ class StreakWidget : AppWidgetProvider() {
             )
         )
 
-        val todayLabel = if (state.todayTotal == 0) "No habits yet"
-        else "Today ${state.todayDone}/${state.todayTotal}"
-        views.setTextViewText(R.id.widget_today, todayLabel)
-
-        val goalLabel = if (state.goal <= 0) "All habits" else "Goal ${state.goal}"
-        views.setTextViewText(R.id.widget_goal, goalLabel)
-
-        views.setTextViewText(
-            R.id.widget_best,
-            "Best ${state.bestStreak} · ${state.totalCompletions} done"
-        )
-
-        // Always render the grid: it is the main reason the widget exists, and
-        // hiding it left a big empty black block. A high-res bitmap keeps cells
-        // crisp on every density; the ImageView scales it down to fit.
-        val heatmapWidth = 360.dpToPx(density).toInt()
-        views.setImageViewBitmap(
-            R.id.widget_heatmap,
-            WidgetArtwork.heatmap(
-                weeks = state.heatWeeks,
-                values = state.ratios,
-                present = state.present,
-                widthPx = heatmapWidth
-            )
-        )
-
-        // Tap anywhere on the widget to open the app.
         views.setOnClickPendingIntent(
-            R.id.widget_body,
+            R.id.widget_mini_body,
             PendingIntent.getActivity(
                 context,
                 BODY_REQUEST_CODE + appWidgetId,
                 Intent(context, MainActivity::class.java).apply {
-                    data = android.net.Uri.parse("momentum://widget/open/main/$appWidgetId")
+                    data = android.net.Uri.parse("momentum://widget/open/mini/$appWidgetId")
                 },
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
@@ -136,19 +98,17 @@ class StreakWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private const val TAG = "StreakWidget"
-        const val ACTION_REFRESH = "com.anish.momentum.action.WIDGET_REFRESH"
+        private const val TAG = "StreakMiniWidget"
 
-        // Unique base so this provider's PendingIntent can never collide with
-        // the mini widget's.
-        private const val BODY_REQUEST_CODE = 1000
+        // Kept clear of StreakWidget's bases (1000/2000).
+        private const val BODY_REQUEST_CODE = 3000
 
-        /** Asks every placed widget to redraw. Cheap and safe to call often. */
+        /** Asks every placed mini widget to redraw. Cheap and safe to call often. */
         fun refresh(context: Context) {
             val ids = widgetIds(context)
             if (ids.isEmpty()) return
             context.sendBroadcast(
-                Intent(context, StreakWidget::class.java).apply {
+                Intent(context, StreakMiniWidget::class.java).apply {
                     action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
                     putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
                 }
@@ -156,7 +116,7 @@ class StreakWidget : AppWidgetProvider() {
         }
 
         fun widgetIds(context: Context): IntArray = AppWidgetManager.getInstance(context)
-            .getAppWidgetIds(ComponentName(context, StreakWidget::class.java))
+            .getAppWidgetIds(ComponentName(context, StreakMiniWidget::class.java))
 
         private fun Int.dpToPx(density: Float): Float = this * density
     }

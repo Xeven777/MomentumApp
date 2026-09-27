@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_bg"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,14 @@
 
         <ImageView
             android:id="@+id/widget_ring"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:contentDescription="@string/widget_streak_description" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="14dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -31,53 +31,66 @@
                 android:id="@+id/widget_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/google_sans_bold"
+                android:maxLines="1"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                tools:text="Today 3/5" />
+                android:textSize="20sp"
+                tools:text="Today 2/3" />
 
             <TextView
                 android:id="@+id/widget_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/google_sans_regular"
+                android:maxLines="1"
                 android:textColor="#8B949E"
-                android:textSize="13sp"
-                tools:text="Goal 3" />
+                android:textSize="14sp"
+                tools:text="All habits" />
 
             <TextView
                 android:id="@+id/widget_best"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/google_sans_regular"
+                android:maxLines="1"
                 android:textColor="#8B949E"
-                android:textSize="12sp"
-                android:visibility="gone"
-                tools:text="Best 14 · 96 done"
-                tools:visibility="visible" />
+                android:textSize="13sp"
+                tools:text="Best 0 · 2 done" />
 
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/widget_tick"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:background="@drawable/widget_tick_bg"
-            android:contentDescription="@string/widget_tick_description"
-            android:padding="8dp"
-            android:src="@drawable/add" />
+            android:id="@+id/widget_flame"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fire" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/google_sans_bold"
+        android:text="LAST 12 WEEKS"
+        android:textColor="#6E7681"
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/widget_heatmap"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/widget_heatmap_description"
-        android:scaleType="fitStart"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:scaleType="fitXY" />
 
 </LinearLayout>

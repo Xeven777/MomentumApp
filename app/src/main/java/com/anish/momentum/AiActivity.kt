@@ -272,6 +272,7 @@ class AiActivity : AppCompatActivity() {
 
     private fun markAdded(aiHabit: AiHabit) {
         StreakWidget.refresh(this)
+        com.anish.momentum.widgets.StreakMiniWidget.refresh(this)
         addedHabitKeys.add(keyOf(aiHabit))
         saveAddedHabitKeysToPrefs()
         aiAdapter?.notifyDataSetChanged()

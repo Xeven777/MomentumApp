@@ -21,21 +21,26 @@ object WidgetArtwork {
     /**
      * @param values completion ratio per cell, oldest column first
      * @param present whether that day has happened yet; future days stay blank
+     * @param widthPx target bitmap width; height is derived (7 rows) so cells
+     * stay square and the grid fills the widget instead of shrinking into a
+     * tiny square.
      */
     fun heatmap(
         weeks: Int,
         values: FloatArray,
         present: BooleanArray,
-        sizePx: Int
+        widthPx: Int
     ): Bitmap {
-        val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)
+        val safeWeeks = weeks.coerceAtLeast(1)
+        val cell = widthPx.toFloat() / safeWeeks
+        val heightPx = (cell * Artwork.DAYS_PER_WEEK).toInt().coerceAtLeast(1)
+        val bitmap = Bitmap.createBitmap(widthPx, heightPx, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         canvas.drawColor(Color.TRANSPARENT)
 
-        val cell = sizePx.toFloat() / (weeks * Artwork.DAYS_PER_WEEK)
         Artwork.drawHeatmap(
             canvas = canvas,
-            weeks = weeks,
+            weeks = safeWeeks,
             values = values,
             present = present,
             left = 0f,

@@ -544,6 +544,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateWidget() {
         StreakWidget.refresh(this)
+        com.anish.momentum.widgets.StreakMiniWidget.refresh(this)
     }
 
     companion object {
