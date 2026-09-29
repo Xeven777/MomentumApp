@@ -46,7 +46,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/google_sans_regular"
                 android:maxLines="1"
-                android:textColor="#8B949E"
+                android:textColor="@color/muted_text"
                 android:textSize="14sp"
                 tools:text="All habits" />
 
@@ -58,7 +58,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/google_sans_regular"
                 android:maxLines="1"
-                android:textColor="#8B949E"
+                android:textColor="@color/muted_text"
                 android:textSize="13sp"
                 tools:text="Best 0 · 2 done" />
 
@@ -81,7 +81,7 @@
         android:layout_marginTop="14dp"
         android:fontFamily="@font/google_sans_bold"
         android:text="LAST 12 WEEKS"
-        android:textColor="#6E7681"
+        android:textColor="@color/caption_text"
         android:textSize="11sp" />
 
     <ImageView

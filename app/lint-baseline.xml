@@ -1,0 +1,2248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.11.0" type="baseline" client="gradle" dependencies="false" name="AGP (8.11.0)" variant="all" version="8.11.0">
+
+    <issue
+        id="ScrollViewSize"
+        message="This LinearLayout should use `android:layout_height=&quot;wrap_content&quot;`"
+        errorLine1="            android:layout_height=&quot;match_parent&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="19"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="                    pickedTime = String.format(&quot;%02d:%02d&quot;, selectedHour, selectedMinute)"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="391"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="                    pickedTime = String.format(&quot;%02d:%02d&quot;, selectedHour, selectedMinute)"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="480"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="            binding.temperatureValue.text = String.format(&quot;%.1f&quot;, value)"
+        errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="118"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="            binding.temperatureValue.text = String.format(&quot;%.1f&quot;, value)"
+        errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="118"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="        binding.temperatureValue.text = String.format(&quot;%.1f&quot;, config.temperature)"
+        errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="148"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="DefaultLocale"
+        message="Implicitly using the default locale is a common source of bugs: Use `String.format(Locale, ...)` instead"
+        errorLine1="        binding.temperatureValue.text = String.format(&quot;%.1f&quot;, config.temperature)"
+        errorLine2="                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="148"
+            column="41"/>
+    </issue>
+
+    <issue
+        id="NewApi"
+        message="`android:layout_marginHorizontal` requires API level 26 (current min is 24)"
+        errorLine1="        &lt;item name=&quot;android:layout_marginHorizontal&quot;>2dp&lt;/item>"
+        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="8"
+            column="15"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `previewLayout` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:previewLayout=&quot;@layout/widget_momentum_mini&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_mini_widget_info.xml"
+            line="7"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `targetCellWidth` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:targetCellWidth=&quot;2&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_mini_widget_info.xml"
+            line="9"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `targetCellHeight` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:targetCellHeight=&quot;2&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_mini_widget_info.xml"
+            line="10"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `previewLayout` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:previewLayout=&quot;@layout/widget_momentum&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_widget_info.xml"
+            line="7"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `targetCellWidth` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:targetCellWidth=&quot;4&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_widget_info.xml"
+            line="9"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `targetCellHeight` is only used in API level 31 and higher (current min is 24)"
+        errorLine1="    android:targetCellHeight=&quot;2&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/xml/streak_widget_info.xml"
+            line="10"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of Gradle than 8.13 is available: 8.14.5"
+        errorLine1="distributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/wrapper/gradle-wrapper.properties"
+            line="4"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.11.0 is available: 9.4.1. (There is also a newer version of 8.11.𝑥 available, if upgrading to 9.4.1 is difficult: 8.11.2)"
+        errorLine1="agp = &quot;8.11.0&quot;"
+        errorLine2="      ~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.devtools.ksp than 2.0.21-1.0.28 is available: 2.3.9"
+        errorLine1="ksp = &quot;2.0.21-1.0.28&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="4"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.core:core-ktx than 1.16.0 is available: 1.19.1"
+        errorLine1="coreKtx = &quot;1.16.0&quot;"
+        errorLine2="          ~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="5"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.test.ext:junit than 1.2.1 is available: 1.3.0"
+        errorLine1="junitVersion = &quot;1.2.1&quot;"
+        errorLine2="               ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="7"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.test.espresso:espresso-core than 3.6.1 is available: 3.7.0"
+        errorLine1="espressoCore = &quot;3.6.1&quot;"
+        errorLine2="               ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="8"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.appcompat:appcompat than 1.7.1 is available: 1.8.0"
+        errorLine1="appcompat = &quot;1.7.1&quot;"
+        errorLine2="            ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="9"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.12.0 is available: 1.14.0"
+        errorLine1="material = &quot;1.12.0&quot;"
+        errorLine2="           ~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="10"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.activity:activity than 1.10.1 is available: 1.13.0"
+        errorLine1="activity = &quot;1.10.1&quot;"
+        errorLine2="           ~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="11"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.2.1 is available: 2.2.2"
+        errorLine1="constraintlayout = &quot;2.2.1&quot;"
+        errorLine2="                   ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="12"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.navigation:navigation-fragment-ktx than 2.6.0 is available: 2.10.2"
+        errorLine1="navigationFragmentKtx = &quot;2.6.0&quot;"
+        errorLine2="                        ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="13"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.navigation:navigation-ui-ktx than 2.6.0 is available: 2.10.2"
+        errorLine1="navigationUiKtx = &quot;2.6.0&quot;"
+        errorLine2="                  ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="14"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.room:room-compiler than 2.6.1 is available: 2.8.5"
+        errorLine1="room = &quot;2.6.1&quot;"
+        errorLine2="       ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="15"
+            column="8"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.room:room-ktx than 2.6.1 is available: 2.8.5"
+        errorLine1="room = &quot;2.6.1&quot;"
+        errorLine2="       ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="15"
+            column="8"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.room:room-runtime than 2.6.1 is available: 2.8.5"
+        errorLine1="room = &quot;2.6.1&quot;"
+        errorLine2="       ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="15"
+            column="8"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.datastore:datastore-preferences than 1.1.1 is available: 1.2.1"
+        errorLine1="datastore = &quot;1.1.1&quot;"
+        errorLine2="            ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="16"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.lifecycle:lifecycle-runtime-ktx than 2.8.7 is available: 2.11.0"
+        errorLine1="lifecycle = &quot;2.8.7&quot;"
+        errorLine2="            ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="18"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of com.airbnb.android:lottie than 6.6.7 is available: 6.7.1"
+        errorLine1="    implementation(&quot;com.airbnb.android:lottie:6.6.7&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="102"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of com.squareup.retrofit2:retrofit than 2.9.0 is available: 3.0.0"
+        errorLine1="    implementation(&quot;com.squareup.retrofit2:retrofit:2.9.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="103"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of com.google.code.gson:gson than 2.13.1 is available: 2.14.0"
+        errorLine1="    implementation(&quot;com.google.code.gson:gson:2.13.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="104"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of com.squareup.retrofit2:converter-gson than 2.9.0 is available: 3.0.0"
+        errorLine1="    implementation(&quot;com.squareup.retrofit2:converter-gson:2.9.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="105"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of org.jetbrains.kotlin.android than 2.0.21 is available: 2.4.20"
+        errorLine1="kotlin = &quot;2.0.21&quot;"
+        errorLine2="         ~~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="3"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of org.jetbrains.kotlinx:kotlinx-coroutines-android than 1.8.1 is available: 1.11.0"
+        errorLine1="coroutines = &quot;1.8.1&quot;"
+        errorLine2="             ~~~~~~~">
+        <location
+            file="$HOME/Documents/github/Momentum-master/gradle/libs.versions.toml"
+            line="17"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                    Paint(Paint.ANTI_ALIAS_FLAG).apply {"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ui/MonthCalendarView.kt"
+            line="200"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="DrawAllocation"
+        message="Avoid object allocations during draw/layout operations (preallocate and reuse instead)"
+        errorLine1="                val marker = Paint(Paint.ANTI_ALIAS_FLAG).apply {"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ui/MonthCalendarView.kt"
+            line="228"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="        aiAdapter?.notifyDataSetChanged()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/AiActivity.kt"
+            line="277"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="        notifyDataSetChanged()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/utils/CalendarAdapter.kt"
+            line="25"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="        notifyDataSetChanged()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/utils/CalendarAdapter.kt"
+            line="30"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="                        habitAdapter.notifyDataSetChanged()"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="165"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="NotifyDataSetChanged"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort."
+        errorLine1="        habitAdapter.notifyDataSetChanged()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="289"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v23`) is unnecessary; `minSdkVersion` is 24. Merge all the resources in this folder into `values`.">
+        <location
+            file="src/main/res/values-v23"/>
+    </issue>
+
+    <issue
+        id="UseCompoundDrawables"
+        message="This tag and its children can be replaced by one `&lt;TextView/>` and a compound drawable"
+        errorLine1="    &lt;LinearLayout"
+        errorLine2="     ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="11"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="DisableBaselineAlignment"
+        message="Set `android:baselineAligned=&quot;false&quot;` on this element for better performance"
+        errorLine1="    &lt;LinearLayout"
+        errorLine2="     ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="10"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_launcher.xml"
+            line="7"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/black` with a theme that also paints a background (inferred theme is `@style/Theme.Habits`)"
+        errorLine1="    android:background=&quot;@color/black&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UselessLeaf"
+        message="This `RelativeLayout` view is unnecessary (no children, no `background`, no `id`, no `style`)"
+        errorLine1="            &lt;RelativeLayout"
+        errorLine2="             ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="732"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="UselessParent"
+        message="This `ScrollView` layout or its `RelativeLayout` parent is unnecessary; transfer the `background` attribute to the other view"
+        errorLine1="    &lt;ScrollView"
+        errorLine2="     ~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="11"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="TooManyViews"
+        message="`activity_questions.xml` has more than 80 views, bad for performance"
+        errorLine1="            &lt;RelativeLayout"
+        errorLine2="             ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="732"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive icon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_logo.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive roundIcon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_logo_round.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/a.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/a.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/add.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/add.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/clock.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/clock.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/edit.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/edit.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/fire.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/fire.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/fire_white.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/fire_white.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/github.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/github.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/gradient.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/gradient.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/momentum.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/momentum.webp"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/settings.webp` in densityless folder">
+        <location
+            file="src/main/res/drawable/settings.webp"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)"
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/anish/momentum/AiActivity.kt"
+            line="170"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)"
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/anish/momentum/AiActivity.kt"
+            line="182"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/AiActivity.kt"
+            line="191"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="            prefs.edit().remove(KEY_API).apply()"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ai/ApiKeyStore.kt"
+            line="39"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        prefs.edit().putString(KEY_API, encrypted).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ai/ApiKeyStore.kt"
+            line="58"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        prefs.edit().remove(KEY_API).apply()"
+        errorLine2="        ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ai/ApiKeyStore.kt"
+            line="64"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension property `View.isVisible` instead?"
+        errorLine1="        val showing = binding.monthCalendarCard.visibility == View.VISIBLE"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="230"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))"
+        errorLine2="                                                     ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="331"
+            column="54"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="                    data = android.net.Uri.parse(&quot;momentum://widget/open/mini/$appWidgetId&quot;)"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/StreakMiniWidget.kt"
+            line="93"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="                    data = android.net.Uri.parse(&quot;momentum://widget/open/mini/$appWidgetId&quot;)"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/StreakMiniWidget.kt"
+            line="93"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="                    data = android.net.Uri.parse(&quot;momentum://widget/open/main/$appWidgetId&quot;)"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/StreakWidget.kt"
+            line="124"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `String.toUri` instead?"
+        errorLine1="                    data = android.net.Uri.parse(&quot;momentum://widget/open/main/$appWidgetId&quot;)"
+        errorLine2="                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/StreakWidget.kt"
+            line="124"
+            column="28"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX function `createBitmap` instead?"
+        errorLine1="        val bitmap = Bitmap.createBitmap(widthPx, heightPx, Bitmap.Config.ARGB_8888)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/WidgetArtwork.kt"
+            line="37"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX function `createBitmap` instead?"
+        errorLine1="        val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/widgets/WidgetArtwork.kt"
+            line="62"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation(&quot;com.airbnb.android:lottie:6.6.7&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="102"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation(&quot;com.squareup.retrofit2:retrofit:2.9.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="103"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation(&quot;com.google.code.gson:gson:2.13.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="104"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseTomlInstead"
+        message="Use version catalog instead"
+        errorLine1="    implementation(&quot;com.squareup.retrofit2:converter-gson:2.9.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="105"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ClickableViewAccessibility"
+        message="`MonthCalendarView#onTouchEvent` should call `MonthCalendarView#performClick` when a click is detected"
+        errorLine1="    override fun onTouchEvent(event: MotionEvent): Boolean {"
+        errorLine2="                 ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/ui/MonthCalendarView.kt"
+            line="131"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="30"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="44"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="292"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="319"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="61"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="94"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="127"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="170"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="        binding.finishedTasks.text = filtered.count { it.isDone }.toString()"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="291"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="        binding.totalTasks.text = filtered.size.toString()"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="292"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="            binding.streakDay.text = streak.toString()"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="299"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="                view.text = &quot;HELLO ${name.uppercase()}&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="319"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                view.text = &quot;HELLO ${name.uppercase()}&quot;"
+        errorLine2="                             ~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="319"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                                view.text = &quot;MOMENTUM&quot;"
+        errorLine2="                                             ~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/MainActivity.kt"
+            line="330"
+            column="46"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="        binding.testConnectionTxt.text = &quot;Testing…&quot;"
+        errorLine2="                                          ~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="299"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                binding.testConnectionTxt.text = &quot;Test connection&quot;"
+        errorLine2="                                                  ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="303"
+            column="51"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            binding.testConnectionTxt.text = &quot;Test connection&quot;"
+        errorLine2="                                              ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/SettingsActivity.kt"
+            line="312"
+            column="47"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="        binding.statCurrentStreak.text = StreakCalculator.current(stats, goal).toString()"
+        errorLine2="                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/StatsActivity.kt"
+            line="77"
+            column="42"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="        binding.statBestStreak.text = StreakCalculator.best(stats, goal).toString()"
+        errorLine2="                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/StatsActivity.kt"
+            line="78"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Number formatting does not take into account locale settings. Consider using `String.format` instead."
+        errorLine1="        binding.statTotal.text = stats.sumOf { it.finishedTasks }.toString()"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/StatsActivity.kt"
+            line="79"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="            row.habitStatName.text = &quot;${habit.emoji} ${habit.name}&quot;"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/anish/momentum/StatsActivity.kt"
+            line="135"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Powered by AI&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Powered by AI&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="45"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Get your personalized habits, but first...&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Get your personalized habits, but first...&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="80"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Answer a few questions&quot;, should use `@string` resource"
+        errorLine1="                                android:text=&quot;Answer a few questions&quot;"
+        errorLine2="                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="112"
+            column="33"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Or just describe what you want to work on&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Or just describe what you want to work on&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="139"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;e.g. I want to be healthier and more focused&quot;, should use `@string` resource"
+        errorLine1="                        android:hint=&quot;e.g. I want to be healthier and more focused&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="154"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Suggest habits&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Suggest habits&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="181"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;AI Recommended Habits&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;AI Recommended Habits&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="205"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Add to habits&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Add to habits&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="234"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Or tap each habit to add them&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Or tap each habit to add them&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="248"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Clear all&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Clear all&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_ai.xml"
+            line="271"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MOMENTUM&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;MOMENTUM&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="30"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Good morning ☀️&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Good morning ☀️&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;HABITS&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;HABITS&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="85"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;0&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="101"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;of&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;of&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="110"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;0&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="119"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Tasks done&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;Tasks done&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="130"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;STREAK&quot;, should use `@string` resource"
+        errorLine1="                    android:text=&quot;STREAK&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="161"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;0&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="189"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;TASKS&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;TASKS&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="250"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;No tasks&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;No tasks&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="270"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;What is your main goal right now?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;What is your main goal right now?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="29"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;(Select any 3 that applies)&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;(Select any 3 that applies)&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="39"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Be more productive&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Be more productive&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="61"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Improve health/fitness&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Improve health/fitness&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="89"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Learn new things&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Learn new things&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="117"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Reduce bad habits&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Reduce bad habits&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="145"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Feel better mentally&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Feel better mentally&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="173"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;How much time can you give daily for new habits?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;How much time can you give daily for new habits?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="187"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Less than 10 mins&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Less than 10 mins&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="211"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;10 - 30mins&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;10 - 30mins&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="239"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;30–60 mins&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;30–60 mins&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="267"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;More than 1 hour&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;More than 1 hour&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="295"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;When do you prefer doing your habits?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;When do you prefer doing your habits?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="309"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Morning&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Morning&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="333"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Afternoon&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Afternoon&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="361"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Evening&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Evening&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="389"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;No preference&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;No preference&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="417"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Any bad habits you&apos;re trying to reduce?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Any bad habits you&apos;re trying to reduce?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="431"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;(Select all the ones that apply)&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;(Select all the ones that apply)&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="441"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Smoking&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Smoking&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="463"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Drinking&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Drinking&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="491"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Excess phone use&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Excess phone use&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="519"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Procrastination&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Procrastination&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="547"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;None&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;None&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="575"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Are you currently a student or working?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Are you currently a student or working?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="589"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Student&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Student&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="613"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Working professional&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Working professional&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="641"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Neither&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Neither&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="669"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Anything else we should know?&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Anything else we should know?&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="683"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Describe or leave empty&quot;, should use `@string` resource"
+        errorLine1="                    android:hint=&quot;Describe or leave empty&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="696"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;SUBMIT&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;SUBMIT&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_questions.xml"
+            line="724"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Settings&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Settings&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Edit your name&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Edit your name&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="69"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Star it on github&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Star it on github&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="102"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Check out my projects&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Check out my projects&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="135"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Daily goal&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Daily goal&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="151"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;A day counts toward your streak once you tick off this many habits&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;A day counts toward your streak once you tick off this many habits&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="173"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;AI Assistant&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;AI Assistant&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="210"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Show the AI button&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Show the AI button&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="232"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;API key&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;API key&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="268"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Not set&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Not set&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="278"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Base URL (OpenAI-compatible)&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Base URL (OpenAI-compatible)&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="305"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Model&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Model&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="341"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;System prompt&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;System prompt&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="377"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Temperature&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Temperature&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="420"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Test connection&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Test connection&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="465"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Reset AI settings to defaults&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;Reset AI settings to defaults&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="491"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Made with ❤️ by Anish&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;Made with ❤️ by Anish&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="513"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Stats&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Stats&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="27"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;0&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="80"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Current streak&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Current streak&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="88"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;0&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="116"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Best streak&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Best streak&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="124"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;0&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="152"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Completed&quot;, should use `@string` resource"
+        errorLine1="                            android:text=&quot;Completed&quot;"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="160"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Last 6 months&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Last 6 months&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="176"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Last 8 weeks&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Last 8 weeks&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="208"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Per habit (30 days)&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Per habit (30 days)&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="240"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Add a habit to see its stats&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Add a habit to see its stats&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="257"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Badges&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Badges&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_stats.xml"
+            line="268"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;✒️&quot;, should use `@string` resource"
+        errorLine1="                android:hint=&quot;✒️&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="29"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Habit name (e.g. Walk 🚶🏻)&quot;, should use `@string` resource"
+        errorLine1="                android:hint=&quot;Habit name (e.g. Walk 🚶🏻)&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="47"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Repeat on&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Repeat on&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="66"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;S&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;S&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="94"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;M&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;M&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="99"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;T&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;T&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="104"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;W&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;W&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="109"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;T&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;T&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="114"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;F&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;F&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="119"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;S&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;S&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="124"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Set daily reminder?&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Set daily reminder?&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="139"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Pick time&quot;, should use `@string` resource"
+        errorLine1="                android:text=&quot;Pick time&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_habit.xml"
+            line="182"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;18&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;18&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_calendar_date.xml"
+            line="19"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MON&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;MON&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_calendar_date.xml"
+            line="28"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;18&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;18&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_calendar_date_selected.xml"
+            line="19"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MON&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;MON&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_calendar_date_selected.xml"
+            line="28"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;🍅&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;🍅&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_habit.xml"
+            line="20"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Read a book&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;Read a book&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_habit.xml"
+            line="28"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;LAST 12 WEEKS&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;LAST 12 WEEKS&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/widget_momentum.xml"
+            line="83"
+            column="9"/>
+    </issue>
+
+</issues>

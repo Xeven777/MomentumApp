@@ -124,7 +124,7 @@ class StatsActivity : AppCompatActivity() {
         for (habit in habits) {
             val id = habit.id.toLongOrNull() ?: continue
             val stat = completionsByHabit.firstOrNull { it.habitId == id } ?: continue
-            val totalPossible = habitPossibleDays(habit.creationDate, since, habit.scheduleMask)
+            val totalPossible = stat.totalPossible
             val percent = if (totalPossible == 0) 0f
             else (stat.totalDone.toFloat() / totalPossible * 100f).coerceAtMost(100f)
 
@@ -141,18 +141,6 @@ class StatsActivity : AppCompatActivity() {
             }
             binding.habitStatsContainer.addView(row.root)
         }
-    }
-
-    /** How many days the habit was actually scheduled for within the window. */
-    private fun habitPossibleDays(creationDate: String, since: String, scheduleMask: Int): Int {
-        var count = 0
-        var date = maxOf(creationDate, since)
-        val limit = DateUtils.today()
-        while (date <= limit) {
-            if (Schedule.isScheduledOn(scheduleMask, date)) count++
-            date = DateUtils.plusDays(date, 1)
-        }
-        return count
     }
 
     private fun renderBadges(stats: List<DayStat>, goal: Int) {

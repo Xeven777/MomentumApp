@@ -1,7 +1,6 @@
 package com.anish.momentum.ui
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -94,14 +93,5 @@ class RingView @JvmOverloads constructor(
         if (caption.isNotEmpty()) {
             canvas.drawText(caption, width / 2f, numberBaseline + captionPaint.textSize * 1.3f, captionPaint)
         }
-    }
-
-    /** Convenience for callers that want the widget's bitmap rendering. */
-    fun toBitmap(): Bitmap {
-        val bitmap = Bitmap.createBitmap(
-            maxOf(width, 1), maxOf(height, 1), Bitmap.Config.ARGB_8888
-        )
-        draw(Canvas(bitmap))
-        return bitmap
     }
 }

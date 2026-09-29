@@ -28,7 +28,7 @@
             android:fontFamily="@font/google_sans_bold"
             android:letterSpacing="0.1"
             android:text="MOMENTUM"
-            android:textColor="#fff4b2"
+            android:textColor="@color/streak_yellow"
             android:textSize="23sp" />
 
         <TextView
@@ -61,7 +61,7 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/habit_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#313131"
+                android:background="@color/dark_grey"
                 android:gravity=""
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -99,7 +99,7 @@
                         android:layout_marginEnd="6dp"
                         android:fontFamily="@font/google_sans_bold"
                         android:text="0"
-                        android:textColor="#fff4b2"
+                        android:textColor="@color/streak_yellow"
                         android:textSize="38sp" />
 
                     <TextView
@@ -132,9 +132,9 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/streak_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                 android:id="@+id/streak_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#fff4b2"
+                android:background="@color/streak_yellow"
                 android:orientation="vertical"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="20dp">
@@ -159,7 +159,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:letterSpacing="0.1"
                     android:text="STREAK"
-                    android:textColor="#f64f2f"
+                    android:textColor="@color/streak_orange"
                     android:textSize="15sp" />
 
                 <LinearLayout
@@ -187,7 +187,7 @@
                         android:fontFamily="@font/google_sans_bold"
                         android:includeFontPadding="false"
                         android:text="0"
-                        android:textColor="#f64f2f"
+                        android:textColor="@color/streak_orange"
                         android:textSize="57sp" />
 
                 </LinearLayout>
@@ -195,7 +195,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
@@ -204,6 +204,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cards"
+        android:contentDescription="@string/show_month_calendar_description"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
@@ -211,7 +212,7 @@
         android:orientation="horizontal"
         android:overScrollMode="never" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/month_calendar_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -236,7 +237,7 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/tasks"
@@ -271,7 +272,7 @@
         android:textSize="18sp"
         android:visibility="gone" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/add_habit_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -285,7 +286,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#282828"
+            android:background="@color/fab_background"
             android:padding="10dp">
 
             <ImageView
@@ -295,10 +296,10 @@
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- AI BTN -->
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/ai_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -322,6 +323,6 @@
 
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

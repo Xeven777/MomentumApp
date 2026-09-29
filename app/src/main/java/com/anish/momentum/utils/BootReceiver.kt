@@ -3,6 +3,7 @@ package com.anish.momentum.utils
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +27,8 @@ class BootReceiver : BroadcastReceiver() {
             try {
                 ServiceLocator.habits.getHabitsWithReminders()
                     .forEach { ReminderUtils.scheduleHabitReminder(appContext, it) }
+            } catch (e: Exception) {
+                Log.e("BootReceiver", "Could not re-arm reminders", e)
             } finally {
                 pending.finish()
             }

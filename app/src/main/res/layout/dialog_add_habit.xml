@@ -46,7 +46,7 @@
                 android:fontFamily="@font/google_sans_regular"
                 android:hint="Habit name (e.g. Walk 🚶🏻)"
                 android:textColor="@color/white"
-                android:textColorHint="#8A8A8A"
+                android:textColorHint="@color/hint_text"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +75,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/google_sans_regular"
             android:gravity="end"
-            android:textColor="#ABABAB"
+            android:textColor="@color/secondary_text"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -148,7 +148,7 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/reminder_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -184,6 +184,6 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

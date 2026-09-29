@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.anish.momentum.databinding.ActivityQuestionsBinding
-import com.anish.momentum.utils.StateManager
 import com.anish.momentum.utils.Vibration
 
 class QuestionsActivity : AppCompatActivity() {
@@ -142,7 +141,6 @@ class QuestionsActivity : AppCompatActivity() {
                 |$anythingElse
             """.trimMargin()
             Log.d("Qnresult", result)
-            StateManager.triggerAi = true
             startActivity(
                 Intent(this, AiActivity::class.java).putExtra("result", result)
             )

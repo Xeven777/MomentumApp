@@ -10,9 +10,7 @@ data class DayStat(
 /** Aggregates for the stats screen. */
 data class HabitStats(
     val habitId: Long,
+    /** Days in the window the habit was actually scheduled for. */
     val totalPossible: Int,
     val totalDone: Int
-) {
-    val rate: Float
-        get() = if (totalPossible == 0) 0f else totalDone.toFloat() / totalPossible
-}
+)

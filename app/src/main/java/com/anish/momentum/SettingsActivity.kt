@@ -1,17 +1,15 @@
 package com.anish.momentum
 
-import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
@@ -20,27 +18,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.anish.momentum.ai.AiConfig
 import com.anish.momentum.ai.AiProvider
 import com.anish.momentum.data.SettingsStore
+import com.anish.momentum.databinding.ActivitySettingsBinding
 import com.anish.momentum.utils.ServiceLocator
 import com.anish.momentum.utils.Vibration
-import com.google.android.material.materialswitch.MaterialSwitch
-import com.google.android.material.slider.Slider
 import kotlinx.coroutines.launch
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var editName: CardView
-    private lateinit var github: CardView
-    private lateinit var projects: CardView
-    private lateinit var aiSwitch: MaterialSwitch
-    private lateinit var apiKeyValue: TextView
-    private lateinit var baseUrlValue: TextView
-    private lateinit var modelValue: TextView
-    private lateinit var systemPromptValue: TextView
-    private lateinit var temperatureValue: TextView
-    private lateinit var temperatureSlider: Slider
-    private lateinit var dailyGoalValue: TextView
-    private lateinit var dailyGoalSlider: Slider
-    private lateinit var testConnectionTxt: TextView
+    private lateinit var binding: ActivitySettingsBinding
 
     private val settings: SettingsStore get() = ServiceLocator.settings
     private val ai by lazy { AiProvider(this) }
@@ -52,38 +37,25 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_settings)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        editName = findViewById(R.id.edit_name)
-        github = findViewById(R.id.github)
-        projects = findViewById(R.id.projects)
-        aiSwitch = findViewById(R.id.ai_switch)
-        apiKeyValue = findViewById(R.id.api_key_value)
-        baseUrlValue = findViewById(R.id.base_url_value)
-        modelValue = findViewById(R.id.model_value)
-        systemPromptValue = findViewById(R.id.system_prompt_value)
-        temperatureValue = findViewById(R.id.temperature_value)
-        temperatureSlider = findViewById(R.id.temperature_slider)
-        dailyGoalValue = findViewById(R.id.daily_goal_value)
-        dailyGoalSlider = findViewById(R.id.daily_goal_slider)
-        testConnectionTxt = findViewById(R.id.test_connection_txt)
-
-        editName.setOnClickListener {
+        binding.editName.setOnClickListener {
             Vibration.vibrate(this, 50)
             showEditNameDialog()
         }
 
-        github.setOnClickListener {
+        binding.github.setOnClickListener {
             Vibration.vibrate(this, 50)
             openUrl("https://github.com/Xeven777/Momentum")
         }
 
-        projects.setOnClickListener {
+        binding.projects.setOnClickListener {
             Vibration.vibrate(this, 50)
             openUrl("https://anish7.me/projects")
         }
@@ -92,7 +64,7 @@ class SettingsActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     settings.aiButtonEnabled.collect { enabled ->
-                        if (aiSwitch.isChecked != enabled) aiSwitch.isChecked = enabled
+                        if (binding.aiSwitch.isChecked != enabled) binding.aiSwitch.isChecked = enabled
                     }
                 }
                 launch {
@@ -104,15 +76,15 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        aiSwitch.setOnCheckedChangeListener { _, isChecked ->
+        binding.aiSwitch.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch { settings.setAiButtonEnabled(isChecked) }
         }
 
-        findViewById<CardView>(R.id.api_key_card).setOnClickListener {
+        binding.apiKeyCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             showApiKeyDialog()
         }
-        findViewById<CardView>(R.id.base_url_card).setOnClickListener {
+        binding.baseUrlCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             showTextDialog(
                 title = "Base URL",
@@ -121,11 +93,11 @@ class SettingsActivity : AppCompatActivity() {
                 multiline = false
             ) { value -> lifecycleScope.launch { settings.setAiBaseUrl(value) } }
         }
-        findViewById<CardView>(R.id.model_card).setOnClickListener {
+        binding.modelCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             showModelDialog()
         }
-        findViewById<CardView>(R.id.system_prompt_card).setOnClickListener {
+        binding.systemPromptCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             showTextDialog(
                 title = "System prompt",
@@ -135,26 +107,26 @@ class SettingsActivity : AppCompatActivity() {
             ) { value -> lifecycleScope.launch { settings.setAiSystemPrompt(value) } }
         }
 
-        dailyGoalSlider.addOnChangeListener { _, value, fromUser ->
+        binding.dailyGoalSlider.addOnChangeListener { _, value, fromUser ->
             renderDailyGoal(value.toInt())
             if (fromUser && !updatingGoal) {
                 lifecycleScope.launch { settings.setDailyGoal(value.toInt()) }
             }
         }
 
-        temperatureSlider.addOnChangeListener { _, value, fromUser ->
-            temperatureValue.text = String.format("%.1f", value)
+        binding.temperatureSlider.addOnChangeListener { _, value, fromUser ->
+            binding.temperatureValue.text = String.format("%.1f", value)
             if (fromUser && !updatingTemperature) {
                 lifecycleScope.launch { settings.setAiTemperature(value.toDouble()) }
             }
         }
 
-        findViewById<CardView>(R.id.test_connection_card).setOnClickListener {
+        binding.testConnectionCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             testConnection()
         }
 
-        findViewById<CardView>(R.id.reset_ai_card).setOnClickListener {
+        binding.resetAiCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             confirmResetAi()
         }
@@ -170,22 +142,22 @@ class SettingsActivity : AppCompatActivity() {
     private fun renderAiConfig(config: AiConfig) {
         currentBaseUrl = config.baseUrl
         currentSystemPrompt = config.systemPrompt
-        baseUrlValue.text = config.normalizedBaseUrl
-        modelValue.text = config.model
-        systemPromptValue.text = config.systemPrompt
-        temperatureValue.text = String.format("%.1f", config.temperature)
-        if (kotlin.math.abs(temperatureSlider.value - config.temperature) > 0.001f) {
+        binding.baseUrlValue.text = config.normalizedBaseUrl
+        binding.modelValue.text = config.model
+        binding.systemPromptValue.text = config.systemPrompt
+        binding.temperatureValue.text = String.format("%.1f", config.temperature)
+        if (kotlin.math.abs(binding.temperatureSlider.value - config.temperature) > 0.001f) {
             updatingTemperature = true
-            temperatureSlider.value = config.temperature.toFloat()
+            binding.temperatureSlider.value = config.temperature.toFloat()
             updatingTemperature = false
         }
     }
 
     private fun renderDailyGoal(goal: Int) {
-        dailyGoalValue.text = if (goal <= 0) "All habits that day" else "$goal habit${if (goal == 1) "" else "s"}"
-        if (dailyGoalSlider.value.toInt() != goal) {
+        binding.dailyGoalValue.text = if (goal <= 0) "All habits that day" else "$goal habit${if (goal == 1) "" else "s"}"
+        if (binding.dailyGoalSlider.value.toInt() != goal) {
             updatingGoal = true
-            dailyGoalSlider.value = goal.toFloat()
+            binding.dailyGoalSlider.value = goal.toFloat()
             updatingGoal = false
         }
     }
@@ -193,7 +165,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun refreshApiKeyLabel() {
         lifecycleScope.launch {
             val masked = ai.maskedKey()
-            apiKeyValue.text = if (masked.isBlank()) "Not set — tap to add" else masked
+            binding.apiKeyValue.text = if (masked.isBlank()) "Not set — tap to add" else masked
         }
     }
 
@@ -202,20 +174,24 @@ class SettingsActivity : AppCompatActivity() {
     private fun showEditNameDialog() {
         val input = EditText(this)
         input.hint = "Enter new name"
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Edit Name")
             .setView(input)
-            .setPositiveButton("Save") { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isEmpty()) {
-                    Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-                lifecycleScope.launch { settings.setUserName(newName) }
-                Toast.makeText(this, "Name updated", Toast.LENGTH_SHORT).show()
-            }
+            .setPositiveButton("Save", null)
             .setNegativeButton("Cancel", null)
             .show()
+        // Validate on click without auto-dismissing, so a blank name does not
+        // throw away the dialog.
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val newName = input.text.toString().trim()
+            if (newName.isEmpty()) {
+                Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            lifecycleScope.launch { settings.setUserName(newName) }
+            Toast.makeText(this, "Name updated", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
     }
 
     private fun showApiKeyDialog() {
@@ -320,11 +296,11 @@ class SettingsActivity : AppCompatActivity() {
     // ------------------------------------------------------------ connection
 
     private fun testConnection() {
-        testConnectionTxt.text = "Testing…"
+        binding.testConnectionTxt.text = "Testing…"
         lifecycleScope.launch {
             val client = ai.client()
             if (client == null) {
-                testConnectionTxt.text = "Test connection"
+                binding.testConnectionTxt.text = "Test connection"
                 Toast.makeText(
                     this@SettingsActivity,
                     "Add an API key first",
@@ -333,7 +309,7 @@ class SettingsActivity : AppCompatActivity() {
                 return@launch
             }
             val result = client.testConnection()
-            testConnectionTxt.text = "Test connection"
+            binding.testConnectionTxt.text = "Test connection"
             result.onSuccess { count ->
                 Toast.makeText(
                     this@SettingsActivity,

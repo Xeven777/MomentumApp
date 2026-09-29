@@ -39,19 +39,8 @@ object Badges {
      * Longest run of days that fully met the goal. Tracked separately from the
      * streak, which a daily goal can also satisfy partially.
      */
-    fun longestPerfectRun(days: List<DayStat>, goal: Int): Int {
-        var best = 0
-        var run = 0
-        for (day in days) {
-            if (StreakCalculator.isComplete(day, goal)) {
-                run++
-                if (run > best) best = run
-            } else {
-                run = 0
-            }
-        }
-        return best
-    }
+    fun longestPerfectRun(days: List<DayStat>, goal: Int): Int =
+        StreakCalculator.best(days, goal)
 
     fun evaluate(
         bestStreak: Int,

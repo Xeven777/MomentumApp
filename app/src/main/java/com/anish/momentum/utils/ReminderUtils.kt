@@ -30,8 +30,9 @@ object ReminderUtils {
         }
 
         val timeParts = habit.reminderTime.split(":")
-        val hour = timeParts[0].toIntOrNull() ?: return
-        val minute = timeParts[1].toIntOrNull() ?: return
+        val hour = timeParts.getOrNull(0)?.toIntOrNull() ?: return
+        val minute = timeParts.getOrNull(1)?.toIntOrNull() ?: return
+        if (hour !in 0..23 || minute !in 0..59) return
 
         val now = Calendar.getInstance()
         val calendar = Calendar.getInstance().apply {

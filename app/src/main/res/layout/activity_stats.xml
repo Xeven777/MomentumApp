@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
@@ -91,9 +91,9 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2.5dp"
@@ -127,9 +127,9 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
@@ -163,7 +163,7 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
@@ -177,7 +177,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -197,7 +197,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- WEEKLY TREND -->
             <TextView
@@ -209,7 +209,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -229,7 +229,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- PER HABIT -->
             <TextView
@@ -255,7 +255,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/google_sans_regular"
                 android:text="Add a habit to see its stats"
-                android:textColor="#ABABAB"
+                android:textColor="@color/secondary_text"
                 android:textSize="15sp"
                 android:visibility="gone" />
 

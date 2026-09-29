@@ -65,6 +65,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    lint {
+        // New warnings fail the build; everything already in the repo is
+        // recorded in lint-baseline.xml so only fresh issues surface.
+        abortOnError = true
+        checkReleaseBuilds = true
+        baseline = file("lint-baseline.xml")
+    }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }

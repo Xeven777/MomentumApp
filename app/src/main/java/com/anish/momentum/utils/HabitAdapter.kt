@@ -39,7 +39,7 @@ class HabitAdapter(
 
             habitItemLayout.setOnClickListener { onToggle(habit) }
             habitItemLayout.setOnLongClickListener {
-                if (!habit.isDone) onLongPress(habit)
+                onLongPress(habit)
                 true
             }
         }

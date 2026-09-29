@@ -41,13 +41,6 @@ class StreakWidget : AppWidgetProvider() {
         render(context, manager, intArrayOf(appWidgetId))
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
-        super.onReceive(context, intent)
-        if (intent.action == ACTION_REFRESH) {
-            render(context, AppWidgetManager.getInstance(context), widgetIds(context))
-        }
-    }
-
     private fun render(context: Context, manager: AppWidgetManager, ids: IntArray) {
         if (ids.isEmpty()) return
         val pending = goAsync()
@@ -137,7 +130,6 @@ class StreakWidget : AppWidgetProvider() {
 
     companion object {
         private const val TAG = "StreakWidget"
-        const val ACTION_REFRESH = "com.anish.momentum.action.WIDGET_REFRESH"
 
         // Unique base so this provider's PendingIntent can never collide with
         // the mini widget's.
