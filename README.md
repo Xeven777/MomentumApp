@@ -278,6 +278,8 @@ Follow the `.editorconfig`, use `kotlin.code.style=official`, and make sure `./g
 
 Built with ❤️ by [Anish Biswas](https://github.com/Xeven777) · [anish7.me](https://anish7.me)
 
+Inspired from [a similar app](https://github.com/Arijit-05/Momentum) by [Arijit](https://github.com/Arijit-05).
+
 Uses [Google Sans](https://github.com/googlefonts/googlesans) under the [SIL Open Font License 1.1](licenses/GoogleSans-OFL.txt), subsetted and instanced for this app.
 
 ---
