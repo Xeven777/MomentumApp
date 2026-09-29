@@ -28,6 +28,12 @@ class SettingsStore(context: Context) {
     val userName: Flow<String> = store.data.map { it[KEY_NAME] ?: "" }
     val aiButtonEnabled: Flow<Boolean> = store.data.map { it[KEY_AI_BUTTON] ?: true }
 
+    /** True once the welcome flow (splash + name) has been completed. */
+    val onboardingComplete: Flow<Boolean> = store.data.map { it[KEY_ONBOARDING] ?: false }
+
+    /** Whether the home screen shows the daily quote card. */
+    val quoteEnabled: Flow<Boolean> = store.data.map { it[KEY_SHOW_QUOTE] ?: true }
+
     /** 0 = "all habits that existed that day". */
     val dailyGoal: Flow<Int> = store.data.map { it[KEY_DAILY_GOAL] ?: 0 }
 
@@ -55,8 +61,16 @@ class SettingsStore(context: Context) {
         store.edit { it[KEY_NAME] = name }
     }
 
+    suspend fun setOnboardingComplete(complete: Boolean) {
+        store.edit { it[KEY_ONBOARDING] = complete }
+    }
+
     suspend fun setAiButtonEnabled(enabled: Boolean) {
         store.edit { it[KEY_AI_BUTTON] = enabled }
+    }
+
+    suspend fun setShowQuote(show: Boolean) {
+        store.edit { it[KEY_SHOW_QUOTE] = show }
     }
 
     suspend fun setDailyGoal(goal: Int) {
@@ -92,7 +106,9 @@ class SettingsStore(context: Context) {
     companion object {
         private const val LEGACY_DEFAULT_MODEL = "google/gemma-4-31b-it:free"
         private val KEY_NAME = stringPreferencesKey("user_name")
+        private val KEY_ONBOARDING = booleanPreferencesKey("onboarding_complete")
         private val KEY_AI_BUTTON = booleanPreferencesKey("ai_button_enabled")
+        private val KEY_SHOW_QUOTE = booleanPreferencesKey("show_quote")
         private val KEY_DAILY_GOAL = intPreferencesKey("daily_goal")
         private val KEY_BASE_URL = stringPreferencesKey("ai_base_url")
         private val KEY_MODEL = stringPreferencesKey("ai_model")

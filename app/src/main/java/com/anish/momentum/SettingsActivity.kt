@@ -69,6 +69,11 @@ openUrl("https://github.com/Xeven777/MomentumApp")
                     }
                 }
                 launch {
+                    settings.quoteEnabled.collect { show ->
+                        if (binding.quoteSwitch.isChecked != show) binding.quoteSwitch.isChecked = show
+                    }
+                }
+                launch {
                     settings.aiConfig.collect { config -> renderAiConfig(config) }
                 }
                 launch {
@@ -79,6 +84,10 @@ openUrl("https://github.com/Xeven777/MomentumApp")
 
         binding.aiSwitch.setOnCheckedChangeListener { _, isChecked ->
             lifecycleScope.launch { settings.setAiButtonEnabled(isChecked) }
+        }
+
+        binding.quoteSwitch.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch { settings.setShowQuote(isChecked) }
         }
 
         binding.apiKeyCard.setOnClickListener {

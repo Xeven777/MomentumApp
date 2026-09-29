@@ -10,13 +10,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/questions_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical">
@@ -707,34 +707,30 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Primary action, in the same brand yellow the rest of the app uses
+                 for buttons, instead of a white block on the dark page. -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/submit_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/streak_yellow"
                 app:cardCornerRadius="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="25dp">
+                app:cardElevation="0dp">
 
-                <RelativeLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="15dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/google_sans_bold"
                     android:gravity="center"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/google_sans_bold"
-                        android:text="SUBMIT"
-                        android:letterSpacing="0.1"
-                        android:textSize="16sp" />
-
-                </RelativeLayout>
+                    android:letterSpacing="0.1"
+                    android:paddingVertical="16dp"
+                    android:text="SUBMIT"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
             </com.google.android.material.card.MaterialCardView>
 

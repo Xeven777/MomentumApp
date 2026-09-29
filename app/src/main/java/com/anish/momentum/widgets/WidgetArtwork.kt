@@ -57,7 +57,8 @@ object WidgetArtwork {
         streak: Int,
         sizePx: Int,
         centerTextSizePx: Float,
-        captionTextSizePx: Float
+        captionTextSizePx: Float,
+        caption: String
     ): Bitmap {
         val bitmap = Bitmap.createBitmap(sizePx, sizePx, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
@@ -89,7 +90,7 @@ object WidgetArtwork {
         val captionBaseline = numberBaseline + captionTextSizePx * 1.25f
 
         canvas.drawText(streak.toString(), sizePx / 2f, numberBaseline, streakPaint)
-        canvas.drawText("day streak", sizePx / 2f, captionBaseline, captionPaint)
+        canvas.drawText(caption, sizePx / 2f, captionBaseline, captionPaint)
         return bitmap
     }
 

@@ -22,31 +22,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginEnd="10dp"
-            android:alpha="1"
+            android:layout_marginEnd="12dp"
+            android:layout_toStartOf="@id/settings"
             android:ellipsize="end"
             android:fontFamily="@font/google_sans_bold"
-            android:letterSpacing="0.1"
-            android:text="MOMENTUM"
+            android:letterSpacing="-0.01"
+            android:maxLines="1"
+            android:text="@string/app_name_upper"
             android:textColor="@color/streak_yellow"
-            android:textSize="23sp" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/wish_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_txt"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/google_sans_regular"
-            android:text="Good morning ☀️"
+            android:text="@string/greeting_prompt_default"
             android:textColor="@color/secondary_text"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/settings"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/open_settings_description"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/settings" />
 
     </RelativeLayout>
@@ -57,89 +64,121 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="2">
 
+        <!-- HABITS: icon + label, "N of M", then the completion bar with its
+             percentage pinned to the bottom of the card. -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/habit_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="6dp"
             android:layout_weight="1"
             app:cardCornerRadius="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/dark_grey"
-                android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    app:drawableStartCompat="@drawable/ic_target"
                     android:fontFamily="@font/google_sans_regular"
-                    android:letterSpacing="0.1"
-                    android:text="HABITS"
+                    android:gravity="center_vertical"
+                    android:text="@string/label_habits"
                     android:textColor="@color/secondary_text"
                     android:textSize="15sp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/finished_tasks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:fontFamily="@font/google_sans_bold"
                         android:text="0"
-                        android:textColor="@color/streak_yellow"
-                        android:textSize="38sp" />
+                        android:textAppearance="@style/TextAppearance.Momentum.NumberStat"
+                        android:textColor="@color/streak_yellow" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="6dp"
-                        android:fontFamily="@font/google_sans_bold"
-                        android:text="of"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:layout_marginStart="7dp"
+                        android:layout_marginEnd="7dp"
+                        android:text="@string/label_of"
+                        android:textAppearance="@style/TextAppearance.Momentum.NumberUnit"
+                        android:textColor="@color/secondary_text" />
 
                     <TextView
                         android:id="@+id/total_tasks"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/google_sans_bold"
                         android:text="0"
-                        android:textColor="@color/white"
-                        android:textSize="33sp" />
+                        android:textAppearance="@style/TextAppearance.Momentum.NumberUnit" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <!--
+                  No weighted spacer here on purpose. This card is match_parent
+                  height inside a wrap_content row, so a vertical weight resolves
+                  against the screen height and blows both cards up to full
+                  screen, pushing everything below off the page. The card is
+                  within a couple of dp of the streak card anyway.
+                -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:text="Tasks done"
-                    android:textColor="@color/secondary_text" />
+                    android:layout_marginTop="14dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/today_progress"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progress="0"
+                        app:indicatorColor="@color/streak_yellow"
+                        app:trackColor="@color/surface_row"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="8dp" />
+
+                    <TextView
+                        android:id="@+id/today_percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/google_sans_bold"
+                        android:fontFeatureSettings="tnum"
+                        android:textColor="@color/streak_yellow"
+                        android:textSize="15sp"
+                        tools:text="0%" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- STREAK: the whole card opens the stats screen. -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/streak_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="6dp"
             android:layout_weight="1"
+            android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="24dp">
 
             <LinearLayout
@@ -148,51 +187,73 @@
                 android:layout_height="match_parent"
                 android:background="@color/streak_yellow"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="20dp">
-
-                <TextView
-                    android:id="@+id/streak_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/google_sans_regular"
-                    android:letterSpacing="0.1"
-                    android:text="STREAK"
-                    android:textColor="@color/streak_orange"
-                    android:textSize="15sp" />
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="16dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/lottie_fire"
-                        android:layout_width="53dp"
-                        android:layout_height="68dp"
-                        android:layout_gravity="center"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/fire_lottie" />
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/streak_day"
+                        android:id="@+id/streak_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="-3dp"
                         android:fontFamily="@font/google_sans_bold"
-                        android:includeFontPadding="false"
-                        android:text="0"
+                        android:letterSpacing="0.12"
+                        android:text="@string/label_streak"
                         android:textColor="@color/streak_orange"
-                        android:textSize="57sp" />
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/lottie_fire"
+                            android:layout_width="38dp"
+                            android:layout_height="48dp"
+                            app:lottie_autoPlay="true"
+                            app:lottie_loop="true"
+                            app:lottie_rawRes="@raw/fire_lottie" />
+
+                        <TextView
+                            android:id="@+id/streak_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.Momentum.NumberHero"
+                            android:textColor="@color/streak_orange" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/streak_caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:maxLines="1"
+                        android:text="@string/streak_start"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/streak_chevron"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="4dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chevron_right" />
 
             </LinearLayout>
 
@@ -205,11 +266,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/cards"
-        android:contentDescription="@string/show_month_calendar_description"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
+        android:clipToPadding="false"
+        android:contentDescription="@string/show_month_calendar_description"
         android:orientation="horizontal"
         android:overScrollMode="never" />
 
@@ -218,111 +280,201 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/calendar_recycler"
-        android:layout_marginHorizontal="18dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
         app:cardCornerRadius="24dp"
         tools:visibility="visible">
 
+        <!-- Margins, not padding: MonthCalendarView derives its cell width from
+             the view width and only honours vertical padding, so an inset has
+             to come from the layout. -->
+        <com.anish.momentum.ui.MonthCalendarView
+            android:id="@+id/month_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="12dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- QUOTE CARD: backdrop is pure XML so the app stays offline. -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/quote_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/month_calendar_card"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="24dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/quote_backdrop"
             android:orientation="vertical"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="12dp">
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="16dp">
 
-            <com.anish.momentum.ui.MonthCalendarView
-                android:id="@+id/month_calendar"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/google_sans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/quote_mark"
+                android:textColor="@color/streak_yellow"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/quote_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/google_sans_regular"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="italic"
+                tools:text="Discipline today builds the life you want tomorrow." />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tasks"
-        android:layout_width="wrap_content"
+    <!-- TASKS HEADER -->
+    <LinearLayout
+        android:id="@+id/tasks_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/month_calendar_card"
-        android:layout_marginStart="20dp"
-        android:fontFamily="@font/google_sans_regular"
-        android:letterSpacing="0.1"
-        android:text="TASKS"
-        android:textColor="@color/secondary_text"
-        android:textSize="15sp" />
+        android:layout_below="@id/quote_card"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="22dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/tasks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_todays_tasks"
+            android:textAppearance="@style/TextAppearance.Momentum.SectionLabel" />
+
+        <TextView
+            android:id="@+id/tasks_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/google_sans_bold"
+            android:fontFeatureSettings="tnum"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            tools:text="0" />
+
+    </LinearLayout>
+
+    <!-- The task list owns every dp left below the header and scrolls inside
+         itself. It must not be wrap_content: the content above it (cards,
+         day strip, quote) grows and shrinks, and a content-sized list with no
+         scroll range simply pushes rows off the bottom of the screen, where
+         they can never be reached. paddingBottom keeps the last row clear of
+         the floating buttons. -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habit_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tasks"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/tasks_header"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:clipToPadding="false"
+        android:paddingBottom="84dp" />
 
-    <TextView
+    <!-- Empty state: a composed block rather than a bare "No tasks" line. -->
+    <LinearLayout
         android:id="@+id/no_tasks_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/habit_recycler"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/google_sans_regular"
-        android:text="No tasks"
-        android:textColor="@color/secondary_text"
-        android:textSize="18sp"
-        android:visibility="gone" />
+        android:layout_below="@id/tasks_header"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_habits_emoji"
+            android:textSize="34sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/google_sans_bold"
+            android:text="@string/empty_habits_title"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/empty_habits_body"
+            android:textAppearance="@style/TextAppearance.Momentum.BodySecondary" />
+
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/add_habit_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        app:cardCornerRadius="24dp"
+        android:contentDescription="@string/add_habit_description"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/surface_row"
+        app:cardCornerRadius="26dp"
         app:cardElevation="0dp">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/fab_background"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/add" />
-
-        </RelativeLayout>
+            android:importantForAccessibility="no"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/add" />
 
     </com.google.android.material.card.MaterialCardView>
 
     <!-- AI BTN -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/ai_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:visibility="gone"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_above="@id/add_habit_btn"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="24dp">
+        android:contentDescription="@string/ai_button_description"
+        android:foreground="?attr/selectableItemBackground"
+        android:visibility="gone"
+        app:cardCornerRadius="26dp"
+        app:cardElevation="0dp"
+        tools:visibility="visible">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gradient"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/fire_white" />
-
-        </RelativeLayout>
+            android:importantForAccessibility="no"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/fire_white" />
 
     </com.google.android.material.card.MaterialCardView>
 

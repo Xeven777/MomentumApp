@@ -10,18 +10,25 @@ import android.graphics.RectF
  */
 object Artwork {
 
-    /** Empty day, then four intensities of the brand yellow (level 4 == streak_yellow). */
+    /**
+     * Empty day, then four intensities of the brand yellow (level 4 == streak_yellow).
+     * Level 0 sits *below* the #313131 card surface so an empty day reads as
+     * recessed rather than disappearing into the card.
+     */
     val HEAT_LEVELS = intArrayOf(
-        0xFF2E2E2E.toInt(), // level 0: nothing done (or no habits that day)
+        0xFF262626.toInt(), // level 0: nothing done (or no habits that day)
         0xFF54481A.toInt(),
         0xFF8F7426.toInt(),
         0xFFC9A93B.toInt(),
         0xFFFFF4B2.toInt()  // level 4: the day was fully met
     )
 
-    const val EMPTY_CELL = 0xFF161B22.toInt()
-    const val OUTLINE = 0xFF30363D.toInt()
-    const val MUTED_TEXT = 0xFF8B949E.toInt()
+    // Neutral greys, matched to values/colors.xml. Previously these were the
+    // cool blue-tinted GitHub palette (#161B22 / #30363D / #8B949E), which put
+    // a cold hue next to the warm yellow everywhere the canvas views draw.
+    const val EMPTY_CELL = 0xFF1F1F1F.toInt()
+    const val OUTLINE = 0xFF3A3A3A.toInt()
+    const val MUTED_TEXT = 0xFF9E9E9E.toInt()
     val FLAME = 0xFFF64F2F.toInt()
     val STREAK_YELLOW = 0xFFFFF4B2.toInt()
 

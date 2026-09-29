@@ -2,35 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingVertical="10dp"
-    android:paddingHorizontal="18dp"
-    android:orientation="vertical"
     android:layout_marginStart="8dp"
+    android:background="@drawable/date_item_bg_selected"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:gravity="center"
-    android:background="@drawable/date_item_bg_selected">
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    android:paddingVertical="10dp">
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/google_sans_bold"
+        android:fontFeatureSettings="tnum"
+        android:text="18"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="18" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/google_sans_regular"
+        android:letterSpacing="0.06"
+        android:text="MON"
         android:textColor="@color/black"
-        android:textSize="12sp"
-        android:text="MON" />
+        android:textSize="11sp" />
 
     <View
+        android:id="@+id/status_dot"
         android:layout_width="6dp"
         android:layout_height="6dp"
-        android:id="@+id/status_dot"
         android:layout_marginTop="4dp"
         android:background="@drawable/dot_grey" />
 

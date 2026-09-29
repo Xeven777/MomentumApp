@@ -20,12 +20,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/google_sans_bold"
-            android:text="Settings"
-            android:includeFontPadding="false"
             android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="35sp" />
+            android:text="@string/screen_settings"
+            android:textAppearance="@style/TextAppearance.Momentum.ScreenTitle" />
 
     </LinearLayout>
 
@@ -47,19 +44,29 @@
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
+                <!--
+                  tools:ignore reasoning for the three About/repo rows below: the
+                  icons are 512x512 rasters drawn at 25dp. A compound drawable has
+                  no size clamp, so it would render them at intrinsic size; the
+                  ImageView bounds are what keep them small here.
+                -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
-                    android:paddingVertical="20dp"
                     android:orientation="horizontal"
-                    android:paddingHorizontal="15dp">
+                    android:paddingHorizontal="15dp"
+                    android:paddingVertical="20dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/edit" />
 
                     <TextView
@@ -75,15 +82,13 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- AI ASSISTANT -->
+            <!-- DAILY GOAL -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/google_sans_bold"
-                android:text="Daily goal"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:text="@string/section_daily_goal"
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -94,7 +99,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="15dp"
                     android:paddingHorizontal="15dp">
@@ -135,14 +139,57 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- HOME SCREEN -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/google_sans_bold"
-                android:text="AI Assistant"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:text="@string/section_home_screen"
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/quote_card_setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingVertical="18dp"
+                    android:paddingHorizontal="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_show_quote"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/quote_switch"
+                        android:layout_marginEnd="12dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/quote_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- AI ASSISTANT -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/section_ai_assistant"
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/ai_card"
@@ -154,7 +201,6 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="horizontal"
                     android:paddingVertical="18dp"
                     android:paddingHorizontal="15dp">
@@ -184,12 +230,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="18dp"
                     android:paddingHorizontal="15dp">
@@ -221,12 +269,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="18dp"
                     android:paddingHorizontal="15dp">
@@ -257,12 +307,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="18dp"
                     android:paddingHorizontal="15dp">
@@ -293,12 +345,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="18dp"
                     android:paddingHorizontal="15dp">
@@ -335,7 +389,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="vertical"
                     android:paddingVertical="15dp"
                     android:paddingHorizontal="15dp">
@@ -384,7 +437,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -411,12 +464,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:gravity="center"
                     android:padding="15dp">
 
@@ -437,10 +492,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/google_sans_bold"
-                android:text="About"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:text="@string/section_about"
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/github"
@@ -455,14 +508,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="horizontal"
                     android:paddingVertical="20dp"
-                    android:paddingHorizontal="15dp">
+                    android:paddingHorizontal="15dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/github" />
 
                     <TextView
@@ -491,14 +545,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
                     android:orientation="horizontal"
                     android:paddingVertical="20dp"
-                    android:paddingHorizontal="15dp">
+                    android:paddingHorizontal="15dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:importantForAccessibility="no"
                         android:src="@drawable/a" />
 
                     <TextView

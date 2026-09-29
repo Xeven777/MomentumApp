@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -33,12 +32,14 @@ import com.anish.momentum.utils.DateUtils
 import com.anish.momentum.utils.HabitAdapter
 import com.anish.momentum.utils.ReminderUtils
 import com.anish.momentum.utils.ServiceLocator
+import com.anish.momentum.ui.Quotes
 import com.anish.momentum.utils.Vibration
 import com.anish.momentum.widgets.StreakWidget
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,8 +55,10 @@ class MainActivity : AppCompatActivity() {
     private val settingsStore: SettingsStore get() = ServiceLocator.settings
 
     private var dailyGoal = 0
-    private var namePromptShown = false
     private var lastAnimatedName: String? = null
+
+    /** Time-of-day emoji, shown beside the name in the header. */
+    private var greetingEmoji = "☀️"
     private var calendarInitialised = false
     private var widgetRefreshJob: Job? = null
 
@@ -85,12 +88,29 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // The header is a time-aware greeting: the emoji rides on the title
+        // beside the name, the greeting and tagline sit underneath.
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        binding.wishTxt.text = when (hour) {
-            in 5..11 -> "Good morning ☀️"
-            in 12..15 -> "Good afternoon 🌤️"
-            in 16..20 -> "Good evening 🌆"
-            else -> "Its late, get some rest 🌝"
+        val (emoji, greeting) = when (hour) {
+            in 5..11 -> "☀️" to getString(R.string.greeting_morning)
+            in 12..15 -> "🌤️" to getString(R.string.greeting_afternoon)
+            in 16..20 -> "🌆" to getString(R.string.greeting_evening)
+            else -> "🌝" to getString(R.string.greeting_late)
+        }
+        greetingEmoji = emoji
+        binding.wishTxt.text = if (hour in 5..20) {
+            "$greeting! ${getString(R.string.greeting_tagline)}"
+        } else {
+            greeting
+        }
+
+        binding.quoteText.text = Quotes.forToday()
+
+        // The quote card is optional; the toggle lives in Settings.
+        lifecycleScope.launch {
+            settingsStore.quoteEnabled.collect { show ->
+                binding.quoteCard.visibility = if (show) View.VISIBLE else View.GONE
+            }
         }
 
         binding.aiBtn.setOnClickListener {
@@ -171,15 +191,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 launch {
+                    // The name is collected during onboarding and edited in
+                    // Settings, so here it only ever drives the greeting.
                     settingsStore.userName.collect { name ->
-                        if (name.isBlank()) {
-                            if (!namePromptShown) {
-                                namePromptShown = true
-                                showNamePrompt()
-                            }
-                        } else {
-                            showGreeting(binding.titleTxt, name)
-                        }
+                        if (name.isNotBlank()) showGreeting(binding.titleTxt, name)
                     }
                 }
 
@@ -199,29 +214,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun showNamePrompt() {
-        val input = EditText(this)
-        input.hint = "Your name"
-        input.setPadding(40, 40, 40, 40)
-        AlertDialog.Builder(this)
-            .setTitle("Welcome to Momentum")
-            .setMessage("What should we call you?")
-            .setView(input)
-            .setCancelable(false)
-            .setPositiveButton("Save") { _, _ ->
-                val name = input.text.toString().trim()
-                if (name.isNotEmpty()) {
-                    lifecycleScope.launch { settingsStore.setUserName(name) }
-                } else {
-                    namePromptShown = false
-                }
-            }
-            .setNegativeButton("Skip") { _, _ ->
-                namePromptShown = false
-            }
-            .show()
     }
 
     // --------------------------------------------------------------- calendar
@@ -288,8 +280,16 @@ class MainActivity : AppCompatActivity() {
         filteredHabits.addAll(filtered.sortedBy { it.isDone })
         habitAdapter.notifyDataSetChanged()
 
-        binding.finishedTasks.text = filtered.count { it.isDone }.toString()
-        binding.totalTasks.text = filtered.size.toString()
+        val finishedCount = filtered.count { it.isDone }
+        val totalCount = filtered.size
+        binding.finishedTasks.text = finishedCount.toString()
+        binding.totalTasks.text = totalCount.toString()
+        binding.tasksCount.text = String.format(Locale.getDefault(), "%d", totalCount)
+
+        val percent = if (totalCount == 0) 0 else finishedCount * 100 / totalCount
+        binding.todayProgress.setProgressCompat(percent, true)
+        binding.todayPercent.text = getString(R.string.percent_format, percent)
+
         binding.noTasksText.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
     }
 
@@ -297,6 +297,9 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val streak = repository.currentStreak(dailyGoal)
             binding.streakDay.text = streak.toString()
+            binding.streakCaption.text = getString(
+                if (streak == 0) R.string.streak_start else R.string.streak_keep
+            )
             saveStreakToPrefs(streak)
             updateWidget()
 
@@ -314,7 +317,13 @@ class MainActivity : AppCompatActivity() {
         if (name == lastAnimatedName) return
         lastAnimatedName = name
         view.alpha = 1f
-        view.text = "HELLO ${name.uppercase()}"
+        val trimmed = name.trim()
+        val display = if (trimmed.isEmpty()) {
+            trimmed
+        } else {
+            trimmed[0].uppercaseChar() + trimmed.substring(1)
+        }
+        view.text = getString(R.string.hello_name, display, greetingEmoji)
     }
 
     // ----------------------------------------------------------------- habits

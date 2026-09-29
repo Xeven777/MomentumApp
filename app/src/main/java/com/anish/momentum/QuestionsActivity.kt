@@ -28,8 +28,13 @@ class QuestionsActivity : AppCompatActivity() {
 
         fun setSelected(selected: Boolean) {
             val ctx = row.context
+            // Selected options use the brand yellow, matching the day strip and
+            // the primary buttons, rather than a white block on the dark page.
             row.setBackgroundColor(
-                ContextCompat.getColor(ctx, if (selected) R.color.white else R.color.dark_grey)
+                ContextCompat.getColor(
+                    ctx,
+                    if (selected) R.color.streak_yellow else R.color.dark_grey
+                )
             )
             label.setTextColor(
                 ContextCompat.getColor(ctx, if (selected) R.color.black else R.color.white)

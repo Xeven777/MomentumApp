@@ -2,13 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="dark_grey">#313131</color>
-    <color name="streak_yellow">#fff4b2</color>
-    <color name="streak_orange">#f64f2f</color>
-    <color name="gray">#494949</color>
+
+    <!-- One neutral ramp, no cool-blue strays: the UI is a warm-neutral grey
+         family on black. Every text/surface token below is pulled from it. -->
+    <color name="dark_grey">#313131</color>   <!-- cards -->
+    <color name="surface_row">#282828</color> <!-- rows, chips, FABs -->
+    <color name="gray">#494949</color>        <!-- dimmed / already-added rows -->
     <color name="secondary_text">#ABABAB</color>
-    <color name="muted_text">#8B949E</color>
-    <color name="caption_text">#6E7681</color>
+    <color name="muted_text">#9E9E9E</color>
     <color name="hint_text">#8A8A8A</color>
-    <color name="fab_background">#282828</color>
+    <color name="outline">#3A3A3A</color>       <!-- hairline strokes; mirrors Artwork.OUTLINE -->
+
+    <!-- Brand accents -->
+    <color name="streak_yellow">#FFF4B2</color>
+    <color name="streak_orange">#F64F2F</color>
 </resources>

@@ -80,7 +80,8 @@ class StreakMiniWidget : AppWidgetProvider() {
                 streak = state.streak,
                 sizePx = ringSize,
                 centerTextSizePx = ringSize * 0.34f,
-                captionTextSizePx = ringSize * 0.105f
+                captionTextSizePx = ringSize * 0.105f,
+                caption = context.getString(R.string.widget_day_streak)
             )
         )
 

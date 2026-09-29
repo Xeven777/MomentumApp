@@ -84,20 +84,33 @@ class StreakWidget : AppWidgetProvider() {
                 streak = state.streak,
                 sizePx = ringSize,
                 centerTextSizePx = ringSize * 0.34f,
-                captionTextSizePx = ringSize * 0.105f
+                captionTextSizePx = ringSize * 0.105f,
+                caption = context.getString(R.string.widget_day_streak)
             )
         )
 
-        val todayLabel = if (state.todayTotal == 0) "No habits yet"
-        else "Today ${state.todayDone}/${state.todayTotal}"
+        val todayLabel = if (state.todayTotal == 0) {
+            context.getString(R.string.widget_no_habits_yet)
+        } else {
+            context.getString(R.string.widget_today, state.todayDone, state.todayTotal)
+        }
         views.setTextViewText(R.id.widget_today, todayLabel)
 
-        val goalLabel = if (state.goal <= 0) "All habits" else "Goal ${state.goal}"
+        val goalLabel = if (state.goal <= 0) {
+            context.getString(R.string.widget_goal_all_habits)
+        } else {
+            context.getString(R.string.widget_goal_target, state.goal)
+        }
         views.setTextViewText(R.id.widget_goal, goalLabel)
 
         views.setTextViewText(
             R.id.widget_best,
-            "Best ${state.bestStreak} · ${state.totalCompletions} done"
+            context.resources.getQuantityString(
+                R.plurals.widget_best_summary,
+                state.totalCompletions,
+                state.bestStreak,
+                state.totalCompletions
+            )
         )
 
         // Always render the grid: it is the main reason the widget exists, and

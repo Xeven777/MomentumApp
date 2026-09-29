@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="@font/google_sans_bold"
+                android:fontFeatureSettings="tnum"
                 android:maxLines="1"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -57,6 +58,7 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/google_sans_regular"
+                android:fontFeatureSettings="tnum"
                 android:maxLines="1"
                 android:textColor="@color/muted_text"
                 android:textSize="13sp"
@@ -79,10 +81,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:fontFamily="@font/google_sans_bold"
-        android:text="LAST 12 WEEKS"
-        android:textColor="@color/caption_text"
-        android:textSize="11sp" />
+        android:text="@string/widget_heatmap_label"
+        android:textAppearance="@style/TextAppearance.Momentum.SectionLabel" />
 
     <ImageView
         android:id="@+id/widget_heatmap"
