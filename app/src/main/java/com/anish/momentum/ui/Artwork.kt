@@ -10,13 +10,13 @@ import android.graphics.RectF
  */
 object Artwork {
 
-    /** Empty day, then four shades of green. */
+    /** Empty day, then four intensities of the brand yellow (level 4 == streak_yellow). */
     val HEAT_LEVELS = intArrayOf(
-        0xFF23272E.toInt(), // level 0: nothing done (or no habits that day)
-        0xFF0E4429.toInt(),
-        0xFF006D32.toInt(),
-        0xFF26A641.toInt(),
-        0xFF39D353.toInt()  // level 4: the day was fully met
+        0xFF2E2E2E.toInt(), // level 0: nothing done (or no habits that day)
+        0xFF54481A.toInt(),
+        0xFF8F7426.toInt(),
+        0xFFC9A93B.toInt(),
+        0xFFFFF4B2.toInt()  // level 4: the day was fully met
     )
 
     const val EMPTY_CELL = 0xFF161B22.toInt()

@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"
-        android:layout_above="@id/footer"
         android:scrollbars="none">
 
         <LinearLayout
@@ -42,7 +41,7 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="28dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/edit_name"
@@ -69,72 +68,6 @@
                         android:text="Edit your name"
                         android:layout_marginStart="15dp"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/google_sans_regular"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/github"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
-                    android:orientation="horizontal"
-                    android:paddingVertical="20dp"
-                    android:paddingHorizontal="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/github" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Star it on github"
-                        android:layout_marginStart="15dp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/google_sans_regular"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/projects"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_grey"
-                    android:orientation="horizontal"
-                    android:paddingVertical="20dp"
-                    android:paddingHorizontal="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/a" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Check out my projects"
-                        android:textColor="@color/white"
-                        android:layout_marginStart="15dp"
                         android:fontFamily="@font/google_sans_regular"
                         android:textSize="16sp" />
 
@@ -499,20 +432,100 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- ABOUT -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/google_sans_bold"
+                android:text="About"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/github"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_grey"
+                    android:orientation="horizontal"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="15dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/github" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Star it on github"
+                        android:layout_marginStart="15dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/projects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_grey"
+                    android:orientation="horizontal"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="15dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/a" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check out my projects"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/google_sans_regular"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/secondary_text"
+                android:fontFamily="@font/google_sans_regular"
+                android:textSize="14sp"
+                android:text="Made with ❤️ by Anish" />
+
         </LinearLayout>
 
     </ScrollView>
-
-    <TextView
-        android:id="@+id/footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/secondary_text"
-        android:fontFamily="@font/google_sans_regular"
-        android:textSize="14sp"
-        android:text="Made with ❤️ by Anish" />
 
 </RelativeLayout>

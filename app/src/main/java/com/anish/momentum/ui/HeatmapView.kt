@@ -45,7 +45,11 @@ class HeatmapView @JvmOverloads constructor(
 
         val width = resolveSize(suggestedMinimumWidth, widthMeasureSpec)
         val heightFromWidth = (width.toFloat() / columns * rows).toInt()
-        val desiredHeight = (heightFromWidth + if (legendVisible) legendHeight() else 0)
+        val desiredHeight = heightFromWidth + if (legendVisible) {
+            // Mirror drawLegend: 6dp gap + one swatch row + breathing room for text descent.
+            val cell = width.toFloat() / columns
+            (6 * resources.displayMetrics.density + cell * 0.8f + 4 * resources.displayMetrics.density).toInt()
+        } else 0
 
         setMeasuredDimension(width, resolveSize(desiredHeight, heightMeasureSpec))
     }
@@ -72,8 +76,6 @@ class HeatmapView @JvmOverloads constructor(
 
         if (legendVisible) drawLegend(canvas, gridHeight, cell)
     }
-
-    private fun legendHeight(): Int = (12 * resources.displayMetrics.density).toInt() + paddingTop
 
     private fun drawLegend(canvas: android.graphics.Canvas, gridHeight: Float, cell: Float) {
         val density = resources.displayMetrics.density

@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() {
                                 showNamePrompt()
                             }
                         } else {
-                            animateTitleSequence(binding.titleTxt, name)
+                            showGreeting(binding.titleTxt, name)
                         }
                     }
                 }
@@ -309,32 +309,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun animateTitleSequence(view: TextView, name: String) {
+    /** The header is a permanent warm greeting; it only updates when the name changes. */
+    private fun showGreeting(view: TextView, name: String) {
         if (name == lastAnimatedName) return
         lastAnimatedName = name
-        view.animate()
-            .alpha(0f)
-            .setDuration(500)
-            .withEndAction {
-                view.text = "HELLO ${name.uppercase()}"
-                view.animate()
-                    .alpha(1f)
-                    .setDuration(800)
-                    .setStartDelay(200)
-                    .withEndAction {
-                        view.animate()
-                            .alpha(0f)
-                            .setDuration(600)
-                            .setStartDelay(400)
-                            .withEndAction {
-                                view.text = "MOMENTUM"
-                                view.animate().alpha(1f).setDuration(800).start()
-                            }
-                            .start()
-                    }
-                    .start()
-            }
-            .start()
+        view.alpha = 1f
+        view.text = "HELLO ${name.uppercase()}"
     }
 
     // ----------------------------------------------------------------- habits
