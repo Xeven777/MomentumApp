@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Card surface for the small widget, in the style of a modern Apple widget:
+  no hairline border at all, just light. A soft orange bloom sits behind the
+  ring and fades to pure black at the edges, so the card reads as something
+  emitting rather than something outlined. The large widget keeps
+  @drawable/widget_bg, which is flat and outlined on purpose.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/black" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:centerX="0.5"
+                android:centerY="0.28"
+                android:gradientRadius="50%p"
+                android:startColor="#33F64F2F"
+                android:centerColor="#12F64F2F"
+                android:endColor="#00F64F2F" />
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+
+</layer-list>

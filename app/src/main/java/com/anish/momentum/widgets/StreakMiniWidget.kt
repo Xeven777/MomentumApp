@@ -19,8 +19,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Compact 2x2 home screen widget: just the streak ring. Tap anywhere to open
- * the app. Refreshed from the app whenever habits change, same as [StreakWidget].
+ * Square hero home screen widget, in the style of a modern Apple activity
+ * widget: a ring that lights up the black card around it, the streak inside,
+ * today's tally under it, then a title and a best-line. Tap anywhere to open
+ * the app. Refreshed from the app whenever habits change, same as
+ * [StreakWidget].
  */
 class StreakMiniWidget : AppWidgetProvider() {
 
@@ -46,7 +49,7 @@ class StreakMiniWidget : AppWidgetProvider() {
                 val state = loadState(appContext)
                 for (id in ids) {
                     val views = RemoteViews(appContext.packageName, R.layout.widget_momentum_mini)
-                    bind(appContext, views, state, id)
+                    bind(appContext, views, state, id, ringDp(context, manager, id))
                     manager.updateAppWidget(id, views)
                 }
             } catch (e: Exception) {
@@ -69,21 +72,31 @@ class StreakMiniWidget : AppWidgetProvider() {
         views: RemoteViews,
         state: WidgetState,
         appWidgetId: Int,
+        ringDp: Int,
     ) {
         val density = context.resources.displayMetrics.density
 
-        val ringSize = 84.dpToPx(density).toInt()
+        val ringSize = ringDp.dpToPx(density).toInt()
         views.setImageViewBitmap(
             R.id.widget_mini_ring,
             WidgetArtwork.ring(
                 progress = state.todayProgress,
                 streak = state.streak,
                 sizePx = ringSize,
-                centerTextSizePx = ringSize * 0.34f,
-                captionTextSizePx = ringSize * 0.105f,
-                caption = context.getString(R.string.widget_day_streak)
+                centerTextSizePx = ringSize * NUMBER_RATIO,
+                // Unused here: an empty caption paints a bare, centred number.
+                captionTextSizePx = 0f,
+                caption = "",
+                style = WidgetArtwork.MINI
             )
         )
+
+        views.setTextViewText(
+            R.id.widget_mini_title,
+            if (state.streak > 0) context.getString(R.string.streak_keep)
+            else context.getString(R.string.streak_start)
+        )
+        views.setTextViewText(R.id.widget_mini_subtitle, todayLabel(context, state))
 
         views.setOnClickPendingIntent(
             R.id.widget_mini_body,
@@ -98,11 +111,42 @@ class StreakMiniWidget : AppWidgetProvider() {
         )
     }
 
+    /** The micro-line under the streak number: today's tally, as in the design. */
+    private fun todayLabel(context: Context, state: WidgetState): String =
+        if (state.todayTotal == 0) context.getString(R.string.widget_no_habits_yet)
+        else context.getString(R.string.widget_today, state.todayDone, state.todayTotal)
+
     companion object {
         private const val TAG = "StreakMiniWidget"
 
         // Kept clear of StreakWidget's bases (1000/2000).
         private const val BODY_REQUEST_CODE = 3000
+
+        /** Streak number height as a share of the ring's diameter. */
+        private const val NUMBER_RATIO = 0.42f
+
+        /**
+         * The hero ring takes half the card's short side, like the activity
+         * rings in a modern home screen widget. Derived from the size the
+         * launcher actually gave us, because a 2x2 cell is anything from
+         * ~110dp to ~150dp tall depending on the launcher: a fixed dp size is
+         * either clipped on the small ones or lost in space on the big ones.
+         * The share stays under half because the two caption lines below it
+         * have to fit too, and readable type beats a bigger ring.
+         */
+        @Suppress("DEPRECATION")
+        private fun ringDp(context: Context, manager: AppWidgetManager, appWidgetId: Int): Int {
+            val options = manager.getAppWidgetOptions(appWidgetId)
+            val widthDp = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0)
+            val heightDp = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
+            val cardDp = minOf(widthDp, heightDp).takeIf { it > 0 } ?: FALLBACK_CARD_DP
+            return (cardDp * RING_SHARE).toInt().coerceIn(MIN_RING_DP, MAX_RING_DP)
+        }
+
+        private const val RING_SHARE = 0.52f
+        private const val MIN_RING_DP = 46
+        private const val MAX_RING_DP = 100
+        private const val FALLBACK_CARD_DP = 110
 
         /** Asks every placed mini widget to redraw. Cheap and safe to call often. */
         fun refresh(context: Context) {

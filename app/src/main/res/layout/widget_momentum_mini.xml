@@ -1,18 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Two tiers only: the ring is the hero, everything under it is a caption. One
+  idea per line, no stats stacked inside the ring, so the card reads at a
+  glance from across a room.
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_mini_body"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_bg"
+    android:background="@drawable/widget_mini_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="8dp">
 
+    <!-- Wrap content: the ring bitmap is painted at the size the launcher gave
+         the card, so this measures itself and nothing can squeeze or clip it. -->
     <ImageView
         android:id="@+id/widget_mini_ring"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/widget_streak_description" />
+
+    <TextView
+        android:id="@+id/widget_mini_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/google_sans_bold"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        tools:text="Keep it going!" />
+
+    <TextView
+        android:id="@+id/widget_mini_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/google_sans_regular"
+        android:fontFeatureSettings="tnum"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/muted_text"
+        android:textSize="10.5sp"
+        tools:text="Today 1/1" />
 
 </LinearLayout>

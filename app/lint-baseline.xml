@@ -136,7 +136,7 @@
     <issue
         id="UnusedAttribute"
         message="Attribute `targetCellWidth` is only used in API level 31 and higher (current min is 24)"
-        errorLine1="    android:targetCellWidth=&quot;4&quot;"
+        errorLine1="    android:targetCellWidth=&quot;5&quot;"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/xml/streak_widget_info.xml"
@@ -147,7 +147,7 @@
     <issue
         id="UnusedAttribute"
         message="Attribute `targetCellHeight` is only used in API level 31 and higher (current min is 24)"
-        errorLine1="    android:targetCellHeight=&quot;2&quot;"
+        errorLine1="    android:targetCellHeight=&quot;4&quot;"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/xml/streak_widget_info.xml"
