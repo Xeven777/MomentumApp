@@ -10,28 +10,57 @@
     android:paddingHorizontal="28dp"
     tools:context=".NameActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/google_sans_bold"
-        android:letterSpacing="-0.01"
-        android:text="@string/name_title"
-        android:textColor="@color/white"
-        android:textSize="26sp" />
+    <!-- Brand flame, carried over from the old splash so the two onboarding
+         pages read as one system. -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/fire_lottie" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:text="@string/name_subtitle"
-        android:textAppearance="@style/TextAppearance.Momentum.BodySecondary" />
+        android:fontFamily="@font/google_sans_bold"
+        android:includeFontPadding="false"
+        android:letterSpacing="0.12"
+        android:text="@string/app_name_upper"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/google_sans_bold"
+        android:gravity="center"
+        android:text="@string/app_tagline"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/name_subtitle"
+        android:textAppearance="@style/TextAppearance.Momentum.BodySecondary"
+        android:textSize="15sp" />
+
+    <!-- The name entry itself is untouched: same field, same styling, same
+         inline error behaviour as before the redesign. -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_input_layout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="24dp"
         app:boxBackgroundColor="@color/dark_grey"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -69,8 +98,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawablePadding="8dp"
             android:fontFamily="@font/google_sans_bold"
             android:gravity="center"
+            app:drawableEndCompat="@drawable/cta_arrow"
+            app:drawableTint="@color/black"
             android:text="@string/name_continue"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -91,5 +123,28 @@
         android:text="@string/name_skip"
         android:textColor="@color/secondary_text"
         android:textSize="15sp" />
+
+    <!-- Page indicator: page 2 of 2. -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/dot_inactive" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/dot_active" />
+
+    </LinearLayout>
 
 </LinearLayout>

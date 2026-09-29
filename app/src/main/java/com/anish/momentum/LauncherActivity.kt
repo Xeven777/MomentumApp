@@ -44,10 +44,15 @@ class LauncherActivity : AppCompatActivity() {
     }
 
     private fun showWelcome() {
-        val content = findViewById<View>(R.id.welcome_content)
-        content.alpha = 0f
-        content.visibility = View.VISIBLE
-        content.animate().alpha(1f).setDuration(WELCOME_FADE_MS).start()
+        // Both text groups sit on separate bands of the full-bleed art, so
+        // they fade in together as one screen.
+        val top = findViewById<View>(R.id.welcome_content)
+        val bottom = findViewById<View>(R.id.welcome_bottom)
+        for (group in listOf(top, bottom)) {
+            group.alpha = 0f
+            group.visibility = View.VISIBLE
+            group.animate().alpha(1f).setDuration(WELCOME_FADE_MS).start()
+        }
 
         findViewById<View>(R.id.get_started_btn).setOnClickListener {
             Vibration.vibrate(this, 50)
