@@ -78,7 +78,7 @@
       --l3: #C9A93B;
       --l4: #FFF4B2;
 
-      --font: "Google Sans Flex", "Google Sans", "Inter", "Arial", "Helvetica", "Tahoma", "Trebuchet MS" system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font: "Google Sans Flex", "Google Sans", "Inter", "Arial", "Helvetica", "Tahoma", "Trebuchet MS", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       --shell: min(1120px, 100% - 2.5rem);
       --r-sm: 10px;
       --r-md: 16px;
@@ -173,7 +173,6 @@
     /* --- type scale, mirroring the app's text appearances --- */
     .eyebrow {
       font-size: .75rem;
-      font-weight: 700;
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--sec);
@@ -182,26 +181,26 @@
 
     .h-xl {
       font-size: clamp(2.6rem, 7.2vw, 4.6rem);
-      font-weight: 800;
-      letter-spacing: -.035em
+      font-weight: 600;
+      letter-spacing: -.04em
     }
 
     .h-lg {
       font-size: clamp(2rem, 4.6vw, 3rem);
-      font-weight: 800;
+      font-weight: 600;
       letter-spacing: -.03em
     }
 
     .h-md {
       font-size: clamp(1.25rem, 2.2vw, 1.5rem);
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -.015em
     }
 
     .lead {
-      font-size: clamp(1.05rem, 1.9vw, 1.25rem);
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
       color: var(--sec);
-      max-width: 56ch
+      max-width: 60ch
     }
 
     .small {
@@ -516,7 +515,7 @@
 
     /* --- hero --- */
     .hero {
-      padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(3rem, 7vw, 5.5rem);
+      padding: clamp(3rem, 6vw, 4rem) 0 clamp(3rem, 7vw, 5.5rem);
       border-top: 0;
       position: relative;
       isolation: isolate
@@ -577,7 +576,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: .8rem;
-      margin-bottom: 1.5rem
+      margin-bottom: 1.5rem;
     }
 
     /* the three facts the hero leads on */
@@ -640,10 +639,8 @@
       font-weight: 700
     }
 
-    /* hero screenshot: a real device capture dropped in later. The frame reserves
-   the phone's aspect ratio so nothing shifts when the image arrives. */
     .shot {
-      width: min(320px, 100%);
+      width: min(350px, 100%);
       margin-inline: auto;
       background: #000;
       border: 1px solid var(--outline);
@@ -654,7 +651,7 @@
 
     .shot-in {
       position: relative;
-      aspect-ratio: 9/19.5;
+      aspect-ratio: 9/19;
       border-radius: 24px;
       overflow: hidden;
       background: var(--row);
@@ -949,10 +946,10 @@
     /* --- closing download CTA --- */
     .build {
       text-align: center;
-      background: linear-gradient(170deg, #2a2617, #0d0d0d);
-      border: 1px solid #4a4326;
+      background: url(./cardbg.webp) center/cover no-repeat;
+      border: 1px solid #4a432681;
       border-radius: var(--r-lg);
-      padding: clamp(2.2rem, 5vw, 3.5rem)
+      padding: clamp(2.2rem, 5vw, 3.8rem)
     }
 
     .build p {
@@ -1554,8 +1551,6 @@
             <a class="btn btn-ghost" href="https://github.com/Xeven777/MomentumApp" target="_blank" rel="noopener">View
               source</a>
           </div>
-          <p class="size" style="margin-top:1.4rem">Free &middot; MIT licensed &middot; Android 7.0+ &middot; no ads,
-            ever</p>
         </div>
       </div>
     </section>
