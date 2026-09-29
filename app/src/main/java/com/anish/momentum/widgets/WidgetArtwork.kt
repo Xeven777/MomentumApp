@@ -104,6 +104,4 @@ object WidgetArtwork {
         val cal = java.util.Calendar.getInstance().apply { time = parsed }
         return cal.get(java.util.Calendar.DAY_OF_WEEK) - java.util.Calendar.SUNDAY
     }
-
-    private const val DAYS_PER_WEEK = Artwork.DAYS_PER_WEEK
 }

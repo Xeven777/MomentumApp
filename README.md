@@ -15,9 +15,9 @@ data on your own device — there is no account, no server, and no tracking.
   respect it, so a Mon/Wed/Fri habit never makes a Tuesday look like a miss.
 - **Month calendar** — tap the day strip to expand a full month view with a per-day completion ring,
   swipe to change month, tap a day to select it. Collapsed by default so it costs no screen space.
-- **Home screen widget** — a progress ring with your streak and today's completion, plus a
-  12-week GitHub-style contribution grid. The `+` button ticks your next pending habit without
-  opening the app.
+- **Home screen widgets** — a progress ring with your streak and today's completion, plus a
+  12-week GitHub-style contribution grid (large widget), or a compact 2×2 streak ring (mini
+  widget). Tap either widget to open the app.
 - **Reminders** — per-habit reminder times, re-armed automatically after a reboot, a package
   update, or a clock/timezone change.
 - **AI assistant** — bring your own API key and point the app at any OpenAI-compatible provider
@@ -94,7 +94,7 @@ project.
 6. **Useful while debugging**:
 
    ```bash
-   adb logcat -s StreakWidget WidgetActionReceiver AiActivity ApiKeyStore:* MainActivity:*
+    adb logcat -s StreakWidget StreakMiniWidget AiActivity ApiKeyStore:* MainActivity:*
    adb shell dumpsys activity com.anish.momentum      # is it running / any crash history
    adb shell pm list packages | grep momentum
    ```

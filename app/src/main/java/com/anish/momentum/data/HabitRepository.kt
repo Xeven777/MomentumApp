@@ -74,7 +74,7 @@ class HabitRepository(private val dao: HabitDao) {
         return habits.map { habit ->
             HabitStats(
                 habitId = habit.id,
-                totalPossible = daysSinceCreation(habit.creationDate, since),
+                totalPossible = possibleDays(habit.creationDate, since, habit.scheduleMask),
                 totalDone = completions.count { it.habitId == habit.id }
             )
         }
@@ -162,11 +162,16 @@ class HabitRepository(private val dao: HabitDao) {
         return dao.isCompleted(id, date)
     }
 
-    private fun daysSinceCreation(creationDate: String, today: String): Int {
-        val start = DateUtils.parse(creationDate) ?: return 0
-        val end = DateUtils.parse(today) ?: return 0
-        val diff = end.time - start.time
-        return (diff / MILLIS_PER_DAY).toInt() + 1
+    /** How many days the habit was actually scheduled for within [since]..today. */
+    private fun possibleDays(creationDate: String, since: String, scheduleMask: Int): Int {
+        var count = 0
+        var date = maxOf(creationDate, since)
+        val limit = DateUtils.today()
+        while (date <= limit) {
+            if (Schedule.isScheduledOn(scheduleMask, date)) count++
+            date = DateUtils.plusDays(date, 1)
+        }
+        return count
     }
 
     private fun HabitWithCompletions.toDomain() = habit.toDomain(
@@ -181,12 +186,12 @@ class HabitRepository(private val dao: HabitDao) {
         hasReminder = hasReminder,
         reminderTime = reminderTime,
         creationDate = creationDate,
+        scheduleMask = scheduleMask,
         completionDates = completionDates
     )
 
     companion object {
         private const val MAX_WINDOW_DAYS = 400
         private const val STREAK_WINDOW_DAYS = 365
-        private const val MILLIS_PER_DAY = 24L * 60 * 60 * 1000
     }
 }

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
+import com.google.android.material.card.MaterialCardView as CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +21,6 @@ import com.anish.momentum.ai.HabitReplyParser
 import com.anish.momentum.utils.AiHabit
 import com.anish.momentum.utils.AiHabitAdapter
 import com.anish.momentum.utils.ServiceLocator
-import com.anish.momentum.utils.StateManager
 import com.anish.momentum.utils.Vibration
 import com.anish.momentum.widgets.StreakWidget
 import com.google.gson.Gson
@@ -119,7 +118,7 @@ class AiActivity : AppCompatActivity() {
             }
         }
 
-        if (StateManager.triggerAi) {
+        if (intent.hasExtra("result")) {
             questionsCard.visibility = View.GONE
             freePromptLayout.visibility = View.GONE
             getAiHabits(intent.getStringExtra("result").orEmpty())

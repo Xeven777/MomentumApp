@@ -4,4 +4,11 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <!-- Dark twin of Widget.Momentum.Card: same #FF424242 fallback background
+         androidx CardView resolved when the theme background was dark. -->
+    <style name="Widget.Momentum.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">#FF424242</item>
+        <item name="cardElevation">2dp</item>
+    </style>
 </resources>

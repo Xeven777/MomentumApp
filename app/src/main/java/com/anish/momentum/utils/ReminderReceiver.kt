@@ -39,7 +39,7 @@ class ReminderReceiver : BroadcastReceiver() {
                     Log.d("ReminderReceiver", "Skipping '$habitName', not scheduled today")
                     return@launch
                 }
-                notify(appContext, habitEmoji, habitName)
+                notify(appContext, habitId, habitEmoji, habitName)
             } catch (e: Exception) {
                 Log.e("ReminderReceiver", "Could not show reminder", e)
             } finally {
@@ -48,7 +48,7 @@ class ReminderReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun notify(context: Context, habitEmoji: String, habitName: String) {
+    private fun notify(context: Context, habitId: String, habitEmoji: String, habitName: String) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = CHANNEL_ID
@@ -63,7 +63,7 @@ class ReminderReceiver : BroadcastReceiver() {
         }
 
         val launchIntent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         val pendingIntent = PendingIntent.getActivity(
             context,
@@ -82,7 +82,7 @@ class ReminderReceiver : BroadcastReceiver() {
             .setContentIntent(pendingIntent)
             .build()
 
-        notificationManager.notify(System.currentTimeMillis().toInt(), notification)
+        notificationManager.notify(habitId.hashCode(), notification)
     }
 
     companion object {

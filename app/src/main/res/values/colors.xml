@@ -6,4 +6,9 @@
     <color name="streak_yellow">#fff4b2</color>
     <color name="streak_orange">#f64f2f</color>
     <color name="gray">#494949</color>
+    <color name="secondary_text">#ABABAB</color>
+    <color name="muted_text">#8B949E</color>
+    <color name="caption_text">#6E7681</color>
+    <color name="hint_text">#8A8A8A</color>
+    <color name="fab_background">#282828</color>
 </resources>

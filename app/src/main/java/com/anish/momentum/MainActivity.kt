@@ -5,17 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
@@ -24,54 +20,44 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import com.anish.momentum.data.HabitRepository
 import com.anish.momentum.data.Schedule
 import com.anish.momentum.data.SettingsStore
+import com.anish.momentum.databinding.ActivityMainBinding
+import com.anish.momentum.databinding.DialogAddHabitBinding
 import com.anish.momentum.models.DateTaskStatus
 import com.anish.momentum.models.Habit
 import com.anish.momentum.utils.CalendarAdapter
 import com.anish.momentum.utils.DayToggleRow
 import com.anish.momentum.utils.DateUtils
 import com.anish.momentum.utils.HabitAdapter
-import com.anish.momentum.ui.MonthCalendarView
 import com.anish.momentum.utils.ReminderUtils
 import com.anish.momentum.utils.ServiceLocator
 import com.anish.momentum.utils.Vibration
 import com.anish.momentum.widgets.StreakWidget
-import com.google.android.material.materialswitch.MaterialSwitch
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var titleTxt: TextView
-    private lateinit var wishTxt: TextView
-    private lateinit var finishedTasks: TextView
-    private lateinit var totalTasks: TextView
-    private lateinit var streakDay: TextView
-    private lateinit var streakBg: LinearLayout
-    private lateinit var lottieFire: LottieAnimationView
-    private lateinit var settings: ImageView
-    private lateinit var addHabitBtn: CardView
-    private lateinit var aiBtn: CardView
-    private lateinit var noTasksText: TextView
-    private lateinit var monthCalendarCard: View
-    private lateinit var monthCalendar: MonthCalendarView
+    private lateinit var binding: ActivityMainBinding
 
     private val allHabits = mutableListOf<Habit>()
     private val filteredHabits = mutableListOf<Habit>()
     private lateinit var habitAdapter: HabitAdapter
     private var selectedDateString: String? = null
     private lateinit var calendarAdapter: CalendarAdapter
-    private lateinit var calendarRecycler: RecyclerView
 
     private val repository: HabitRepository get() = ServiceLocator.habits
     private val settingsStore: SettingsStore get() = ServiceLocator.settings
 
     private var dailyGoal = 0
     private var namePromptShown = false
+    private var lastAnimatedName: String? = null
+    private var calendarInitialised = false
+    private var widgetRefreshJob: Job? = null
 
     private val PREFS_NAME = "ai_settings_prefs"
     private val STREAK_KEY = "current_streak"
@@ -79,7 +65,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ActivityCompat.checkSelfPermission(
@@ -92,84 +79,68 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        titleTxt = findViewById(R.id.title_txt)
-        wishTxt = findViewById(R.id.wish_txt)
-        finishedTasks = findViewById(R.id.finished_tasks)
-        totalTasks = findViewById(R.id.total_tasks)
-        streakDay = findViewById(R.id.streak_day)
-        streakBg = findViewById(R.id.streak_bg)
-        aiBtn = findViewById(R.id.ai_btn)
-        addHabitBtn = findViewById(R.id.add_habit_btn)
-        settings = findViewById(R.id.settings)
-        lottieFire = findViewById(R.id.lottie_fire)
-        noTasksText = findViewById(R.id.no_tasks_text)
-        monthCalendarCard = findViewById(R.id.month_calendar_card)
-        monthCalendar = findViewById(R.id.month_calendar)
-
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-        wishTxt.text = when (hour) {
+        binding.wishTxt.text = when (hour) {
             in 5..11 -> "Good morning ☀️"
             in 12..15 -> "Good afternoon 🌤️"
             in 16..20 -> "Good evening 🌆"
             else -> "Its late, get some rest 🌝"
         }
 
-        aiBtn.setOnClickListener {
+        binding.aiBtn.setOnClickListener {
             Vibration.vibrate(this, 100)
             startActivity(Intent(this, AiActivity::class.java))
         }
 
-        addHabitBtn.setOnClickListener {
+        binding.addHabitBtn.setOnClickListener {
             Vibration.vibrate(this, 100)
             showAddHabitDialog()
         }
 
-        settings.setOnClickListener {
+        binding.settings.setOnClickListener {
             Vibration.vibrate(this, 50)
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        calendarRecycler = findViewById(R.id.calendar_recycler)
         calendarAdapter = CalendarAdapter(emptyList(), { selectedDate ->
             val selectedDateStr = DateUtils.format(selectedDate.date)
             calendarAdapter.updateSelectedDate(selectedDateStr)
             onCalendarDateSelected(selectedDate)
             Vibration.vibrate(this, 50)
         }, selectedDateString)
-        calendarRecycler.layoutManager =
+        binding.calendarRecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        calendarRecycler.adapter = calendarAdapter
+        binding.calendarRecycler.adapter = calendarAdapter
 
         habitAdapter = HabitAdapter(
             filteredHabits,
             onToggle = { habit -> onHabitToggled(habit) },
             onLongPress = { habit -> showEditDeleteDialog(habit) }
         )
-        val habitRecycler = findViewById<RecyclerView>(R.id.habit_recycler)
-        habitRecycler.layoutManager = LinearLayoutManager(this)
-        habitRecycler.adapter = habitAdapter
+        binding.habitRecycler.layoutManager = LinearLayoutManager(this)
+        binding.habitRecycler.adapter = habitAdapter
 
         // Tapping the day strip opens the full month calendar.
-        calendarRecycler.setOnClickListener {
+        binding.calendarRecycler.setOnClickListener {
             Vibration.vibrate(this, 50)
             toggleMonthCalendar()
         }
-        monthCalendar.onDateSelected = { date ->
+        binding.monthCalendar.onDateSelected = { date ->
             Vibration.vibrate(this, 50)
             selectedDateString = date
-            monthCalendar.setSelectedDate(date)
+            binding.monthCalendar.setSelectedDate(date)
             calendarAdapter.updateSelectedDate(date)
             refreshSelectedDay()
         }
 
         // The streak card is the entry point to the stats screen.
-        findViewById<View>(R.id.streak_card).setOnClickListener {
+        binding.streakCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             startActivity(Intent(this, StatsActivity::class.java))
         }
@@ -207,14 +178,14 @@ class MainActivity : AppCompatActivity() {
                                 showNamePrompt()
                             }
                         } else {
-                            animateTitleSequence(titleTxt, name)
+                            animateTitleSequence(binding.titleTxt, name)
                         }
                     }
                 }
 
                 launch {
                     settingsStore.aiButtonEnabled.collect { enabled ->
-                        aiBtn.visibility = if (enabled) View.VISIBLE else View.GONE
+                        binding.aiBtn.visibility = if (enabled) View.VISIBLE else View.GONE
                     }
                 }
 
@@ -256,26 +227,26 @@ class MainActivity : AppCompatActivity() {
     // --------------------------------------------------------------- calendar
 
     private fun toggleMonthCalendar() {
-        val showing = monthCalendarCard.visibility == View.VISIBLE
-        monthCalendarCard.visibility = if (showing) View.GONE else View.VISIBLE
+        val showing = binding.monthCalendarCard.visibility == View.VISIBLE
+        binding.monthCalendarCard.visibility = if (showing) View.GONE else View.VISIBLE
         if (showing) return
-        selectedDateString?.let { monthCalendar.showMonthContaining(it) }
-        monthCalendar.setSelectedDate(selectedDateString)
-        monthCalendar.onMonthChanged = { refreshMonthCalendar() }
+        selectedDateString?.let { binding.monthCalendar.showMonthContaining(it) }
+        binding.monthCalendar.setSelectedDate(selectedDateString)
+        binding.monthCalendar.onMonthChanged = { refreshMonthCalendar() }
         refreshMonthCalendar()
     }
 
     private fun refreshMonthCalendar() {
-        if (monthCalendarCard.visibility != View.VISIBLE) return
+        if (binding.monthCalendarCard.visibility != View.VISIBLE) return
         lifecycleScope.launch {
-            val monthStart = monthCalendar.displayedMonthStart()
+            val monthStart = binding.monthCalendar.displayedMonthStart()
             // A little padding either side so the leading/trailing blanks of the
             // grid are filled in too.
             val stats = repository.dayStatsBetween(
                 DateUtils.plusDays(monthStart, -7),
                 DateUtils.plusDays(monthStart, 45)
             )
-            monthCalendar.setData(stats)
+            binding.monthCalendar.setData(stats)
         }
     }
 
@@ -289,8 +260,10 @@ class MainActivity : AppCompatActivity() {
             }
             calendarAdapter.updateData(data)
             selectedDateString?.let { calendarAdapter.updateSelectedDate(it) }
-            if (data.isNotEmpty()) calendarRecycler.scrollToPosition(data.size - 1)
-            updateStreak()
+            if (data.isNotEmpty() && !calendarInitialised) {
+                calendarInitialised = true
+                binding.calendarRecycler.scrollToPosition(data.size - 1)
+            }
         }
     }
 
@@ -298,7 +271,7 @@ class MainActivity : AppCompatActivity() {
         val selectedDateStr = DateUtils.format(selectedDate.date)
         selectedDateString = selectedDateStr
         calendarAdapter.updateSelectedDate(selectedDateStr)
-        monthCalendar.setSelectedDate(selectedDateStr)
+        binding.monthCalendar.setSelectedDate(selectedDateStr)
         refreshSelectedDay()
     }
 
@@ -315,46 +288,47 @@ class MainActivity : AppCompatActivity() {
         filteredHabits.addAll(filtered.sortedBy { it.isDone })
         habitAdapter.notifyDataSetChanged()
 
-        finishedTasks.text = filtered.count { it.isDone }.toString()
-        totalTasks.text = filtered.size.toString()
-        noTasksText.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+        binding.finishedTasks.text = filtered.count { it.isDone }.toString()
+        binding.totalTasks.text = filtered.size.toString()
+        binding.noTasksText.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun updateStreak() {
         lifecycleScope.launch {
             val streak = repository.currentStreak(dailyGoal)
-            streakDay.text = streak.toString()
+            binding.streakDay.text = streak.toString()
             saveStreakToPrefs(streak)
             updateWidget()
 
             if (streak == 0) {
-                lottieFire.pauseAnimation()
+                binding.lottieFire.pauseAnimation()
             } else {
-                streakBg.setBackgroundResource(R.color.streak_yellow)
-                lottieFire.resumeAnimation()
+                binding.streakBg.setBackgroundResource(R.color.streak_yellow)
+                binding.lottieFire.resumeAnimation()
             }
         }
     }
 
-    private fun animateTitleSequence(titleTxt: TextView, name: String) {
-        if (titleTxt.text.toString().contains(name.uppercase())) return
-        titleTxt.animate()
+    private fun animateTitleSequence(view: TextView, name: String) {
+        if (name == lastAnimatedName) return
+        lastAnimatedName = name
+        view.animate()
             .alpha(0f)
             .setDuration(500)
             .withEndAction {
-                titleTxt.text = "HELLO ${name.uppercase()}"
-                titleTxt.animate()
+                view.text = "HELLO ${name.uppercase()}"
+                view.animate()
                     .alpha(1f)
                     .setDuration(800)
                     .setStartDelay(200)
                     .withEndAction {
-                        titleTxt.animate()
+                        view.animate()
                             .alpha(0f)
                             .setDuration(600)
                             .setStartDelay(400)
                             .withEndAction {
-                                titleTxt.text = "MOMENTUM"
-                                titleTxt.animate().alpha(1f).setDuration(800).start()
+                                view.text = "MOMENTUM"
+                                view.animate().alpha(1f).setDuration(800).start()
                             }
                             .start()
                     }
@@ -394,58 +368,61 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddHabitDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_habit, null)
-        val etEmoji = dialogView.findViewById<EditText>(R.id.et_emoji)
-        val etHabitName = dialogView.findViewById<EditText>(R.id.et_habit_name)
-        val switchReminder = dialogView.findViewById<MaterialSwitch>(R.id.switch_reminder)
-        val timePicker = dialogView.findViewById<CardView>(R.id.reminder_time)
-        val timePickerTxt = dialogView.findViewById<TextView>(R.id.time_picker_txt)
-        val dayToggles = DayToggleRow(dayToggleViews(dialogView), dialogView.findViewById(R.id.schedule_label))
+        val dialogBinding = DialogAddHabitBinding.inflate(layoutInflater)
+        val dayToggles = DayToggleRow(
+            listOf(
+                dialogBinding.day0, dialogBinding.day1, dialogBinding.day2,
+                dialogBinding.day3, dialogBinding.day4, dialogBinding.day5,
+                dialogBinding.day6
+            ),
+            dialogBinding.scheduleLabel
+        )
         var pickedTime: String? = null
 
-        switchReminder.setOnCheckedChangeListener { _, isChecked ->
-            timePicker.visibility = if (isChecked) View.VISIBLE else View.GONE
+        dialogBinding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
+            dialogBinding.reminderTime.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
-        timePicker.setOnClickListener {
+        dialogBinding.reminderTime.setOnClickListener {
             Vibration.vibrate(this, 50)
             val cal = Calendar.getInstance()
             TimePickerDialog(
                 this,
                 { _, selectedHour, selectedMinute ->
                     pickedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-                    timePickerTxt.text = pickedTime
+                    dialogBinding.timePickerTxt.text = pickedTime
                 },
                 cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true
             ).show()
         }
 
-        AlertDialog.Builder(this)
+        // The positive button is wired after show() so a blank name keeps the
+        // dialog open instead of throwing away everything the user typed.
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Add Habit")
-            .setView(dialogView)
-            .setPositiveButton("Save") { _, _ ->
-                val name = etHabitName.text.toString().trim()
-                val emoji = etEmoji.text.toString().trim().takeIf { it.isNotEmpty() } ?: "✅"
-                val hasReminder = switchReminder.isChecked
-                val time = pickedTime ?: ""
-                val scheduleMask = dayToggles.mask()
-
-                if (name.isEmpty()) {
-                    Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                lifecycleScope.launch {
-                    val habit = repository.addHabit(name, emoji, hasReminder, time, scheduleMask)
-                    ReminderUtils.scheduleHabitReminder(this@MainActivity, habit)
-                    Toast.makeText(this@MainActivity, "Habit added", Toast.LENGTH_SHORT).show()
-                }
-            }
+            .setView(dialogBinding.root)
+            .setPositiveButton("Save", null)
             .setNegativeButton("Cancel", null)
             .show()
-    }
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val name = dialogBinding.etHabitName.text.toString().trim()
+            val emoji = dialogBinding.etEmoji.text.toString().trim().takeIf { it.isNotEmpty() } ?: "✅"
+            val hasReminder = dialogBinding.switchReminder.isChecked
+            val time = pickedTime ?: ""
+            val scheduleMask = dayToggles.mask()
 
-    private fun dayToggleViews(dialogView: View): List<TextView> =
-        (0..6).map { dialogView.findViewById<TextView>(dayToggleIds[it]) }
+            if (name.isEmpty()) {
+                Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            lifecycleScope.launch {
+                val habit = repository.addHabit(name, emoji, hasReminder, time, scheduleMask)
+                ReminderUtils.scheduleHabitReminder(this@MainActivity, habit)
+                Toast.makeText(this@MainActivity, "Habit added", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
+    }
 
     private fun showEditDeleteDialog(habit: Habit) {
         AlertDialog.Builder(this)
@@ -472,68 +449,71 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEditHabitDialog(habit: Habit) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_habit, null)
-        val etHabitName = dialogView.findViewById<EditText>(R.id.et_habit_name)
-        val etEmoji = dialogView.findViewById<EditText>(R.id.et_emoji)
-        val switchReminder = dialogView.findViewById<MaterialSwitch>(R.id.switch_reminder)
-        val timePicker = dialogView.findViewById<CardView>(R.id.reminder_time)
-        val timePickerTxt = dialogView.findViewById<TextView>(R.id.time_picker_txt)
+        val dialogBinding = DialogAddHabitBinding.inflate(layoutInflater)
 
-        val dayToggles = DayToggleRow(dayToggleViews(dialogView), dialogView.findViewById(R.id.schedule_label))
+        val dayToggles = DayToggleRow(
+            listOf(
+                dialogBinding.day0, dialogBinding.day1, dialogBinding.day2,
+                dialogBinding.day3, dialogBinding.day4, dialogBinding.day5,
+                dialogBinding.day6
+            ),
+            dialogBinding.scheduleLabel
+        )
         dayToggles.setMask(habit.scheduleMask)
 
-        etEmoji.setText(habit.emoji)
-        etHabitName.setText(habit.name)
-        switchReminder.isChecked = habit.hasReminder
+        dialogBinding.etEmoji.setText(habit.emoji)
+        dialogBinding.etHabitName.setText(habit.name)
+        dialogBinding.switchReminder.isChecked = habit.hasReminder
         var pickedTime: String? = habit.reminderTime
-        timePicker.visibility = if (habit.hasReminder) View.VISIBLE else View.GONE
-        timePickerTxt.text = habit.reminderTime
+        dialogBinding.reminderTime.visibility = if (habit.hasReminder) View.VISIBLE else View.GONE
+        dialogBinding.timePickerTxt.text = habit.reminderTime
 
-        switchReminder.setOnCheckedChangeListener { _, isChecked ->
-            timePicker.visibility = if (isChecked) View.VISIBLE else View.GONE
+        dialogBinding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
+            dialogBinding.reminderTime.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
-        timePicker.setOnClickListener {
+        dialogBinding.reminderTime.setOnClickListener {
             Vibration.vibrate(this, 50)
             val cal = Calendar.getInstance()
             TimePickerDialog(
                 this,
                 { _, selectedHour, selectedMinute ->
                     pickedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-                    timePickerTxt.text = pickedTime
+                    dialogBinding.timePickerTxt.text = pickedTime
                 },
                 cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true
             ).show()
         }
 
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Edit Habit")
-            .setView(dialogView)
-            .setPositiveButton("Update") { _, _ ->
-                val newName = etHabitName.text.toString().trim()
-                val newEmoji = etEmoji.text.toString().trim().takeIf { it.isNotEmpty() } ?: "✅"
-                val newReminder = switchReminder.isChecked
-                val newTime = pickedTime ?: ""
-
-                habit.scheduleMask = dayToggles.mask()
-
-                if (newName.isEmpty()) {
-                    Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                habit.name = newName
-                habit.emoji = newEmoji
-                habit.hasReminder = newReminder
-                habit.reminderTime = if (newReminder) newTime else ""
-
-                lifecycleScope.launch {
-                    repository.updateHabit(habit)
-                    ReminderUtils.scheduleHabitReminder(this@MainActivity, habit)
-                    Toast.makeText(this@MainActivity, "Habit updated", Toast.LENGTH_SHORT).show()
-                }
-            }
+            .setView(dialogBinding.root)
+            .setPositiveButton("Update", null)
             .setNegativeButton("Cancel", null)
             .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val newName = dialogBinding.etHabitName.text.toString().trim()
+            val newEmoji = dialogBinding.etEmoji.text.toString().trim().takeIf { it.isNotEmpty() } ?: "✅"
+            val newReminder = dialogBinding.switchReminder.isChecked
+            val newTime = pickedTime ?: ""
+
+            if (newName.isEmpty()) {
+                Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            habit.scheduleMask = dayToggles.mask()
+            habit.name = newName
+            habit.emoji = newEmoji
+            habit.hasReminder = newReminder
+            habit.reminderTime = if (newReminder) newTime else ""
+
+            lifecycleScope.launch {
+                repository.updateHabit(habit)
+                ReminderUtils.scheduleHabitReminder(this@MainActivity, habit)
+                Toast.makeText(this@MainActivity, "Habit updated", Toast.LENGTH_SHORT).show()
+            }
+            dialog.dismiss()
+        }
     }
 
     // ---------------------------------------------------------------- widget
@@ -543,15 +523,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateWidget() {
-        StreakWidget.refresh(this)
-        com.anish.momentum.widgets.StreakMiniWidget.refresh(this)
+        // Habit toggles fire several emissions in a burst; coalesce them so
+        // the widget (which re-queries the DB per refresh) redraws once.
+        widgetRefreshJob?.cancel()
+        widgetRefreshJob = lifecycleScope.launch {
+            delay(500)
+            StreakWidget.refresh(this@MainActivity)
+            com.anish.momentum.widgets.StreakMiniWidget.refresh(this@MainActivity)
+        }
     }
 
     companion object {
         private const val CALENDAR_WINDOW_DAYS = 10
-        private val dayToggleIds = intArrayOf(
-            R.id.day_0, R.id.day_1, R.id.day_2, R.id.day_3,
-            R.id.day_4, R.id.day_5, R.id.day_6
-        )
     }
 }
