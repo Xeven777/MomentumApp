@@ -181,20 +181,18 @@
             android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="24dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:id="@+id/streak_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/streak_yellow"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="16dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_gravity="center"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
@@ -251,11 +249,11 @@
                     android:id="@+id/streak_chevron"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginStart="4dp"
+                    android:layout_gravity="top|end"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right" />
 
-            </LinearLayout>
+            </FrameLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -308,36 +306,60 @@
         android:layout_marginTop="4dp"
         app:cardCornerRadius="24dp">
 
-        <LinearLayout
+        <!-- The art is pinned to the text box's edges (alignTop/Bottom), so the
+             photo can never decide the card's height — only the text does. -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/quote_backdrop"
-            android:orientation="vertical"
-            android:paddingHorizontal="18dp"
-            android:paddingVertical="16dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/google_sans_bold"
-                android:includeFontPadding="false"
-                android:text="@string/quote_mark"
-                android:textColor="@color/streak_yellow"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/quote_text"
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/google_sans_regular"
-                android:lineSpacingExtra="4dp"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:textStyle="italic"
-                tools:text="Discipline today builds the life you want tomorrow." />
+                android:layout_alignTop="@+id/quote_content"
+                android:layout_alignBottom="@id/quote_content"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cardbg" />
 
-        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/quote_content"
+                android:layout_alignBottom="@id/quote_content"
+                android:background="#66000000" />
+
+            <LinearLayout
+                android:id="@+id/quote_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/quote_mark"
+                    android:textColor="@color/streak_yellow"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/quote_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/google_sans_regular"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="italic"
+                    tools:text="Discipline today builds the life you want tomorrow." />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

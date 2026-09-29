@@ -10,15 +10,27 @@
     android:paddingHorizontal="28dp"
     tools:context=".NameActivity">
 
-    <!-- Brand flame, carried over from the old splash so the two onboarding
-         pages read as one system. -->
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="120dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center_horizontal"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/fire_lottie" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <View
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:background="@drawable/glow_orange"
+            android:importantForAccessibility="no" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="125dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/fire_lottie" />
+
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,9 +64,6 @@
         android:text="@string/name_subtitle"
         android:textAppearance="@style/TextAppearance.Momentum.BodySecondary"
         android:textSize="15sp" />
-
-    <!-- The name entry itself is untouched: same field, same styling, same
-         inline error behaviour as before the redesign. -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_input_layout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -96,11 +105,11 @@
         app:cardElevation="0dp">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:drawablePadding="8dp"
             android:fontFamily="@font/google_sans_bold"
-            android:gravity="center"
             app:drawableEndCompat="@drawable/cta_arrow"
             app:drawableTint="@color/black"
             android:text="@string/name_continue"

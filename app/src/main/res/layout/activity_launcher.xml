@@ -39,11 +39,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="56dp"
             android:fontFamily="@font/google_sans_bold"
             android:includeFontPadding="false"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="-2dp"
+            android:letterSpacing="-0.015"
+            android:lineSpacingExtra="-3dp"
             android:text="@string/onboarding_headline_1"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -53,8 +53,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/google_sans_bold"
             android:includeFontPadding="false"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="-2dp"
+            android:letterSpacing="-0.015"
+            android:lineSpacingExtra="-3dp"
             android:text="@string/onboarding_headline_2"
             android:textColor="@color/white"
             android:textSize="30sp" />
@@ -65,20 +65,9 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/google_sans_bold"
             android:includeFontPadding="false"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="-2dp"
+            android:letterSpacing="-0.015"
+            android:lineSpacingExtra="-3dp"
             android:text="@string/onboarding_headline_3"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/google_sans_bold"
-            android:includeFontPadding="false"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="-2dp"
-            android:text="@string/onboarding_headline_4"
             android:textColor="@color/streak_yellow"
             android:textSize="30sp" />
 
@@ -98,28 +87,11 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/onboarding_body_1"
-            android:textAppearance="@style/TextAppearance.Momentum.BodySecondary"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:text="@string/onboarding_body_2"
-            android:textAppearance="@style/TextAppearance.Momentum.BodySecondary"
-            android:textSize="15sp" />
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/get_started_btn"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="24dp"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -137,15 +109,6 @@
                 android:textSize="16sp" />
 
         </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/google_sans_regular"
-            android:text="@string/onboarding_hint_1"
-            android:textColor="@color/secondary_text"
-            android:textSize="14sp" />
 
         <!-- Page indicator: page 1 of 2. -->
         <LinearLayout
