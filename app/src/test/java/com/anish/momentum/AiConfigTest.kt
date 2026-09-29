@@ -32,6 +32,13 @@ class AiConfigTest {
     }
 
     @Test
+    fun `default model is a free openrouter id`() {
+        assertTrue(AiConfig.DEFAULT_MODEL.isNotBlank())
+        assertTrue(AiConfig.DEFAULT_MODEL.endsWith(":free"))
+        assertTrue(AiConfig().isUsable)
+    }
+
+    @Test
     fun `blank base url or model is not usable`() {
         assertTrue(!AiConfig(baseUrl = "", model = "m").isUsable)
         assertTrue(!AiConfig(baseUrl = "https://x/v1", model = " ").isUsable)

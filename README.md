@@ -37,7 +37,7 @@ data on your own device — there is no account, no server, and no tracking.
     <td><img src="https://github.com/user-attachments/assets/8590fec3-1086-47be-8549-118be8dc8828" width="200"></td>
     <td><img src="https://github.com/user-attachments/assets/6f140309-54f0-4c9b-b9ad-803021a7a644" width="200"></td>
     <td><img src="https://github.com/user-attachments/assets/796214ad-85af-4e93-ac91-4fe87e0daee1" width="200"></td>
-    
+
   </tr>
 </table>
 
@@ -55,7 +55,7 @@ data on your own device — there is no account, no server, and no tracking.
 ### Build and run
 
 ```bash
-git clone https://github.com/Xeven777/Momentum.git
+git clone https://github.com/Xeven777/MomentumApp.git
 cd Momentum
 
 ./gradlew assembleDebug          # debug APK
@@ -123,7 +123,7 @@ The app ships with no key and no endpoint baked in. Open **Settings → AI Assis
 | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
 | **API key**       | Stored encrypted with a key held in the Android Keystore. Never leaves the device, never in the build.               |
 | **Base URL**      | Any OpenAI-compatible endpoint. Defaults to `https://openrouter.ai/api/v1`. A missing trailing `/` is added for you. |
-| **Model**         | Whatever your provider calls it, e.g. `mistralai/mistral-small` or `google/gemini-2.0-flash-exp:free`.               |
+| **Model**         | Whatever your provider calls it, e.g. `qwen/qwen3.8-27b:free` or `google/gemma-4-31b-it:free`.               |
 | **System prompt** | Editable — control the format the model returns.                                                                     |
 | **Temperature**   | 0.0 – 2.0.                                                                                                           |
 

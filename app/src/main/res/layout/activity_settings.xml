@@ -48,7 +48,7 @@
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                         android:layout_marginStart="15dp"
                         android:textColor="@color/white"
                         android:fontFamily="@font/google_sans_regular"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                         android:layout_marginStart="15dp"
                         android:textColor="@color/white"
                         android:fontFamily="@font/google_sans_regular"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -114,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                         android:textColor="@color/white"
                         android:layout_marginStart="15dp"
                         android:fontFamily="@font/google_sans_regular"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -150,13 +150,13 @@
                 android:fontFamily="@font/google_sans_bold"
                 android:text="Daily goal"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/google_sans_regular"
                         android:text="A day counts toward your streak once you tick off this many habits"
-                        android:textColor="@color/white"
+                        android:textColor="@color/secondary_text"
                         android:textSize="14sp" />
 
                     <LinearLayout
@@ -209,14 +209,14 @@
                 android:fontFamily="@font/google_sans_bold"
                 android:text="AI Assistant"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/ai_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                         android:textColor="@color/white"
                         android:layout_centerVertical="true"
                         android:fontFamily="@font/google_sans_regular"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/ai_switch"
@@ -251,7 +251,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -267,7 +267,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="API key"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/api_key_value"
@@ -288,7 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -304,7 +304,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Base URL (OpenAI-compatible)"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/base_url_value"
@@ -324,7 +324,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -340,7 +340,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Model"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/model_value"
@@ -360,7 +360,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -376,7 +376,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="System prompt"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/system_prompt_value"
@@ -397,7 +397,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -419,7 +419,7 @@
                             android:fontFamily="@font/google_sans_regular"
                             android:text="Temperature"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/temperature_value"
@@ -448,7 +448,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="25dp">
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -475,7 +478,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="25dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -507,9 +510,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
+        android:textColor="@color/secondary_text"
         android:fontFamily="@font/google_sans_regular"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:text="Made with ❤️ by Anish" />
 
 </RelativeLayout>

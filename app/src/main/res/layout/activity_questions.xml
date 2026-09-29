@@ -28,14 +28,14 @@
                 android:fontFamily="@font/google_sans_bold"
                 android:text="What is your main goal right now?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/google_sans_regular"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@color/secondary_text"
+                android:textSize="14sp"
                 android:text="(Select any 3 that applies)" />
 
             <com.google.android.material.card.MaterialCardView
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn1a_rl"
@@ -60,7 +60,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Be more productive"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn1b_rl"
@@ -88,7 +88,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Improve health/fitness"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn1c_rl"
@@ -116,7 +116,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Learn new things"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn1d_rl"
@@ -144,7 +144,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Reduce bad habits"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn1e_rl"
@@ -172,7 +172,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Feel better mentally"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -186,14 +186,14 @@
                 android:layout_marginTop="20dp"
                 android:text="How much time can you give daily for new habits?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/qn2a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn2a_rl"
@@ -210,7 +210,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Less than 10 mins"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -221,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn2b_rl"
@@ -238,7 +238,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="10 - 30mins"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -249,7 +249,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn2c_rl"
@@ -266,7 +266,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="30–60 mins"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -277,7 +277,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn2d_rl"
@@ -294,7 +294,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="More than 1 hour"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -308,14 +308,14 @@
                 android:layout_marginTop="20dp"
                 android:text="When do you prefer doing your habits?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/qn3a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn3a_rl"
@@ -332,7 +332,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Morning"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -343,7 +343,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn3b_rl"
@@ -360,7 +360,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Afternoon"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -371,7 +371,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn3c_rl"
@@ -388,7 +388,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Evening"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -399,7 +399,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn3d_rl"
@@ -416,7 +416,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="No preference"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -430,14 +430,13 @@
                 android:layout_marginTop="20dp"
                 android:text="Any bad habits you're trying to reduce?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/google_sans_regular"
+                android:textColor="@color/secondary_text"
+                android:textSize="14sp"
                 android:text="(Select all the ones that apply)" />
 
             <com.google.android.material.card.MaterialCardView
@@ -445,7 +444,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn4a_rl"
@@ -462,7 +461,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Smoking"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -473,7 +472,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn4b_rl"
@@ -490,7 +489,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Drinking"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -501,7 +500,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn4c_rl"
@@ -518,7 +517,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Excess phone use"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -529,7 +528,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn4d_rl"
@@ -546,7 +545,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Procrastination"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -557,7 +556,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn4e_rl"
@@ -574,7 +573,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="None"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -588,14 +587,14 @@
                 android:layout_marginTop="20dp"
                 android:text="Are you currently a student or working?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/qn5a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn5a_rl"
@@ -612,7 +611,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Student"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -623,7 +622,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn5b_rl"
@@ -640,7 +639,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Working professional"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -651,7 +650,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="16dp">
 
                 <RelativeLayout
                     android:id="@+id/qn5c_rl"
@@ -668,7 +667,7 @@
                         android:fontFamily="@font/google_sans_regular"
                         android:text="Neither"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -682,12 +681,19 @@
                 android:layout_marginTop="20dp"
                 android:text="Anything else we should know?"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                app:boxBackgroundColor="@color/dark_grey"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:hintTextColor="@color/secondary_text">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/anything_else"
@@ -705,7 +711,10 @@
                 android:id="@+id/submit_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="25dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="25dp">
 
@@ -723,7 +732,7 @@
                         android:fontFamily="@font/google_sans_bold"
                         android:text="SUBMIT"
                         android:letterSpacing="0.1"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 

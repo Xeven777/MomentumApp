@@ -1,6 +1,7 @@
 package com.anish.momentum.ai
 
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -25,7 +26,8 @@ class AiException(message: String) : Exception(message)
  */
 class AiClient(
     private val config: AiConfig,
-    private val apiKey: String
+    private val apiKey: String,
+    private val chatApi: ChatApi? = null
 ) {
 
     private val gson = Gson()
@@ -43,7 +45,7 @@ class AiClient(
         .build()
 
     private val api: ChatApi by lazy {
-        Retrofit.Builder()
+        chatApi ?: Retrofit.Builder()
             .baseUrl(config.normalizedBaseUrl)
             .client(http)
             .addConverterFactory(GsonConverterFactory.create())
@@ -52,6 +54,10 @@ class AiClient(
     }
 
     private fun authHeader() = "Bearer $apiKey"
+
+    private companion object {
+        const val RETRY_DELAY_MS = 1500L
+    }
 
     /** Returns the assistant's reply text. Throws [AiException] with a friendly message. */
     suspend fun complete(userPrompt: String): String {
@@ -72,7 +78,9 @@ class AiClient(
         )
 
         val response = try {
-            api.chat(authHeader(), request).await()
+            sendWithRetry(request)
+        } catch (e: AiException) {
+            throw e
         } catch (e: Exception) {
             throw AiException(errorMessage(e))
         }
@@ -82,6 +90,37 @@ class AiClient(
             throw AiException("The model returned an empty response. Try again.")
         }
         return reply
+    }
+
+    /**
+     * One quick retry on transient free-tier hiccups (provider 5xx, timeouts).
+     * The completion call is read-only, so repeating it is safe.
+     */
+    private suspend fun sendWithRetry(request: ChatRequest): ChatResponse {
+        var lastError: Exception = IOException("Request failed")
+        repeat(2) { attempt ->
+            try {
+                return api.chat(authHeader(), request).await()
+            } catch (e: AiException) {
+                throw e
+            } catch (e: Exception) {
+                lastError = e
+                if (attempt == 0 && isTransientProviderError(e)) {
+                    delay(RETRY_DELAY_MS)
+                } else {
+                    throw e
+                }
+            }
+        }
+        throw lastError
+    }
+
+    private fun isTransientProviderError(e: Exception): Boolean = when (e) {
+        is SocketTimeoutException -> true
+        is HttpFailure ->
+            e.code in 500..599 ||
+                e.errorBody?.error?.message?.contains("provider", ignoreCase = true) == true
+        else -> false
     }
 
     /** Validates key + base URL. Returns the number of models the endpoint offers. */
@@ -113,13 +152,18 @@ class AiClient(
             }
         }
         val serverMessage = e.errorBody?.error?.message
+        if (e.code in 500..599 ||
+            serverMessage?.contains("provider", ignoreCase = true) == true
+        ) {
+            return "The free model's server stumbled. Wait a moment and try again, " +
+                "or pick another free model in Settings."
+        }
         return when (e.code) {
             401 -> serverMessage ?: "API key was rejected. Check the key in Settings."
             402 -> serverMessage ?: "This provider reports no credit left on the account."
             403 -> serverMessage ?: "This key is not allowed to use that model."
             404 -> serverMessage ?: "Endpoint or model not found. Check the base URL and model name."
             429 -> serverMessage ?: "Rate limited. Wait a moment and try again."
-            in 500..599 -> serverMessage ?: "The provider is having trouble. Try again shortly."
             else -> serverMessage ?: "Request failed (HTTP ${e.code})."
         }
     }

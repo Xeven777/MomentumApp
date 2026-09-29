@@ -52,7 +52,8 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.github.setOnClickListener {
             Vibration.vibrate(this, 50)
-            openUrl("https://github.com/Xeven777/Momentum")
+openUrl("https://github.com/Xeven777/MomentumApp")
+
         }
 
         binding.projects.setOnClickListener {
@@ -233,15 +234,18 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showModelDialog() {
         val input = EditText(this)
-        input.hint = "e.g. mistralai/mistral-small"
+input.hint = "e.g. qwen/qwen3.8-27b:free"
+
         input.setPadding(40, 40, 40, 40)
 
         AlertDialog.Builder(this)
             .setTitle("Model")
             .setMessage(
                 "OpenRouter model id, or whatever your provider calls it. " +
-                    "Free options include google/gemini-2.0-flash-exp:free and " +
-                    "deepseek/deepseek-chat-v3-0324:free"
+"Free options include qwen/qwen3.8-27b:free, " +
+        "nvidia/nemotron-3.5-lightning:free, google/gemma-4-31b-it:free and " +
+        "poolside/laguna-s-2.1:free"
+
             )
             .setView(input)
             .setPositiveButton("Save") { _, _ ->

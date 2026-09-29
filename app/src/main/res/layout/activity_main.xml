@@ -38,7 +38,7 @@
             android:layout_below="@id/title_txt"
             android:fontFamily="@font/google_sans_regular"
             android:text="Good morning ☀️"
-            android:textColor="@color/white"
+            android:textColor="@color/secondary_text"
             android:textSize="15sp" />
 
         <ImageView
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:fontFamily="@font/google_sans_regular"
                     android:letterSpacing="0.1"
                     android:text="HABITS"
-                    android:textColor="@color/white"
+                    android:textColor="@color/secondary_text"
                     android:textSize="15sp" />
 
                 <LinearLayout
@@ -128,7 +128,7 @@
                     android:layout_marginTop="-5dp"
                     android:fontFamily="@font/google_sans_regular"
                     android:text="Tasks done"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/secondary_text" />
 
             </LinearLayout>
 
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="24dp">
 
             <LinearLayout
                 android:id="@+id/streak_bg"
@@ -220,7 +220,7 @@
         android:layout_marginHorizontal="18dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="24dp"
         tools:visibility="visible">
 
         <LinearLayout
@@ -248,7 +248,7 @@
         android:fontFamily="@font/google_sans_regular"
         android:letterSpacing="0.1"
         android:text="TASKS"
-        android:textColor="@color/white"
+        android:textColor="@color/secondary_text"
         android:textSize="15sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -268,7 +268,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/google_sans_regular"
         android:text="No tasks"
-        android:textColor="@color/white"
+        android:textColor="@color/secondary_text"
         android:textSize="18sp"
         android:visibility="gone" />
 
@@ -280,7 +280,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="24dp"
         app:cardElevation="0dp">
 
         <RelativeLayout
@@ -308,7 +308,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="24dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

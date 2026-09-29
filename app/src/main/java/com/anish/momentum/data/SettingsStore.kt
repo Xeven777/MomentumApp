@@ -14,11 +14,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "momentum_settings")
+private val Context.dataStore: DataStore<Preferences> by
+        preferencesDataStore(name = "momentum_settings")
 
 /**
- * Lightweight user settings. The AI API key deliberately does NOT live here —
- * it goes in [com.anish.momentum.ai.ApiKeyStore], backed by the Android Keystore.
+ * Lightweight user settings. The AI API key deliberately does NOT live here — it goes in
+ * [com.anish.momentum.ai.ApiKeyStore], backed by the Android Keystore.
  */
 class SettingsStore(context: Context) {
 
@@ -30,14 +31,21 @@ class SettingsStore(context: Context) {
     /** 0 = "all habits that existed that day". */
     val dailyGoal: Flow<Int> = store.data.map { it[KEY_DAILY_GOAL] ?: 0 }
 
-    val aiConfig: Flow<AiConfig> = store.data.map { prefs ->
-        AiConfig(
-            baseUrl = prefs[KEY_BASE_URL] ?: AiConfig.DEFAULT_BASE_URL,
-            model = prefs[KEY_MODEL] ?: AiConfig.DEFAULT_MODEL,
-            systemPrompt = prefs[KEY_SYSTEM_PROMPT] ?: AiConfig.DEFAULT_SYSTEM_PROMPT,
-            temperature = prefs[KEY_TEMPERATURE] ?: AiConfig.DEFAULT_TEMPERATURE
-        )
-    }
+    val aiConfig: Flow<AiConfig> =
+            store.data.map { prefs ->
+                val storedModel = prefs[KEY_MODEL]
+                AiConfig(
+                        baseUrl = prefs[KEY_BASE_URL] ?: AiConfig.DEFAULT_BASE_URL,
+                        model =
+                                if (storedModel == null || storedModel == LEGACY_DEFAULT_MODEL) {
+                                    AiConfig.DEFAULT_MODEL
+                                } else {
+                                    storedModel
+                                },
+                        systemPrompt = prefs[KEY_SYSTEM_PROMPT] ?: AiConfig.DEFAULT_SYSTEM_PROMPT,
+                        temperature = prefs[KEY_TEMPERATURE] ?: AiConfig.DEFAULT_TEMPERATURE
+                )
+            }
 
     suspend fun currentAiConfig(): AiConfig = aiConfig.first()
 
@@ -82,6 +90,7 @@ class SettingsStore(context: Context) {
     }
 
     companion object {
+        private const val LEGACY_DEFAULT_MODEL = "google/gemma-4-31b-it:free"
         private val KEY_NAME = stringPreferencesKey("user_name")
         private val KEY_AI_BUTTON = booleanPreferencesKey("ai_button_enabled")
         private val KEY_DAILY_GOAL = intPreferencesKey("daily_goal")
