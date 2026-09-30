@@ -693,13 +693,6 @@
 
     <issue
         id="IconLocation"
-        message="Found bitmap drawable `res/drawable/momentum.webp` in densityless folder">
-        <location
-            file="src/main/res/drawable/momentum.webp"/>
-    </issue>
-
-    <issue
-        id="IconLocation"
         message="Found bitmap drawable `res/drawable/settings.webp` in densityless folder">
         <location
             file="src/main/res/drawable/settings.webp"/>
@@ -912,17 +905,6 @@
             file="src/main/java/com/anish/momentum/ui/MonthCalendarView.kt"
             line="131"
             column="18"/>
-    </issue>
-
-    <issue
-        id="ContentDescription"
-        message="Missing `contentDescription` attribute on image"
-        errorLine1="            &lt;ImageView"
-        errorLine2="             ~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_ai.xml"
-            line="30"
-            column="14"/>
     </issue>
 
     <issue

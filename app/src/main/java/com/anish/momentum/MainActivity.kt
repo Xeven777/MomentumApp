@@ -219,12 +219,25 @@ class MainActivity : AppCompatActivity() {
     // --------------------------------------------------------------- calendar
 
     private fun toggleMonthCalendar() {
-        val showing = binding.monthCalendarCard.visibility == View.VISIBLE
-        binding.monthCalendarCard.visibility = if (showing) View.GONE else View.VISIBLE
-        if (showing) return
+        val card = binding.monthCalendarCard
+        val showing = card.visibility == View.VISIBLE
+        if (showing) {
+            card.animate().cancel()
+            card.animate().alpha(0f).translationY(-8f * resources.displayMetrics.density)
+                .setDuration(200).withEndAction {
+                    card.visibility = View.GONE
+                    card.alpha = 1f
+                    card.translationY = 0f
+                }.start()
+            return
+        }
         selectedDateString?.let { binding.monthCalendar.showMonthContaining(it) }
         binding.monthCalendar.setSelectedDate(selectedDateString)
         binding.monthCalendar.onMonthChanged = { refreshMonthCalendar() }
+        card.alpha = 0f
+        card.translationY = -8f * resources.displayMetrics.density
+        card.visibility = View.VISIBLE
+        card.animate().alpha(1f).translationY(0f).setDuration(200).start()
         refreshMonthCalendar()
     }
 

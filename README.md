@@ -117,7 +117,9 @@ This is a standard Android Gradle project. From the repo root:
 ./gradlew assembleRelease        # minified + R8-shrunk release APK (unsigned)
 ```
 
-Release builds use R8 minification and resource shrinking. The release APK is **~2.74 MB**, with no Firebase, no Analytics, and no crash-reporting SDKs.
+Release builds use R8 minification and resource shrinking. The release APK is **~2.49 MB** (the per-ABI splits the release workflow ships are ~2.44 MB each), with no Firebase, no Analytics, and no crash-reporting SDKs.
+
+Sizes here are dominated by two things that are easy to overlook, because `resources.arsc` is stored *uncompressed* and therefore costs one APK byte per byte: the resource table and the DEX. The app ships **English only** — `androidResources.localeFilters` drops the ~85 locale configs that AppCompat and Material would otherwise contribute, which is worth roughly 15% of the APK on its own. There is no i18n effort to preserve: every string this app declares is already English.
 
 ---
 
@@ -255,7 +257,7 @@ app/src/main/java/com/anish/momentum/
 - **Retrofit 2.9 + OkHttp + Gson 2.13** for AI calls only, only on your trigger
 - **Material Design 3** with a single-accent dark theme (no dynamic colour), plus adaptive icons
 - **Lottie 6.6.7** for the flame animation and loaders
-- **R8** with resource shrinking on release builds
+- **R8** with resource shrinking on release builds, plus English-only locale filtering (the single largest size lever)
 - **Lint** with a baseline, so fresh issues fail the build
 
 ---

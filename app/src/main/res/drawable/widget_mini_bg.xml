@@ -3,8 +3,9 @@
   Card surface for the small widget, in the style of a modern Apple widget:
   no hairline border at all, just light. A soft orange bloom sits behind the
   ring and fades to pure black at the edges, so the card reads as something
-  emitting rather than something outlined. The large widget keeps
-  @drawable/widget_bg, which is flat and outlined on purpose.
+  emitting rather than something outlined. The large widget speaks the same
+  language (see widget_bg): an edge-lit rim and a warm bloom over a dark
+  glass surface.
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 

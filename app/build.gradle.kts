@@ -6,6 +6,12 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+// Current released version. The GitHub release workflow builds with -P overrides
+// and then commits the shipped values back into these two lines, so this file is
+// always the record of what is live. Keep each value on its own single line.
+val currentVersionName = "1.0"
+val currentVersionCode = 1
+
 android {
     namespace = "com.anish.momentum"
     compileSdk = 36
@@ -14,8 +20,9 @@ android {
         applicationId = "com.anish.momentum"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (project.findProperty("momentumVersionCode") as String?)?.toIntOrNull()
+            ?: currentVersionCode
+        versionName = project.findProperty("momentumVersionName") as String? ?: currentVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +40,17 @@ android {
             storePassword = signing?.getProperty("MOMENTUM_STORE_PASSWORD")
             keyAlias = signing?.getProperty("MOMENTUM_KEY_ALIAS")
             keyPassword = signing?.getProperty("MOMENTUM_KEY_PASSWORD")
+        }
+    }
+
+    // Only the release workflow passes -PmomentumAbiSplits=true, which gives one
+    // smaller APK per CPU architecture. Local builds keep a single universal APK.
+    splits {
+        abi {
+            isEnable = project.findProperty("momentumAbiSplits") == "true"
+            reset()
+            include("armeabi-v7a", "arm64-v8a", "x86_64")
+            isUniversalApk = false
         }
     }
 
@@ -74,11 +92,22 @@ android {
     }
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        // OkHttp ships a 37 KB public-suffix (cookie domain) database. It is only
+        // reachable from Cookie.parse() and HttpUrl.topPrivateDomain(), and this
+        // app sets no CookieJar and calls neither, so it is dead weight. R8 cannot
+        // see it — it is a resource, not code.
+        resources.excludes += "okhttp3/internal/publicsuffix/*"
     }
     androidResources {
         // Everything raster in this project is already WebP; crunching would
         // only cost build time and re-encode quality.
         noCompress += "webp"
+        // Every string this app declares is English, but AppCompat and Material
+        // ship translations for ~85 locales, which the resource shrinker keeps
+        // because the referenced resources survive. Filtering happens before
+        // shrinking, so this is the one place they can be removed.
+        // (resConfigs is deprecated in favour of this.)
+        localeFilters += "en"
     }
 }
 

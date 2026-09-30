@@ -50,7 +50,7 @@ object WidgetArtwork {
             left = 0f,
             top = 0f,
             cell = cell,
-            cornerRadius = cell * 0.22f
+            cornerRadius = cell * 0.30f
         )
         return bitmap
     }

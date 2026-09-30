@@ -946,7 +946,7 @@
     /* --- closing download CTA --- */
     .build {
       text-align: center;
-      background: url(./cardbg.webp) center/cover no-repeat;
+      background: url(../app/src/main/res/drawable/cardbg.webp) center/cover no-repeat;
       border: 1px solid #4a432681;
       border-radius: var(--r-lg);
       padding: clamp(2.2rem, 5vw, 3.8rem)
@@ -1355,53 +1355,6 @@
       </div>
     </section>
 
-    <!-- ============ AI ============ -->
-    <section id="ai">
-      <div class="shell">
-        <div class="sec-head rv">
-          <p class="eyebrow">Optional AI assistant</p>
-          <h2 class="h-lg">Bring your own key. Point it anywhere. Or never turn it on.</h2>
-          <p>The AI feature stays off until you paste a key yourself. Nothing is baked into the build, and if you never
-            set a key the app never makes a request.</p>
-        </div>
-
-        <div class="ai rv">
-          <div>
-            <h3 class="h-md">Any OpenAI-compatible provider</h3>
-            <p class="small" style="margin-top:.7rem">
-              Use it to suggest habits from a short questionnaire, from your own free-text
-              description, or both. Suggestions arrive as draft habits you review before saving.
-            </p>
-            <div class="chips">
-              <span class="chip">OpenRouter</span>
-              <span class="chip">Groq</span>
-              <span class="chip">OpenAI</span>
-              <span class="chip">Gemini</span>
-              <span class="chip">Claude</span>
-              <span class="chip">Ollama</span>
-            </div>
-            <p class="small">Your key is stored encrypted with a Keystore-backed key. It never enters the build and
-              never appears in a log.</p>
-          </div>
-
-          <div class="terminal" role="img"
-            aria-label="The AI settings screen, showing a masked API key, the base URL openrouter dot ai slash api slash v1, a model name, a temperature, and a successful test connection reporting 284 models available.">
-            <div><span class="c"># Settings &rarr; AI Assistant</span></div>
-            <div><span class="k">API key</span>
-              sk-or-v1-&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-            </div>
-            <div><span class="k">Base URL</span> https://openrouter.ai/api/v1</div>
-            <div><span class="k">Model</span> qwen/qwen3.8-27b:free</div>
-            <div><span class="k">Temp</span> 0.7</div>
-            <div>&nbsp;</div>
-            <div><span class="g">&#10003; Test connection</span></div>
-            <div><span class="c">284 models available on this endpoint.</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- ============ COMPARE ============ -->
     <section id="compare">
       <div class="shell">
@@ -1468,6 +1421,51 @@
       </div>
     </section>
 
+        <!-- ============ AI ============ -->
+        <section id="ai">
+          <div class="shell">
+            <div class="sec-head rv">
+              <p class="eyebrow">Optional AI assistant</p>
+              <h2 class="h-lg">Bring your own key. Point it anywhere. Or never turn it on.</h2>
+              <p>The AI feature stays off until you paste a key yourself. Nothing is baked into the build, and if you never
+                set a key the app never makes a request.</p>
+            </div>
+        
+            <div class="ai rv">
+              <div>
+                <h3 class="h-md">Any OpenAI-compatible provider</h3>
+                <p class="small" style="margin-top:.7rem">
+                  Use it to suggest habits from a short questionnaire, from your own free-text
+                  description, or both. Suggestions arrive as draft habits you review before saving.
+                </p>
+                <div class="chips">
+                  <span class="chip">OpenRouter</span>
+                  <span class="chip">Groq</span>
+                  <span class="chip">OpenAI</span>
+                  <span class="chip">Gemini</span>
+                  <span class="chip">Claude</span>
+                  <span class="chip">Ollama</span>
+                </div>
+                <p class="small">Your key is stored encrypted with a Keystore-backed key. It never enters the build and
+                  never appears in a log.</p>
+              </div>
+        
+              <div class="terminal" role="img"
+                aria-label="The AI settings screen, showing a masked API key, the base URL openrouter dot ai slash api slash v1, a model name, a temperature, and a successful test connection reporting 284 models available.">
+                <div><span class="c"># Settings &rarr; AI Assistant</span></div>
+                <div><span class="k">API key</span>
+                  sk-or-v1-&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+                </div>
+                <div><span class="k">Base URL</span> https://openrouter.ai/api/v1</div>
+                <div><span class="k">Model</span> qwen/qwen3.8-27b:free</div>
+                <div><span class="k">Temp</span> 0.7</div>
+                <div>&nbsp;</div>
+                <div><span class="g">&#10003; Test connection</span></div>
+                <div><span class="c">284 models available on this endpoint.</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
 
     <!-- ============ FAQ ============ -->
     <section id="faq">

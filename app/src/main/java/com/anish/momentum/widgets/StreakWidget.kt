@@ -76,7 +76,7 @@ class StreakWidget : AppWidgetProvider() {
     ) {
         val density = context.resources.displayMetrics.density
 
-        val ringSize = 96.dpToPx(density).toInt()
+        val ringSize = 104.dpToPx(density).toInt()
         views.setImageViewBitmap(
             R.id.widget_ring,
             WidgetArtwork.ring(
@@ -84,7 +84,7 @@ class StreakWidget : AppWidgetProvider() {
                 streak = state.streak,
                 sizePx = ringSize,
                 centerTextSizePx = ringSize * 0.34f,
-                captionTextSizePx = ringSize * 0.105f,
+                captionTextSizePx = ringSize * 0.07f,
                 caption = context.getString(R.string.widget_day_streak)
             )
         )

@@ -1,0 +1,169 @@
+name: Release
+
+# Manual only: Actions tab -> Release -> Run workflow. Fills in the version,
+# builds the APKs, publishes a GitHub release, then records the version back
+# into app/build.gradle.kts so the repo always matches what is live.
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: "Version name, e.g. 1.1"
+        required: true
+        type: string
+      version_code:
+        description: "Version code, must be higher than the last release, e.g. 2"
+        required: true
+        type: string
+      notes:
+        description: "Release notes (leave empty to auto-generate from commits)"
+        required: false
+        default: ""
+        type: string
+      prerelease:
+        description: "Mark as pre-release (alpha/beta) instead of a full release"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_NAME: ${{ inputs.version_name }}
+      VERSION_CODE: ${{ inputs.version_code }}
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Check the version
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$VERSION_CODE" | grep -Eq '^[0-9]+$'; then
+            echo "::error::version_code must be a whole number, got '$VERSION_CODE'"
+            exit 1
+          fi
+          if [ -z "$VERSION_NAME" ]; then
+            echo "::error::version_name cannot be empty"
+            exit 1
+          fi
+          current=$(sed -nE 's/^val currentVersionCode = ([0-9]+)$/\1/p' app/build.gradle.kts)
+          echo "Current in build.gradle.kts: $current -> releasing $VERSION_CODE"
+          if [ "$VERSION_CODE" -le "$current" ]; then
+            echo "::error::version_code $VERSION_CODE must be greater than $current"
+            exit 1
+          fi
+
+      - name: Restore the release keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.MOMENTUM_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.MOMENTUM_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.MOMENTUM_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.MOMENTUM_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          for name in KEYSTORE_BASE64 STORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::repository secret $name is not set, cannot sign the release"
+              exit 1
+            fi
+          done
+          mkdir -p keystore
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > keystore/momentum-release.jks
+          cat > keystore/signing.properties <<EOF
+          MOMENTUM_STORE_PASSWORD=$STORE_PASSWORD
+          MOMENTUM_KEY_ALIAS=$KEY_ALIAS
+          MOMENTUM_KEY_PASSWORD=$KEY_PASSWORD
+          EOF
+
+      - name: Run unit tests, lint and assemble
+        run: |
+          ./gradlew --no-daemon --stacktrace \
+            testDebugUnitTest \
+            lintRelease \
+            assembleRelease \
+            -PmomentumVersionName="$VERSION_NAME" \
+            -PmomentumVersionCode="$VERSION_CODE" \
+            -PmomentumAbiSplits=true
+
+      - name: Collect the APKs
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          for apk in app/build/outputs/apk/release/*.apk; do
+            abi=$(basename "$apk" | sed -E 's/^app-(.+)-release\.apk$/\1/')
+            cp "$apk" "dist/Momentum-$VERSION_NAME-$abi.apk"
+          done
+          ls -l dist
+
+      - name: Verify the APKs are signed with the release key
+        run: |
+          set -euo pipefail
+          apksigner=$(ls -1 "$ANDROID_HOME"/build-tools/*/apksigner | tail -n 1)
+          for apk in dist/*.apk; do
+            echo "== $apk"
+            "$apksigner" verify --print-certs "$apk" | grep -E "Signer #1 certificate DN|Signer #1 certificate SHA-256"
+          done
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTES: ${{ inputs.notes }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+          tag="v$VERSION_NAME"
+          if [ "$PRERELEASE" = "true" ]; then
+            prerelease_flag="--prerelease"
+          else
+            prerelease_flag=""
+          fi
+          if gh release view "$tag" > /dev/null 2>&1; then
+            echo "Release $tag already exists, replacing the APKs on it"
+            gh release upload "$tag" dist/*.apk --clobber
+          elif [ -n "$NOTES" ]; then
+            gh release create "$tag" dist/*.apk \
+              --title "Momentum $VERSION_NAME" --notes "$NOTES" $prerelease_flag
+          else
+            gh release create "$tag" dist/*.apk \
+              --title "Momentum $VERSION_NAME" --generate-notes $prerelease_flag
+          fi
+          gh release view "$tag" --json url --jq .url
+
+      - name: Record the version in app/build.gradle.kts
+        # Skipped when the workflow was run from a tag rather than a branch.
+        if: startsWith(github.ref, 'refs/heads/')
+        # The release is already live at this point, so a conflict here (someone
+        # pushed to the branch mid-build) should warn, not fail the run.
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          sed -i -E \
+            "s/^val currentVersionName = \".*\"$/val currentVersionName = \"$VERSION_NAME\"/" \
+            app/build.gradle.kts
+          sed -i -E \
+            "s/^val currentVersionCode = [0-9]+$/val currentVersionCode = $VERSION_CODE/" \
+            app/build.gradle.kts
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- app/build.gradle.kts; then
+            echo "build.gradle.kts already says $VERSION_NAME ($VERSION_CODE)"
+            exit 0
+          fi
+          git add app/build.gradle.kts
+          git commit -m "Release $VERSION_NAME (versionCode $VERSION_CODE)"
+          git push origin "HEAD:$GITHUB_REF"

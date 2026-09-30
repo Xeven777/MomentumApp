@@ -160,10 +160,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:fontFamily="@font/google_sans_bold"
                 android:text="Last 6 months"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -191,10 +189,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:fontFamily="@font/google_sans_bold"
                 android:text="Last 8 weeks"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -222,10 +218,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:fontFamily="@font/google_sans_bold"
                 android:text="Per habit (30 days)"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <LinearLayout
                 android:id="@+id/habit_stats_container"
@@ -272,10 +266,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                android:fontFamily="@font/google_sans_bold"
                 android:text="Badges"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textAppearance="@style/TextAppearance.Momentum.ItemTitle" />
 
             <LinearLayout
                 android:id="@+id/badge_container"

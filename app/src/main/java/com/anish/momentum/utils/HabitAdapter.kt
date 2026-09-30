@@ -31,10 +31,15 @@ class HabitAdapter(
 
             if (habit.isDone) {
                 habitName.paintFlags = habitName.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                habitItemLayout.alpha = 0.4f
             } else {
                 habitName.paintFlags = habitName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                habitItemLayout.alpha = 1.0f
+            }
+            // Crossfade instead of an instant jump, so ticking feels physical.
+            // Same 200ms the AI screen uses for its card swaps.
+            val targetAlpha = if (habit.isDone) 0.4f else 1.0f
+            habitItemLayout.animate().cancel()
+            if (habitItemLayout.alpha != targetAlpha) {
+                habitItemLayout.animate().alpha(targetAlpha).setDuration(200).start()
             }
 
             habitItemLayout.setOnClickListener { onToggle(habit) }
