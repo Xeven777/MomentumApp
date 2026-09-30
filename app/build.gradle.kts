@@ -9,8 +9,8 @@ plugins {
 // Current released version. The GitHub release workflow builds with -P overrides
 // and then commits the shipped values back into these two lines, so this file is
 // always the record of what is live. Keep each value on its own single line.
-val currentVersionName = "1.0"
-val currentVersionCode = 1
+val currentVersionName = "1.1"
+val currentVersionCode = 2
 
 android {
     namespace = "com.anish.momentum"
