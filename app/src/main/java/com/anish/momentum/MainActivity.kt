@@ -422,7 +422,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
+            if (hasReminder && time.isEmpty()) {
+                Toast.makeText(this, "Pick a reminder time", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             lifecycleScope.launch {
                 val habit = repository.addHabit(name, emoji, hasReminder, time, scheduleMask)
                 ReminderUtils.scheduleHabitReminder(this@MainActivity, habit)
@@ -508,6 +511,10 @@ class MainActivity : AppCompatActivity() {
 
             if (newName.isEmpty()) {
                 Toast.makeText(this, "Habit name can't be empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (newReminder && newTime.isEmpty()) {
+                Toast.makeText(this, "Pick a reminder time", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

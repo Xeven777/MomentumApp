@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.anish.momentum.models.Habit
 import java.util.*
 
@@ -62,12 +63,23 @@ object ReminderUtils {
         }
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            buildPendingIntent(context, habit)
-        )
+        val triggerAt = calendar.timeInMillis
+        val pending = buildPendingIntent(context, habit)
+        // setRepeating is inexact and paused by Doze, so reminders arrived
+        // hours late or never. Fire exact once, the receiver re-arms tomorrow.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager.canScheduleExactAlarms()) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP, triggerAt, pending
+                )
+            } else {
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pending)
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pending)
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pending)
+        }
     }
 
     fun cancelHabitReminder(context: Context, habit: Habit) {

@@ -17,8 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Shows a habit reminder. The alarm itself repeats daily, so a habit scheduled
- * for Mon/Wed/Fri is checked here and stays quiet on the days it is not due.
+ * Shows a habit reminder. The alarm fires exact once and re-arms tomorrow,
+ * so a habit scheduled for Mon/Wed/Fri is checked here and stays quiet
+ * on the days it is not due.
  */
 class ReminderReceiver : BroadcastReceiver() {
 
@@ -35,9 +36,18 @@ class ReminderReceiver : BroadcastReceiver() {
                     .getActiveHabits()
                     .firstOrNull { it.id == habitId }
 
-                if (habit != null && !Schedule.isScheduledOn(habit.scheduleMask, DateUtils.today())) {
-                    Log.d("ReminderReceiver", "Skipping '$habitName', not scheduled today")
-                    return@launch
+                if (habit != null) {
+                    // Exact alarms fire once, so re-arm tomorrow before anything else.
+                    try {
+                        ReminderUtils.scheduleHabitReminder(appContext, habit)
+                    } catch (e: Exception) {
+                        Log.e("ReminderReceiver", "Could not re-arm reminder", e)
+                    }
+                    if (!habit.hasReminder) return@launch
+                    if (!Schedule.isScheduledOn(habit.scheduleMask, DateUtils.today())) {
+                        Log.d("ReminderReceiver", "Skipping '$habitName', not scheduled today")
+                        return@launch
+                    }
                 }
                 notify(appContext, habitId, habitEmoji, habitName)
             } catch (e: Exception) {
@@ -75,9 +85,11 @@ class ReminderReceiver : BroadcastReceiver() {
         Log.d("ReminderReceiver", "Alarm triggered for: $habitName")
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("Reminder")
-            .setContentText("Time to complete: $habitEmoji $habitName")
+            .setContentTitle("$habitEmoji $habitName")
+            .setContentText(nudgeFor(habitId))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(nudgeFor(habitId)))
             .setSmallIcon(R.drawable.fire)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
@@ -85,8 +97,25 @@ class ReminderReceiver : BroadcastReceiver() {
         notificationManager.notify(habitId.hashCode(), notification)
     }
 
+    private fun nudgeFor(habitId: String): String {
+        val day = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_YEAR)
+        val index = Math.floorMod(day + habitId.hashCode(), NUDGES.size)
+        return NUDGES[index]
+    }
+
     companion object {
         const val CHANNEL_ID = "habit_channel"
         const val EXTRA_HABIT_ID = "habitId"
+
+        private val NUDGES = listOf(
+            "A small session still counts today.",
+            "Go slow if you need to. Still show up.",
+            "Today is a good day to keep this going.",
+            "You kept this up before. Do one round now.",
+            "No rush. Start with the first minute.",
+            "This counts even when it feels small.",
+            "One honest effort is enough today.",
+            "Your future self will thank you for today."
+        )
     }
 }
