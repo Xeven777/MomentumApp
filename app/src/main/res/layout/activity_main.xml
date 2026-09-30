@@ -28,7 +28,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="15dp">
 
         <TextView
@@ -76,7 +77,8 @@
         android:id="@+id/cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="16dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
@@ -295,38 +297,109 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendar_recycler"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
-        android:clipToPadding="false"
-        android:contentDescription="@string/show_month_calendar_description"
-        android:orientation="horizontal"
-        android:overScrollMode="never" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendar_recycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+
+        <ImageButton
+            android:id="@+id/month_calendar_toggle"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/show_month_calendar_description"
+            android:rotation="90"
+            android:scaleType="center"
+            android:src="@drawable/ic_chevron_right" />
+    </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/month_calendar_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
         app:cardCornerRadius="24dp"
         tools:visibility="visible">
 
-        <!-- Margins, not padding: MonthCalendarView derives its cell width from
-             the view width and only honours vertical padding, so an inset has
-             to come from the layout. -->
-        <com.anish.momentum.ui.MonthCalendarView
-            android:id="@+id/month_calendar"
+<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="12dp" />
+            android:orientation="vertical"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+
+            <!-- Month stepper: visible prev/next beats an undiscoverable swipe.
+                 The grid below no longer paints its own title. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/month_prev"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/previous_month_description"
+                    android:rotation="180"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_chevron_right" />
+
+                <TextView
+                    android:id="@+id/month_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/month_next"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/next_month_description"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_chevron_right" />
+
+            </LinearLayout>
+
+            <!-- Margins, not padding: MonthCalendarView derives its cell width from
+                 the view width and only honours vertical padding, so an inset has
+                 to come from the layout. -->
+            <com.anish.momentum.ui.MonthCalendarView
+                android:id="@+id/month_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp" />
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -335,7 +408,8 @@
         android:id="@+id/quote_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="4dp"
         app:cardCornerRadius="24dp">
 
@@ -401,7 +475,8 @@
         android:id="@+id/tasks_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="22dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -433,7 +508,8 @@
         android:id="@+id/habit_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
@@ -444,7 +520,8 @@
         android:id="@+id/no_tasks_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="84dp"
         android:gravity="center_horizontal"
@@ -502,7 +579,7 @@
             android:padding="12dp"
             android:scaleType="fitCenter"
             android:src="@drawable/add"
-            android:tint="@color/black" />
+            app:tint="@color/black" />
 
     </com.google.android.material.card.MaterialCardView>
 

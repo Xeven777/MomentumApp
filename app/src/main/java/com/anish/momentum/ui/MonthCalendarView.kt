@@ -33,14 +33,17 @@ class MonthCalendarView @JvmOverloads constructor(
         color = Artwork.OUTLINE
         textAlign = Paint.Align.CENTER
     }
-    private val headerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.WHITE
-        textAlign = Paint.Align.CENTER
-        isFakeBoldText = true
-    }
     private val weekdayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Artwork.MUTED_TEXT
         textAlign = Paint.Align.CENTER
+    }
+    private val futureRingPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        color = Artwork.OUTLINE
+    }
+    private val todayMarkerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        color = Color.WHITE
     }
 
     private val density = resources.displayMetrics.density
@@ -141,7 +144,7 @@ class MonthCalendarView @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val width = resolveSize(suggestedMinimumWidth, widthMeasureSpec)
         val cell = width / DAYS_PER_WEEK
-        val height = (headerHeight() + weekdayHeight() + cell * MAX_WEEKS + paddingBottom).toInt()
+        val height = (weekdayHeight() + cell * MAX_WEEKS + paddingBottom).toInt()
         setMeasuredDimension(width, resolveSize(height, heightMeasureSpec))
     }
 
@@ -151,24 +154,18 @@ class MonthCalendarView @JvmOverloads constructor(
         val cellTextSize = cell * 0.34f
         cellTextPaint.textSize = cellTextSize
         outOfMonthPaint.textSize = cellTextSize
-        headerPaint.textSize = 15 * density
         weekdayPaint.textSize = 10 * density
 
-        canvas.drawText(
-            monthLabel(),
-            width / 2f,
-            paddingTop + headerHeight() * 0.62f,
-            headerPaint
-        )
-
-        val weekdayTop = paddingTop + headerHeight() + weekdayHeight() * 0.7f
+        val weekdayTop = paddingTop + weekdayHeight() * 0.7f
         WEEKDAY_LABELS.forEachIndexed { index, label ->
             val centerX = cell * index + cell / 2f
             canvas.drawText(label, centerX, weekdayTop, weekdayPaint)
         }
 
-        val gridTop = paddingTop + headerHeight() + weekdayHeight()
+        val gridTop = paddingTop + weekdayHeight()
         cellTextPaint.color = Color.WHITE
+        futureRingPaint.strokeWidth = cell * 0.05f
+        todayMarkerPaint.strokeWidth = cell * 0.05f
 
         // Sunday-first offset for the first of this month.
         val cal = Calendar.getInstance().apply {
@@ -182,8 +179,8 @@ class MonthCalendarView @JvmOverloads constructor(
 
         for (day in 1..daysInMonth) {
             val index = leadingBlanks + day - 1
-            val column = index / DAYS_PER_WEEK
-            val row = index % DAYS_PER_WEEK
+            val row = index / DAYS_PER_WEEK
+            val column = index % DAYS_PER_WEEK
             val centerX = cell * column + cell / 2f
             val centerY = gridTop + cell * row + cell / 2f
 
@@ -195,14 +192,7 @@ class MonthCalendarView @JvmOverloads constructor(
             val isToday = dateStr == todayString
 
             if (isFuture) {
-                canvas.drawCircle(
-                    centerX, centerY, cell * 0.36f,
-                    Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                        style = Paint.Style.STROKE
-                        strokeWidth = cell * 0.05f
-                        color = Artwork.OUTLINE
-                    }
-                )
+                canvas.drawCircle(centerX, centerY, cell * 0.36f, futureRingPaint)
                 cellTextPaint.color = Artwork.MUTED_TEXT
                 canvas.drawText(day.toString(), centerX, centerY, cellTextPaint)
                 cellTextPaint.color = Color.WHITE
@@ -225,19 +215,16 @@ class MonthCalendarView @JvmOverloads constructor(
             )
 
             if (isToday || isSelected(dateStr)) {
-                val marker = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                    style = Paint.Style.STROKE
-                    strokeWidth = cell * 0.05f
-                    color = Color.WHITE
-                }
-                canvas.drawCircle(centerX, centerY, cell * 0.48f, marker)
+                canvas.drawCircle(centerX, centerY, cell * 0.48f, todayMarkerPaint)
             }
         }
     }
 
     private fun isSelected(date: String) = selectedDate == date
 
-    private fun headerHeight(): Float = 26 * density
+    /** Forward is capped at the current month, so the › button dims there. */
+    fun canGoNext(): Boolean = monthOffset < 0
+
     private fun weekdayHeight(): Float = 16 * density
 
     private fun startOfDisplayedMonth(): java.util.Date {
@@ -267,7 +254,7 @@ class MonthCalendarView @JvmOverloads constructor(
     /** Which date (if any) was drawn at these coordinates. */
     private fun dateAt(x: Float, y: Float): String? {
         val cell = width / DAYS_PER_WEEK
-        val gridTop = paddingTop + headerHeight() + weekdayHeight()
+        val gridTop = paddingTop + weekdayHeight()
         if (y < gridTop || y > gridTop + cell * MAX_WEEKS) return null
         if (x < 0 || x > width) return null
 

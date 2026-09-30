@@ -79,4 +79,7 @@
     </plurals>
     <string name="close_description">Close</string>
     <string name="show_month_calendar_description">Show the month calendar</string>
+    <string name="hide_month_calendar_description">Hide the month calendar</string>
+    <string name="previous_month_description">Previous month</string>
+    <string name="next_month_description">Next month</string>
 </resources>

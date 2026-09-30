@@ -47,13 +47,13 @@ object Artwork {
         return HEAT_LEVELS[level]
     }
 
-    fun arcPaint(strokeWidth: Float, color: Int, cap: Paint.Cap = Paint.Cap.ROUND): Paint =
-        Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            style = Paint.Style.STROKE
-            this.strokeWidth = strokeWidth
-            strokeCap = cap
-            this.color = color
-        }
+    // Reused across calls: a calendar frame draws one ring per day, so building a
+    // fresh Paint each time is what makes the grid stutter while swiping.
+    private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeCap = Paint.Cap.ROUND
+    }
+    private val dayBounds = RectF()
 
     /** Progress arc starting at 12 o'clock, drawn over a full track ring. */
     fun drawRing(
@@ -64,12 +64,12 @@ object Artwork {
         trackColor: Int,
         progressColor: Int
     ) {
-        canvas.drawArc(bounds, 0f, 360f, false, arcPaint(strokeWidth, trackColor))
+        ringPaint.strokeWidth = strokeWidth
+        ringPaint.color = trackColor
+        canvas.drawArc(bounds, 0f, 360f, false, ringPaint)
         if (progress > 0f) {
-            canvas.drawArc(
-                bounds, -90f, 360f * progress.coerceIn(0f, 1f), false,
-                arcPaint(strokeWidth, progressColor)
-            )
+            ringPaint.color = progressColor
+            canvas.drawArc(bounds, -90f, 360f * progress.coerceIn(0f, 1f), false, ringPaint)
         }
     }
 
@@ -118,19 +118,17 @@ object Artwork {
         textPaint: Paint,
         ringColor: Int
     ) {
-        val bounds = RectF(
+        dayBounds.set(
             centerX - radius, centerY - radius,
             centerX + radius, centerY + radius
         )
         if (!hasHabits) {
-            canvas.drawCircle(centerX, centerY, radius * 0.86f, Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                color = OUTLINE
-                style = Paint.Style.STROKE
-                strokeWidth = radius * 0.14f
-            })
+            ringPaint.strokeWidth = radius * 0.14f
+            ringPaint.color = OUTLINE
+            canvas.drawCircle(centerX, centerY, radius * 0.86f, ringPaint)
         } else {
             drawRing(
-                canvas, bounds, ratio,
+                canvas, dayBounds, ratio,
                 strokeWidth = radius * 0.14f,
                 trackColor = OUTLINE,
                 progressColor = ringColor

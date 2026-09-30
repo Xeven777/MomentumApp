@@ -144,10 +144,23 @@ class MainActivity : AppCompatActivity() {
         binding.habitRecycler.layoutManager = LinearLayoutManager(this)
         binding.habitRecycler.adapter = habitAdapter
 
-        // Tapping the day strip opens the full month calendar.
+        // The expander below the day strip opens the full month calendar;
+// tapping the strip's empty space does the same.
+        binding.monthCalendarToggle.setOnClickListener {
+            Vibration.vibrate(this, 50)
+            toggleMonthCalendar()
+        }
         binding.calendarRecycler.setOnClickListener {
             Vibration.vibrate(this, 50)
             toggleMonthCalendar()
+        }
+        binding.monthPrev.setOnClickListener {
+            Vibration.vibrate(this, 50)
+            binding.monthCalendar.changeMonth(-1)
+        }
+        binding.monthNext.setOnClickListener {
+            Vibration.vibrate(this, 50)
+            binding.monthCalendar.changeMonth(1)
         }
         binding.monthCalendar.onDateSelected = { date ->
             Vibration.vibrate(this, 50)
@@ -224,7 +237,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun toggleMonthCalendar() {
         val card = binding.monthCalendarCard
+        val toggle = binding.monthCalendarToggle
         val showing = card.visibility == View.VISIBLE
+        // Chevron points down when closed, up when open; 200ms matches the card fade.
+        toggle.animate().cancel()
+        toggle.animate().rotation(if (showing) 90f else 270f).setDuration(200).start()
+        toggle.contentDescription = getString(
+            if (showing) R.string.show_month_calendar_description
+            else R.string.hide_month_calendar_description
+        )
         if (showing) {
             card.animate().cancel()
             card.animate().alpha(0f).translationY(-8f * resources.displayMetrics.density)
@@ -247,6 +268,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun refreshMonthCalendar() {
         if (binding.monthCalendarCard.visibility != View.VISIBLE) return
+        updateMonthHeader()
         lifecycleScope.launch {
             val monthStart = binding.monthCalendar.displayedMonthStart()
             // A little padding either side so the leading/trailing blanks of the
@@ -257,6 +279,14 @@ class MainActivity : AppCompatActivity() {
             )
             binding.monthCalendar.setData(stats)
         }
+    }
+
+    /** Month title plus › dimming; called on open and on every month change. */
+    private fun updateMonthHeader() {
+        binding.monthTitle.text = binding.monthCalendar.currentMonthLabel()
+        val forward = binding.monthCalendar.canGoNext()
+        binding.monthNext.isEnabled = forward
+        binding.monthNext.alpha = if (forward) 1f else 0.3f
     }
 
     private fun refreshCalendar() {
