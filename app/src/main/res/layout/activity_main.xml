@@ -491,7 +491,7 @@
         android:layout_marginBottom="20dp"
         android:contentDescription="@string/add_habit_description"
         android:foreground="?attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/surface_row"
+        app:cardBackgroundColor="@color/streak_yellow"
         app:cardCornerRadius="26dp"
         app:cardElevation="0dp">
 
@@ -501,7 +501,8 @@
             android:importantForAccessibility="no"
             android:padding="12dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/add" />
+            android:src="@drawable/add"
+            android:tint="@color/black" />
 
     </com.google.android.material.card.MaterialCardView>
 
