@@ -2,32 +2,14 @@
 
 **A privacy-first habit tracker for Android, 100% offline, zero tracking, no accounts. Build routines, watch your streak grow, and keep every habit on the phone you carry everywhere.**
 
+![demo](docs/demo.webp)
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?color=4f46e5&labelColor=2e1a47)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-7F52B5?labelColor=2e1a47)](https://kotlinlang.org)
 [![Android](https://img.shields.io/badge/Android-24%2B%20%7C%2036-brightgreen?labelColor=2e1a47)](https://developer.android.com)
 [![Offline](https://img.shields.io/badge/offline-100%25%20local-seagreen?labelColor=2e1a47)](https://github.com/Xeven777/MomentumApp#what-is-momentum)
 [![Open Source](https://img.shields.io/badge/open--source-%F0%9F%92%BB-4f46e5?labelColor=2e1a47)](https://github.com/Xeven777/MomentumApp)
 
----
-
-## Table of contents
-
-- [What is Momentum?](#what-is-momentum)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Why another habit tracker?](#why-another-habit-tracker)
-- [Getting started](#getting-started)
-- [Building from source](#building-from-source)
-- [Testing on a device over USB](#testing-on-a-device-over-usb)
-- [Tests](#tests)
-- [Configuring the AI assistant](#configuring-the-ai-assistant)
-- [Project structure](#project-structure)
-- [Technologies](#technologies)
-- [Contributing](#contributing)
-- [Credits](#credits)
-- [License](#license)
-
----
 
 ## What is Momentum?
 
@@ -59,15 +41,19 @@ The AI assistant is the one feature that touches the network, and it is opt-in. 
 
 <table>
   <tr>
-      <td><img src="https://github.com/user-attachments/assets/42594889-e533-494e-80ff-d08c403980d0" width="200"></td>
-    <td><img src="https://github.com/user-attachments/assets/1acfcbc5-3031-4f0f-8cc9-3ee7399b1db9" width="200"></td>
-    <td><img src="https://github.com/user-attachments/assets/11dba4f3-7665-4fd7-a1f9-00854b75146b" width="200"></td>
+      <td><img src="pics/1.webp" width="245"></td>
+    <td><img src="pics/2.webp" width="245"></td>
+    <td><img src="pics/3.webp" width="245"></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/8590fec3-1086-47be-8549-118be8dc8828" width="200"></td>
-    <td><img src="https://github.com/user-attachments/assets/6f140309-54f0-4c9b-b9ad-803021a7a644" width="200"></td>
-    <td><img src="https://github.com/user-attachments/assets/796214ad-85af-4e93-ac91-4fe87e0daee1" width="200"></td>
-
+    <td><img src="pics/4.webp" width="245"></td>
+    <td><img src="pics/5.webp" width="245"></td>
+    <td><img src="pics/6.webp" width="245"></td>
+  </tr>
+   <tr>
+    <td><img src="pics/7.webp" width="245"></td>
+    <td><img src="pics/8.webp" width="245"></td>
+    <td><img src="pics/9.webp" width="245"></td>
   </tr>
 </table>
 
@@ -190,64 +176,6 @@ The app ships with no key and no endpoint baked in. Open **Settings → AI Assis
 
 ---
 
-## Project structure
-
-```
-app/src/main/java/com/anish/momentum/
-  LauncherActivity.kt        # app entry: one-time welcome on first run, else the home screen
-  NameActivity.kt            # onboarding: the name used for the home greeting
-  MainActivity.kt            # habit list, calendar strip, streak
-  AiActivity.kt              # AI suggestions → habits
-  QuestionsActivity.kt       # the AI questionnaire
-  SettingsActivity.kt        # name, daily goal, AI config
-  StatsActivity.kt           # streaks, heatmap, trend, per-habit rates, badges
-  data/
-    Entities.kt              # Room entities (Habit, HabitCompletion)
-    HabitWithCompletions.kt  # Habit joined with its completions
-    HabitDao.kt              # DAO: insert, query, delete
-    HabitRepository.kt       # single source of truth
-    StreakCalculator.kt      # the streak + daily-goal arithmetic
-    Schedule.kt              # weekday bitmask rules
-    Badges.kt                # unlock logic for 3/7/30/100-day + perfect week
-    SettingsStore.kt         # DataStore (prefs)
-    MomentumDatabase.kt      # Room database
-    Stats.kt                 # stats data model
-  ai/
-    AiClient.kt              # Retrofit + OkHttp client
-    AiProvider.kt            # OpenAI-compatible config
-    ApiKeyStore.kt           # Keystore-backed encrypted key
-    ChatApi.kt               # request/response models
-    HabitReplyParser.kt      # parse AI → Habit objects
-  models/
-    Habit.kt                 # the Habit domain model
-    CalendarDate.kt          # per-day completion state
-  ui/
-    Artwork.kt               # shared Canvas primitives: rings, heatmap, day cells
-    RingView.kt              # progress ring with a figure in the middle
-    HeatmapView.kt           # 6-month contribution grid
-    BarChartView.kt          # 8-week trend
-    MonthCalendarView.kt     # swipeable month grid
-    Quotes.kt                # the rotating home-screen quote
-  utils/
-    ReminderUtils.kt         # schedule + cancel alarms
-    BootReceiver.kt          # re-arm reminders after reboot
-    ReminderReceiver.kt      # alarm → notification
-    HabitAdapter.kt          # RecyclerView adapter
-    CalendarAdapter.kt
-    AiHabitAdapter.kt
-    DateUtils.kt
-    DayToggleRow.kt          # weekday selector
-    Vibration.kt
-    Momentum.kt              # app-wide helpers
-  widgets/
-    StreakWidget.kt          # 12-week grid widget
-    StreakMiniWidget.kt      # 2×2 ring widget
-    WidgetArtwork.kt         # bitmap rendering
-    WidgetState.kt
-```
-
----
-
 ## Technologies
 
 - **Kotlin 2.0.21**, coroutines, official code style
@@ -291,3 +219,5 @@ Uses [Google Sans](https://github.com/googlefonts/googlesans) under the [SIL Ope
 [MIT](LICENSE)
 
 Copyright (c) 2026 Xeven777
+
+![bg](docs/cardbg.webp)

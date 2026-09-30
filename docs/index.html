@@ -541,7 +541,7 @@
       pointer-events: none;
       left: 50%;
       top: -10%;
-      width: min(1100px, 130%);
+      width: min(1100px, 100%);
       aspect-ratio: 16/9;
       transform: translateX(-50%);
       background:
@@ -693,6 +693,21 @@
       display: grid;
       place-items: center;
       font-size: 1.4rem
+    }
+
+    #pic img {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: block;
+      border-radius: var(--r-lg);
+      box-shadow: 0 40px 90px -30px #000, 0 0 0 10px #0a0a0a;
+      transition: all .5s var(--ease);
+    }
+
+    #pic img:hover {
+      transform: scale(1.02);
+      filter: brightness(1.05) saturate(1.1);
     }
 
     /* --- feature grid --- */
@@ -946,15 +961,15 @@
     /* --- closing download CTA --- */
     .build {
       text-align: center;
-      background: url(../app/src/main/res/drawable/cardbg.webp) center/cover no-repeat;
+      background: url(cardbg.webp) center/cover no-repeat;
       border: 1px solid #4a432681;
       border-radius: var(--r-lg);
       padding: clamp(2.2rem, 5vw, 3.8rem)
     }
 
     .build p {
-      color: var(--sec);
       max-width: 46ch;
+      opacity: .9;
       margin: 1rem auto 2rem
     }
 
@@ -1037,46 +1052,6 @@
       color: var(--sec);
       font-size: .95rem;
       max-width: 70ch
-    }
-
-    /* --- back to top --- */
-    .totop {
-      position: fixed;
-      right: 1.25rem;
-      bottom: 1.25rem;
-      z-index: 40;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--card);
-      border: 1px solid var(--outline);
-      color: #fff;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(12px);
-      transition: opacity .3s, transform .3s var(--ease), background .2s;
-    }
-
-    .totop.show {
-      opacity: 1;
-      pointer-events: auto;
-      transform: none
-    }
-
-    .totop:hover {
-      background: var(--yellow);
-      color: #000;
-      border-color: var(--yellow)
-    }
-
-    @media (max-width:860px) {
-      .totop {
-        right: 1rem;
-        bottom: 1rem
-      }
     }
 
     /* --- footer --- */
@@ -1227,6 +1202,9 @@
       </div>
     </section>
 
+    <section id="pic">
+      <img src="./demo.webp" alt="screenshots" loading="lazy" decoding="async" onerror="this.style.display='none'">
+    </section>
 
     <!-- ============ FEATURES ============ -->
     <section id="features">
@@ -1430,7 +1408,7 @@
               <p>The AI feature stays off until you paste a key yourself. Nothing is baked into the build, and if you never
                 set a key the app never makes a request.</p>
             </div>
-        
+
             <div class="ai rv">
               <div>
                 <h3 class="h-md">Any OpenAI-compatible provider</h3>
@@ -1449,7 +1427,7 @@
                 <p class="small">Your key is stored encrypted with a Keystore-backed key. It never enters the build and
                   never appears in a log.</p>
               </div>
-        
+
               <div class="terminal" role="img"
                 aria-label="The AI settings screen, showing a masked API key, the base URL openrouter dot ai slash api slash v1, a model name, a temperature, and a successful test connection reporting 284 models available.">
                 <div><span class="c"># Settings &rarr; AI Assistant</span></div>
@@ -1574,13 +1552,6 @@
     </div>
   </footer>
 
-  <button class="totop" type="button" aria-label="Back to top">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 19V5M5 12l7-7 7 7" />
-    </svg>
-  </button>
-
   <script>
     (function () {
       /* ---------- 1. reveal on scroll (progressive enhancement) ---------- */
@@ -1626,13 +1597,11 @@
 
       var header = document.querySelector('header');
       var bar = document.querySelector('.progress i');
-      var toTop = document.querySelector('.totop');
       var ticking = false;
 
       function onScroll() {
         var y = window.pageYOffset || document.documentElement.scrollTop;
         header.classList.toggle('scrolled', y > 8);
-        toTop.classList.toggle('show', y > 600);
 
         var doc = document.documentElement;
         var max = doc.scrollHeight - window.innerHeight;
@@ -1644,10 +1613,6 @@
         if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
       }, { passive: true });
       onScroll();
-
-      toTop.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-      });
 
       /* ---------- 4. scrollspy: highlight the section being read ---------- */
       var links = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
