@@ -88,13 +88,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // The header is a time-aware greeting: the emoji rides on the title
-        // beside the name, the greeting and tagline sit underneath.
         val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val (emoji, greeting) = when (hour) {
             in 5..11 -> "☀️" to getString(R.string.greeting_morning)
-            in 12..15 -> "🌤️" to getString(R.string.greeting_afternoon)
-            in 16..20 -> "🌆" to getString(R.string.greeting_evening)
+            in 12..17 -> "🌤️" to getString(R.string.greeting_afternoon)
+            in 18..20 -> "🌆" to getString(R.string.greeting_evening)
             else -> "🌝" to getString(R.string.greeting_late)
         }
         greetingEmoji = emoji
@@ -163,6 +161,12 @@ class MainActivity : AppCompatActivity() {
         binding.streakCard.setOnClickListener {
             Vibration.vibrate(this, 50)
             startActivity(Intent(this, StatsActivity::class.java))
+        }
+
+        // The habits card is the entry point to the add-habit dialog.
+        binding.habitCard.setOnClickListener {
+            Vibration.vibrate(this, 50)
+            showAddHabitDialog()
         }
 
         observeState()
@@ -390,10 +394,12 @@ class MainActivity : AppCompatActivity() {
             TimePickerDialog(
                 this,
                 { _, selectedHour, selectedMinute ->
-                    pickedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-                    dialogBinding.timePickerTxt.text = pickedTime
+                    val picked = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    pickedTime = picked
+                    dialogBinding.timePickerTxt.text =
+                        ReminderUtils.formatTo12Hour(picked)
                 },
-                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true
+                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false
             ).show()
         }
 
@@ -468,7 +474,7 @@ class MainActivity : AppCompatActivity() {
         dialogBinding.switchReminder.isChecked = habit.hasReminder
         var pickedTime: String? = habit.reminderTime
         dialogBinding.reminderTime.visibility = if (habit.hasReminder) View.VISIBLE else View.GONE
-        dialogBinding.timePickerTxt.text = habit.reminderTime
+        dialogBinding.timePickerTxt.text = ReminderUtils.formatTo12Hour(habit.reminderTime)
 
         dialogBinding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
             dialogBinding.reminderTime.visibility = if (isChecked) View.VISIBLE else View.GONE
@@ -479,10 +485,12 @@ class MainActivity : AppCompatActivity() {
             TimePickerDialog(
                 this,
                 { _, selectedHour, selectedMinute ->
-                    pickedTime = String.format("%02d:%02d", selectedHour, selectedMinute)
-                    dialogBinding.timePickerTxt.text = pickedTime
+                    val picked = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    pickedTime = picked
+                    dialogBinding.timePickerTxt.text =
+                        ReminderUtils.formatTo12Hour(picked)
                 },
-                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true
+                cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false
             ).show()
         }
 

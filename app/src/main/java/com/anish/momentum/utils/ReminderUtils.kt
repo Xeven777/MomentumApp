@@ -9,6 +9,22 @@ import java.util.*
 
 object ReminderUtils {
 
+    /** "HH:mm" storage format → "h:mm a" display format ("14:30" → "2:30 PM").
+     *  Returns the input unchanged if it does not parse, so bad data never
+     *  blanks the UI. */
+    fun formatTo12Hour(hhMm: String): String {
+        val parts = hhMm.split(":")
+        val hour = parts.getOrNull(0)?.toIntOrNull()
+        val minute = parts.getOrNull(1)?.toIntOrNull()
+        if (hour == null || minute == null || hour !in 0..23 || minute !in 0..59) return hhMm
+        val suffix = if (hour < 12) "AM" else "PM"
+        val hour12 = when (hour % 12) {
+            0 -> 12
+            else -> hour % 12
+        }
+        return "$hour12:${minute.toString().padStart(2, '0')} $suffix"
+    }
+
     private fun buildPendingIntent(context: Context, habit: Habit): PendingIntent {
         val intent = Intent(context, ReminderReceiver::class.java).apply {
             putExtra("habitName", habit.name)

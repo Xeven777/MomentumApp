@@ -43,17 +43,6 @@ android {
         }
     }
 
-    // Only the release workflow passes -PmomentumAbiSplits=true, which gives one
-    // smaller APK per CPU architecture. Local builds keep a single universal APK.
-    splits {
-        abi {
-            isEnable = project.findProperty("momentumAbiSplits") == "true"
-            reset()
-            include("armeabi-v7a", "arm64-v8a", "x86_64")
-            isUniversalApk = false
-        }
-    }
-
     buildTypes {
         release {
             // Only sign when the keystore and its passwords are actually present,

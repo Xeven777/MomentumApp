@@ -8,12 +8,26 @@
     android:background="@color/black"
     tools:context=".MainActivity">
 
+    <!-- One scroll for the whole page: header, cards, day strip, quote and
+         the task list all move together. The list no longer scrolls inside
+         itself, so it is wrap_content with nested scrolling off. The two
+         floating buttons stay outside, pinned to the bottom. -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <!-- HEADER -->
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="15dp">
 
@@ -62,7 +76,6 @@
         android:id="@+id/cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
         android:baselineAligned="false"
@@ -77,13 +90,20 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             app:cardCornerRadius="24dp">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -167,7 +187,23 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:importantForAccessibility="no"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="14dp"
+                    android:paddingBottom="12dp"
+                    android:text="+"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -263,7 +299,6 @@
         android:id="@+id/calendar_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cards"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
@@ -277,7 +312,6 @@
         android:id="@+id/month_calendar_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/calendar_recycler"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
@@ -301,7 +335,6 @@
         android:id="@+id/quote_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/month_calendar_card"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="4dp"
         app:cardCornerRadius="24dp">
@@ -368,7 +401,6 @@
         android:id="@+id/tasks_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/quote_card"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="22dp"
         android:gravity="center_vertical"
@@ -394,21 +426,17 @@
 
     </LinearLayout>
 
-    <!-- The task list owns every dp left below the header and scrolls inside
-         itself. It must not be wrap_content: the content above it (cards,
-         day strip, quote) grows and shrinks, and a content-sized list with no
-         scroll range simply pushes rows off the bottom of the screen, where
-         they can never be reached. paddingBottom keeps the last row clear of
-         the floating buttons. -->
+    <!-- Part of the page scroll now: wrap_content with nested scrolling off,
+         so the outer NestedScrollView owns all movement. paddingBottom keeps
+         the last row clear of the floating buttons. -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/habit_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/tasks_header"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
         android:paddingBottom="84dp" />
 
     <!-- Empty state: a composed block rather than a bare "No tasks" line. -->
@@ -416,9 +444,9 @@
         android:id="@+id/no_tasks_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tasks_header"
         android:layout_marginHorizontal="36dp"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="84dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone"
@@ -448,6 +476,10 @@
             android:textAppearance="@style/TextAppearance.Momentum.BodySecondary" />
 
     </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/add_habit_btn"

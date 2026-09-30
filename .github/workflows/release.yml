@@ -1,7 +1,7 @@
 name: Release
 
 # Manual only: Actions tab -> Release -> Run workflow. Fills in the version,
-# builds the APKs, publishes a GitHub release, then records the version back
+# builds the APK, publishes a GitHub release, then records the version back
 # into app/build.gradle.kts so the repo always matches what is live.
 on:
   workflow_dispatch:
@@ -99,17 +99,13 @@ jobs:
             lintRelease \
             assembleRelease \
             -PmomentumVersionName="$VERSION_NAME" \
-            -PmomentumVersionCode="$VERSION_CODE" \
-            -PmomentumAbiSplits=true
+            -PmomentumVersionCode="$VERSION_CODE"
 
-      - name: Collect the APKs
+      - name: Collect the APK
         run: |
           set -euo pipefail
           mkdir -p dist
-          for apk in app/build/outputs/apk/release/*.apk; do
-            abi=$(basename "$apk" | sed -E 's/^app-(.+)-release\.apk$/\1/')
-            cp "$apk" "dist/Momentum-$VERSION_NAME-$abi.apk"
-          done
+          cp app/build/outputs/apk/release/app-release.apk "dist/Momentum-$VERSION_NAME.apk"
           ls -l dist
 
       - name: Verify the APKs are signed with the release key
