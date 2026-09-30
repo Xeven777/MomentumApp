@@ -84,11 +84,13 @@ jobs:
           done
           mkdir -p keystore
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > keystore/momentum-release.jks
-          cat > keystore/signing.properties <<EOF
-          MOMENTUM_STORE_PASSWORD=$STORE_PASSWORD
-          MOMENTUM_KEY_ALIAS=$KEY_ALIAS
-          MOMENTUM_KEY_PASSWORD=$KEY_PASSWORD
-          EOF
+          # printf, not a heredoc: a password containing $, `, \ or ! would be
+          # mangled by heredoc expansion and signing would silently break.
+          {
+            printf 'MOMENTUM_STORE_PASSWORD=%s\n' "$STORE_PASSWORD"
+            printf 'MOMENTUM_KEY_ALIAS=%s\n' "$KEY_ALIAS"
+            printf 'MOMENTUM_KEY_PASSWORD=%s\n' "$KEY_PASSWORD"
+          } > keystore/signing.properties
 
       - name: Run unit tests, lint and assemble
         run: |
@@ -111,12 +113,46 @@ jobs:
           ls -l dist
 
       - name: Verify the APKs are signed with the release key
+        env:
+          STORE_PASSWORD: ${{ secrets.MOMENTUM_STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.MOMENTUM_KEY_ALIAS }}
         run: |
           set -euo pipefail
           apksigner=$(ls -1 "$ANDROID_HOME"/build-tools/*/apksigner | tail -n 1)
-          for apk in dist/*.apk; do
+          # Fingerprint of the release cert, straight from the keystore.
+          expected=$(keytool -list -v -keystore keystore/momentum-release.jks \
+            -alias "$KEY_ALIAS" -storepass "$STORE_PASSWORD" \
+            | grep -m1 'SHA256:' | awk '{print $NF}' | tr -d ':' || true)
+          if [ -z "$expected" ]; then
+            echo "::error::could not read the release cert from the keystore (wrong alias or password?)"
+            exit 1
+          fi
+          echo "Release key SHA-256: $expected"
+          shopt -s nullglob
+          apks=(dist/*.apk)
+          if [ "${#apks[@]}" -eq 0 ]; then
+            echo "::error::no APKs found in dist/"
+            exit 1
+          fi
+          for apk in "${apks[@]}"; do
             echo "== $apk"
-            "$apksigner" verify --print-certs "$apk" | grep -E "Signer #1 certificate DN|Signer #1 certificate SHA-256"
+            # No grep filter: the full output stays in the log, so a failure
+            # shows why instead of failing silently inside a pipe.
+            if ! out=$("$apksigner" verify --print-certs "$apk"); then
+              echo "::error::$apk failed apksigner verification (unsigned or corrupt)"
+              exit 1
+            fi
+            echo "$out"
+            actual=$(printf '%s\n' "$out" | grep -m1 'certificate SHA-256 digest:' | awk '{print $NF}' | tr -d ':' || true)
+            if [ -z "$actual" ]; then
+              echo "::error::$apk has no signer certificate"
+              exit 1
+            fi
+            if [ "${actual^^}" != "${expected^^}" ]; then
+              echo "::error::$apk signed with $actual, expected release key $expected"
+              exit 1
+            fi
+            echo "OK: signed with the release key"
           done
 
       - name: Publish the release
