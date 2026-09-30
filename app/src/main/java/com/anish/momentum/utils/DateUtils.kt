@@ -11,8 +11,14 @@ import java.util.Locale
  */
 object DateUtils {
 
+    // One formatter per thread: SimpleDateFormat is not thread-safe, so a shared
+    // val would race between the UI thread and repository coroutines, while a
+    // fresh instance per call (the old getter) littered the draw loop.
+    private val threadFormat =
+        ThreadLocal.withInitial { SimpleDateFormat("yyyy-MM-dd", Locale.US) }
+
     val FORMAT: SimpleDateFormat
-        get() = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        get() = threadFormat.get()
 
     fun today(): String = FORMAT.format(Date())
 

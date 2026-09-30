@@ -168,15 +168,16 @@ class MonthCalendarView @JvmOverloads constructor(
         todayMarkerPaint.strokeWidth = cell * 0.05f
 
         // Sunday-first offset for the first of this month.
+        val monthStart = startOfDisplayedMonth()
         val cal = Calendar.getInstance().apply {
-            time = startOfDisplayedMonth()
+            time = monthStart
             firstDayOfWeek = Calendar.SUNDAY
         }
         val leadingBlanks = cal.get(Calendar.DAY_OF_WEEK) - Calendar.SUNDAY
-        val monthStart = startOfDisplayedMonth()
         val daysInMonth = Calendar.getInstance().apply { time = monthStart }
             .getActualMaximum(Calendar.DAY_OF_MONTH)
 
+        cal.time = monthStart
         for (day in 1..daysInMonth) {
             val index = leadingBlanks + day - 1
             val row = index / DAYS_PER_WEEK
@@ -184,9 +185,8 @@ class MonthCalendarView @JvmOverloads constructor(
             val centerX = cell * column + cell / 2f
             val centerY = gridTop + cell * row + cell / 2f
 
-            cal.time = startOfDisplayedMonth()
-            cal.add(Calendar.DAY_OF_MONTH, day - 1)
             val dateStr = DateUtils.format(cal.time)
+            cal.add(Calendar.DAY_OF_MONTH, 1)
             val stat = statsByDate[dateStr]
             val isFuture = dateStr > todayString
             val isToday = dateStr == todayString
